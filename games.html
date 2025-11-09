@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="games">Games & Puzzles - FalTrav</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .game-card {
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .game-image {
+      height: 200px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--light-bg);
+      border-radius: 10px;
+    }
+    
+    .game-image img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+    
+    .game-content {
+      margin-bottom: 1.5rem;
+    }
+    
+    .game-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    .game-option {
+      padding: 0.8rem;
+      background-color: var(--light-bg);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+    }
+    
+    .game-option:hover {
+      background-color: var(--secondary-color);
+      color: var(--white);
+    }
+    
+    .game-feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+    
+    .correct {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    .incorrect {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html" data-i18n="siteTitle">FalTrav</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html" data-i18n="home">Home</a></li>
+          <li><a href="cities.html" data-i18n="cities">Cities Guide</a></li>
+          <li><a href="news.html" data-i18n="news">Latest News</a></li>
+          <li><a href="shop.html" data-i18n="shop">Shop</a></li>
+          <li><a href="games.html" data-i18n="games">Games & Puzzles</a></li>
+          <li><a href="guides.html" data-i18n="guides">Travel Guides</a></li>
+        </ul>
+        <div class="language-switcher">
+          <button id="lang-en" title="English">🇬🇧</button>
+          <button id="lang-ar" title="Arabic">🇸🇦</button>
+          <button id="lang-fr" title="French">🇫🇷</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1 data-i18n="gamesTitle">Travel Games & Puzzles</h1>
+        <p data-i18n="gamesSubtitle">Test your travel knowledge</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <section class="cards-grid">
+        <!-- Guess the City Game -->
+        <div class="card">
+          <div class="game-card">
+            <div class="game-image">
+              <img src="https://picsum.photos/300/200?random=22" alt="Landmark">
+            </div>
+            <div class="game-content">
+              <h3>Guess the City</h3>
+              <p>Can you identify this famous landmark?</p>
+              <div class="game-options">
+                <button class="game-option" data-answer="false">London</button>
+                <button class="game-option" data-answer="true">Paris</button>
+                <button class="game-option" data-answer="false">Rome</button>
+                <button class="game-option" data-answer="false">Berlin</button>
+              </div>
+              <div class="game-feedback hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Country Flag Quiz -->
+        <div class="card">
+          <div class="game-card">
+            <div class="game-image">
+              <img src="https://picsum.photos/300/200?random=23" alt="Flag">
+            </div>
+            <div class="game-content">
+              <h3>Flag Quiz</h3>
+              <p>Which country does this flag belong to?</p>
+              <div class="game-options">
+                <button class="game-option" data-answer="false">Spain</button>
+                <button class="game-option" data-answer="false">Italy</button>
+                <button class="game-option" data-answer="true">Japan</button>
+                <button class="game-option" data-answer="false">Brazil</button>
+              </div>
+              <div class="game-feedback hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Travel Trivia -->
+        <div class="card">
+          <div class="game-card">
+            <div class="game-image">
+              <img src="https://picsum.photos/300/200?random=24" alt="Trivia">
+            </div>
+            <div class="game-content">
+              <h3>Travel Trivia</h3>
+              <p>Which is the longest river in the world?</p>
+              <div class="game-options">
+                <button class="game-option" data-answer="false">Amazon River</button>
+                <button class="game-option" data-answer="true">Nile River</button>
+                <button class="game-option" data-answer="false">Yangtze River</button>
+                <button class="game-option" data-answer="false">Mississippi River</button>
+              </div>
+              <div class="game-feedback hidden"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#" data-i18n="about">About Us</a>
+          <a href="#" data-i18n="contact">Contact</a>
+          <a href="#" data-i18n="privacy">Privacy Policy</a>
+        </div>
+        <div class="copyright" data-i18n="footerText">
+          © 2025 FalTrav. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Game functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const gameOptions = document.querySelectorAll('.game-option');
+      
+      gameOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          const isCorrect = option.getAttribute('data-answer') === 'true';
+          const feedback = option.closest('.game-content').querySelector('.game-feedback');
+          
+          // Clear previous feedback
+          feedback.classList.remove('correct', 'incorrect');
+          feedback.classList.remove('hidden');
+          
+          if (isCorrect) {
+            feedback.textContent = 'Correct! Well done.';
+            feedback.classList.add('correct');
+          } else {
+            feedback.textContent = 'Incorrect. Try again!';
+            feedback.classList.add('incorrect');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

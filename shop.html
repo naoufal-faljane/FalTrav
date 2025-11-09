@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="shop">Shop - FalTrav</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html" data-i18n="siteTitle">FalTrav</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html" data-i18n="home">Home</a></li>
+          <li><a href="cities.html" data-i18n="cities">Cities Guide</a></li>
+          <li><a href="news.html" data-i18n="news">Latest News</a></li>
+          <li><a href="shop.html" data-i18n="shop">Shop</a></li>
+          <li><a href="games.html" data-i18n="games">Games & Puzzles</a></li>
+          <li><a href="guides.html" data-i18n="guides">Travel Guides</a></li>
+        </ul>
+        <div class="language-switcher">
+          <button id="lang-en" title="English">🇬🇧</button>
+          <button id="lang-ar" title="Arabic">🇸🇦</button>
+          <button id="lang-fr" title="French">🇫🇷</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1 data-i18n="shopTitle">Travel Shop</h1>
+        <p data-i18n="shopSubtitle">Find everything you need for your next adventure</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Filter Buttons -->
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all" data-i18n="showAll">Show All</button>
+        <button class="filter-btn" data-filter="digital" data-i18n="digital">Digital</button>
+        <button class="filter-btn" data-filter="physical" data-i18n="physical">Physical</button>
+      </div>
+
+      <!-- Product Grid -->
+      <section class="product-grid">
+        <!-- Digital Products -->
+        <div class="product-card" data-type="digital">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=14" alt="Cairo Travel Map">
+          </div>
+          <div class="product-info">
+            <h3>Cairo Travel Map (PDF)</h3>
+            <span class="product-type digital" data-i18n="digital">Digital</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-type="digital">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=15" alt="Morocco Itinerary">
+          </div>
+          <div class="product-info">
+            <h3>Morocco Itinerary Template</h3>
+            <span class="product-type digital" data-i18n="digital">Digital</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-type="digital">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=16" alt="Japan Phrasebook">
+          </div>
+          <div class="product-info">
+            <h3>Japan Travel Phrasebook (eBook)</h3>
+            <span class="product-type digital" data-i18n="digital">Digital</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-type="digital">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=17" alt="Europe Guide">
+          </div>
+          <div class="product-info">
+            <h3>Europe Backpacking Guide (PDF)</h3>
+            <span class="product-type digital" data-i18n="digital">Digital</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+
+        <!-- Physical Products -->
+        <div class="product-card" data-type="physical">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=18" alt="Travel Journal">
+          </div>
+          <div class="product-info">
+            <h3>Travel Journal</h3>
+            <span class="product-type physical" data-i18n="physical">Physical</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-type="physical">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=19" alt="World Map Poster">
+          </div>
+          <div class="product-info">
+            <h3>World Map Poster</h3>
+            <span class="product-type physical" data-i18n="physical">Physical</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-type="physical">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=20" alt="Passport Holder">
+          </div>
+          <div class="product-info">
+            <h3>Leather Passport Holder</h3>
+            <span class="product-type physical" data-i18n="physical">Physical</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+
+        <div class="product-card" data-type="physical">
+          <div class="product-image">
+            <img src="https://picsum.photos/200/150?random=21" alt="Packing Cubes">
+          </div>
+          <div class="product-info">
+            <h3>Travel Packing Cubes Set</h3>
+            <span class="product-type physical" data-i18n="physical">Physical</span>
+            <button class="view-btn" data-i18n="viewProduct">View</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#" data-i18n="about">About Us</a>
+          <a href="#" data-i18n="contact">Contact</a>
+          <a href="#" data-i18n="privacy">Privacy Policy</a>
+        </div>
+        <div class="copyright" data-i18n="footerText">
+          © 2025 FalTrav. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/translations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
