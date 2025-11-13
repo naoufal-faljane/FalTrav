@@ -5,9 +5,133 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="cities">Cities Guide - FalTrav</title>
   <link rel="stylesheet" href="css/style.css">
+
+</head>
+  <style>
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      padding: 0.5rem 1rem;
+      background-color: var(--light-bg);
+      border: 1px solid var(--primary-color);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .pagination button:hover,
+    .pagination button.active {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .page-info {
+      text-align: center;
+      margin: 1rem 0;
+      color: #666;
+      font-weight: 500;
+    }
+    
+    /* Image Browser Styles */
+    .image-browser {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .current-image-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      margin-bottom: 15px;
+    }
+
+    .current-image {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .image-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .nav-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-btn:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
+
+    .image-indicators {
+      display: flex;
+      gap: 8px;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--light-bg);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .indicator.active {
+      background: var(--primary-color);
+      transform: scale(1.2);
+    }
+
+    .indicator:hover {
+      background: var(--secondary-color);
+    }
+    
+    /* Override page header styles to remove blue */
+    .page-header {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+      color: #333 !important;
+      padding: 2rem 0 !important;
+      text-align: center !important;
+      margin-bottom: 2rem !important;
+    }
+    
+    .page-header h1 {
+      color: #2c6e49 !important;
+      font-size: 2.5rem !important;
+    }
+    
+    .page-header p {
+      color: #666 !important;
+    }
+  </style>
 </head>
 <body>
-  <!-- FalTrav initial commit -->
   <!-- Header -->
   <header>
     <div class="container">
@@ -17,16 +141,15 @@
         </div>
         <ul class="nav-links">
           <li><a href="index.html" data-i18n="home">Home</a></li>
-          <li><a href="cities.html" data-i18n="cities">Cities Guide</a></li>
-          <li><a href="news.html" data-i18n="news">Latest News</a></li>
+          <li><a href="cities.html" data-i18n="cities">Cities</a></li>
+          <li><a href="news.html" data-i18n="news">News</a></li>
           <li><a href="shop.html" data-i18n="shop">Shop</a></li>
-          <li><a href="games.html" data-i18n="games">Games & Puzzles</a></li>
-          <li><a href="guides.html" data-i18n="guides">Travel Guides</a></li>
+          <li><a href="games.html" data-i18n="games">Games</a></li>
         </ul>
         <div class="language-switcher">
-          <button id="lang-en" title="English">🇬🇧</button>
-          <button id="lang-ar" title="Arabic">🇸🇦</button>
-          <button id="lang-fr" title="French">🇫🇷</button>
+          <button id="lang-en" title="English">EN</button>
+          <button id="lang-ar" title="Arabic">AR</button>
+          <button id="lang-fr" title="French">FR</button>
         </div>
       </nav>
     </div>
@@ -36,16 +159,24 @@
   <main>
     <section class="page-header">
       <div class="container">
-        <h1 data-i18n="citiesTitle">Cities Guide</h1>
+        <h1 data-i18n="citiesTitle">Cities</h1>
         <p data-i18n="citiesSubtitle">Explore amazing destinations around the world</p>
       </div>
     </section>
 
     <div class="container">
-      <section class="cards-grid">
+      <div class="page-info">
+        Showing <span id="start-index">1</span> - <span id="end-index">12</span> of <span id="total-cities">57</span> cities
+      </div>
+      <div class="search-container" style="margin-bottom: 2rem; text-align: center;">
+        <input type="text" id="city-search" placeholder="Search for a city, country, landmark, food, or souvenirs..." style="padding: 0.8rem; width: 100%; max-width: 500px; border: 2px solid var(--primary-color); border-radius: 30px; font-size: 1rem;">
+        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;">Search city names, countries, landmarks, food, or souvenirs</p>
+      </div>
+      <section class="cards-grid" id="cities-container">
+        <!-- Cities will be dynamically inserted here -->
         <div class="card">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=4" alt="Paris">
+            <img src="imags/paris1.png" alt="Paris, France">
           </div>
           <div class="card-content">
             <h3>Paris, France</h3>
@@ -73,7 +204,7 @@
 
         <div class="card">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=5" alt="Tokyo">
+            <img src="imags/tokyo1.png" alt="Tokyo, Japan">
           </div>
           <div class="card-content">
             <h3>Tokyo, Japan</h3>
@@ -101,7 +232,7 @@
 
         <div class="card">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=6" alt="Cairo">
+            <img src="imags/Cairo1.png" alt="Cairo, Egypt">
           </div>
           <div class="card-content">
             <h3>Cairo, Egypt</h3>
@@ -129,7 +260,7 @@
 
         <div class="card">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=7" alt="New York">
+            <img src="imags/NewYork1.png" alt="New York, USA">
           </div>
           <div class="card-content">
             <h3>New York, USA</h3>
@@ -154,7 +285,1416 @@
             </ul>
           </div>
         </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Marrakech.png" alt="Marrakech, Morocco">
+          </div>
+          <div class="card-content">
+            <h3>Marrakech, Morocco</h3>
+            <p>The Red City is a vibrant blend of traditional markets, stunning architecture, and rich cultural heritage nestled at the foot of the Atlas Mountains.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Jemaa el-Fnaa Square</li>
+              <li>Koutoubia Mosque</li>
+              <li>Majorelle Garden</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Tagine</li>
+              <li>Couscous</li>
+              <li>Moroccan Mint Tea</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Argan Oil</li>
+              <li>Berber Jewelry</li>
+              <li>Traditional Pottery</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/London.png" alt="London, United Kingdom">
+          </div>
+          <div class="card-content">
+            <h3>London, United Kingdom</h3>
+            <p>The capital of England offers iconic landmarks, world-class museums, royal heritage, and a vibrant cultural scene.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Big Ben and Houses of Parliament</li>
+              <li>Buckingham Palace</li>
+              <li>Tower of London</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Fish and Chips</li>
+              <li>Afternoon Tea</li>
+              <li>Shepherd's Pie</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Union Jack Souvenirs</li>
+              <li>Tea and Biscuits</li>
+              <li>London Bus Miniature</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Dubai.png" alt="Dubai, UAE">
+          </div>
+          <div class="card-content">
+            <h3>Dubai, UAE</h3>
+            <p>A modern metropolis featuring iconic skyscrapers, luxury shopping, and desert adventures.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Burj Khalifa</li>
+              <li>Palm Jumeirah</li>
+              <li>Dubai Mall</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Shawarma</li>
+              <li>Machboos</li>
+              <li>Luqaimat</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Gold and Jewelry</li>
+              <li>Spices</li>
+              <li>Dubai-themed Keychains</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/rome.png" alt="Rome, Italy">
+          </div>
+          <div class="card-content">
+            <h3>Rome, Italy</h3>
+            <p>The Eternal City is rich in history with ancient ruins, world-class art, and exceptional cuisine.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Colosseum</li>
+              <li>Vatican City</li>
+              <li>Roman Forum</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Carbonara</li>
+              <li>Supplì</li>
+              <li>Cannoli</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Italian Leather Goods</li>
+              <li>Prosecco</li>
+              <li>Mini Colosseum Statue</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Barcelona.png" alt="Barcelona, Spain">
+          </div>
+          <div class="card-content">
+            <h3>Barcelona, Spain</h3>
+            <p>A vibrant city with stunning architecture, beautiful beaches, and a lively nightlife scene.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Sagrada Família</li>
+              <li>Las Ramblas</li>
+              <li>Park Güell</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Paella</li>
+              <li>Tapas</li>
+              <li>Churros</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Flamenco Accessories</li>
+              <li>Spanish Saffron</li>
+              <li>Gaudí-inspired Art</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Istanbul.png" alt="Istanbul, Turkey">
+          </div>
+          <div class="card-content">
+            <h3>Istanbul, Turkey</h3>
+            <p>A vibrant metropolis bridging Europe and Asia with historic mosques, bazaars, and delicious cuisine.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Hagia Sophia</li>
+              <li>Blue Mosque</li>
+              <li>Grand Bazaar</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Doner Kebab</li>
+              <li>Baklava</li>
+              <li>Turkish Delight</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Evil Eye Charms</li>
+              <li>Turkish Carpets</li>
+              <li>Sets of Turkish Coffee</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Bangkok.png" alt="Bangkok, Thailand">
+          </div>
+          <div class="card-content">
+            <h3>Bangkok, Thailand</h3>
+            <p>An energetic city offering ornate temples, vibrant street life, and world-renowned cuisine.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Grand Palace</li>
+              <li>Wat Pho Temple</li>
+              <li>Chatuchak Weekend Market</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Pad Thai</li>
+              <li>Tom Yum Goong</li>
+              <li>Mango Sticky Rice</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Thai Silk</li>
+              <li>Buddha Statues</li>
+              <li>Spiced Thai Tea</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Casablanca.png" alt="Casablanca, Morocco">
+          </div>
+          <div class="card-content">
+            <h3>Casablanca, Morocco</h3>
+            <p>One of Morocco's largest cities and its economic capital, blending French colonial architecture with traditional Moroccan culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Hassan II Mosque</li>
+              <li>Old Medina</li>
+              <li>Ain Diab Beach</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Harira Soup</li>
+              <li>Mechoui Lamb</li>
+              <li>Mint Tea</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Ceramic Pottery</li>
+              <li>Argan Oil</li>
+              <li>Traditional Carpets</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Sydney.png" alt="Sydney, Australia">
+          </div>
+          <div class="card-content">
+            <h3>Sydney, Australia</h3>
+            <p>A stunning coastal city known for its iconic Opera House, beautiful beaches, and vibrant culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Sydney Opera House</li>
+              <li>Sydney Harbour Bridge</li>
+              <li>Bondi Beach</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Vegemite</li>
+              <li>Pavlova</li>
+              <li>Meat Pie</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Aboriginal Art</li>
+              <li>Koala Plushies</li>
+              <li>Boomerang</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Rio de Janeiro.png" alt="Rio de Janeiro, Brazil">
+          </div>
+          <div class="card-content">
+            <h3>Rio de Janeiro, Brazil</h3>
+            <p>A breathtaking city famous for its Carnival, stunning beaches, and dramatic landscape.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Christ the Redeemer</li>
+              <li>Sugar Loaf Mountain</li>
+              <li>Ipanema Beach</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Coxinha</li>
+              <li>Feijoada</li>
+              <li>Açaí Bowl</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Carnival Masks</li>
+              <li>Havaianas Flip-flops</li>
+              <li>Brazil Nut Statues</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Cape Town.png" alt="Cape Town, South Africa">
+          </div>
+          <div class="card-content">
+            <h3>Cape Town, South Africa</h3>
+            <p>A beautiful coastal city offering dramatic mountains, wine regions, and rich cultural heritage.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Table Mountain</li>
+              <li>Cape of Good Hope</li>
+              <li>Robben Island</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Bobotie</li>
+              <li>Braai</li>
+              <li>Malamatoo</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Shweshwe Textiles</li>
+              <li>Wine from Stellenbosch</li>
+              <li>African Masks</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Prague.png" alt="Prague, Czech Republic">
+          </div>
+          <div class="card-content">
+            <h3>Prague, Czech Republic</h3>
+            <p>A fairy-tale city with stunning architecture, historic castles, and world-famous beer culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Prague Castle</li>
+              <li>Charles Bridge</li>
+              <li>Old Town Square</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Pierogi</li>
+              <li>Goulash</li>
+              <li>Trdelník</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Crystal Glassware</li>
+              <li>Beer Steins</li>
+              <li>Marionette Puppets</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Buenos Aires.png" alt="Buenos Aires, Argentina">
+          </div>
+          <div class="card-content">
+            <h3>Buenos Aires, Argentina</h3>
+            <p>The Paris of South America, known for tango, European architecture, and vibrant neighborhoods.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>La Boca</li>
+              <li>Recoleta Cemetery</li>
+              <li>Teatro Colón</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Asado</li>
+              <li>Empanadas</li>
+              <li>Choripán</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Tango Vinyl Records</li>
+              <li>Mate Sets</li>
+              <li>Argentine Wine</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Singapore.png" alt="Singapore, Singapore">
+          </div>
+          <div class="card-content">
+            <h3>Singapore, Singapore</h3>
+            <p>A modern cosmopolitan city-state known for gardens, food culture, and architectural marvels.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Gardens by the Bay</li>
+              <li>Marina Bay Sands</li>
+              <li>Chinatown</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Hainanese Chicken Rice</li>
+              <li>Chili Crab</li>
+              <li>Laksa</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Lantern Decorations</li>
+              <li>Spices</li>
+              <li>Orchid-themed Items</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Vienna.png" alt="Vienna, Austria">
+          </div>
+          <div class="card-content">
+            <h3>Vienna, Austria</h3>
+            <p>A cultural capital renowned for music, imperial history, coffeehouse culture, and fine arts.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Schoenbrunn Palace</li>
+              <li>Vienna State Opera</li>
+              <li>Belvedere Palace</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Wiener Schnitzel</li>
+              <li>Sacher Torte</li>
+              <li>Apfelstrudel</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Mozart Kugeln</li>
+              <li>Crystal Decorations</li>
+              <li>Coffee and Sacher Torte</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Seoul, South.png" alt="Seoul, South Korea">
+          </div>
+          <div class="card-content">
+            <h3>Seoul, South Korea</h3>
+            <p>A dynamic metropolis blending ancient palaces and temples with modern K-pop culture and tech.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Gyeongbokgung Palace</li>
+              <li>Bukchon Hanok Village</li>
+              <li>N Seoul Tower</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Bulgogi</li>
+              <li>Bibimbap</li>
+              <li>Korean BBQ</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Korean Ginseng</li>
+              <li>K-Pop Merchandise</li>
+              <li>Traditional Hanbok</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Lisbon.png" alt="Lisbon, Portugal">
+          </div>
+          <div class="card-content">
+            <h3>Lisbon, Portugal</h3>
+            <p>A charming coastal city known for its colorful tiles, historic trams, and Fado music.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Belém Tower</li>
+              <li>Tram 28</li>
+              <li>Jerónimos Monastery</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Pastéis de Nata</li>
+              <li>Bacalhau</li>
+              <li>Francesinha</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Azulejo Tiles</li>
+              <li>Port Wine</li>
+              <li>Portuguese Cork Products</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Amsterdam.png" alt="Amsterdam, Netherlands">
+          </div>
+          <div class="card-content">
+            <h3>Amsterdam, Netherlands</h3>
+            <p>A scenic city famous for its canals, historic architecture, and vibrant cycling culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Canal Ring</li>
+              <li>Rijksmuseum</li>
+              <li>Vondelpark</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Stroopwafel</li>
+              <li>Herring</li>
+              <li>Poffertjes</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Clogs (Wooden Shoes)</li>
+              <li>Delft Blue Pottery</li>
+              <li>Cheese from Dutch Markets</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Athens.png" alt="Athens, Greece">
+          </div>
+          <div class="card-content">
+            <h3>Athens, Greece</h3>
+            <p>The birthplace of democracy and Western civilization, featuring ancient ruins and vibrant culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Acropolis and Parthenon</li>
+              <li>Plaka Neighborhood</li>
+              <li>Temple of Olympian Zeus</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Gyro</li>
+              <li>Moussaka</li>
+              <li>Greek Salad</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Olive Oil and Soap</li>
+              <li>Backgammon Sets</li>
+              <li>Blue and White Ceramics</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Montreal.png" alt="Montreal, Canada">
+          </div>
+          <div class="card-content">
+            <h3>Montreal, Canada</h3>
+            <p>A bilingual city with European charm, historic architecture, and renowned festivals.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Old Montreal</li>
+              <li>Montreal Botanical Garden</li>
+              <li>Mount Royal Park</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Poutine</li>
+              <li>Montreal Smoked Meat</li>
+              <li>Maple Taffy</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Maple Syrup Products</li>
+              <li>Montreal Canadiens Merch</li>
+              <li>Ice Wine</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Munich.png" alt="Munich, Germany">
+          </div>
+          <div class="card-content">
+            <h3>Munich, Germany</h3>
+            <p>A beautiful Bavarian city known for its beer gardens, historic architecture, and festivals.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Marienplatz</li>
+              <li>Nationaltheater Munich</li>
+              <li>English Garden</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Bratwurst</li>
+              <li>Pretzel</li>
+              <li>Sauerbraten</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Beer Steins</li>
+              <li>Lederhosen Dirndls</li>
+              <li>Oktoberfest Memorabilia</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Edinburgh.png" alt="Edinburgh, Scotland">
+          </div>
+          <div class="card-content">
+            <h3>Edinburgh, Scotland</h3>
+            <p>The capital of Scotland, known for its historic architecture and annual arts festival.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Edinburgh Castle</li>
+              <li>Royal Mile</li>
+              <li>Arthur's Seat</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Haggis</li>
+              <li>Scotch Whisky</li>
+              <li>Shortbread</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Tartan Products</li>
+              <li>Scotch Whisky</li>
+              <li>Kilts and Accessories</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Mumbai.png" alt="Mumbai, India">
+          </div>
+          <div class="card-content">
+            <h3>Mumbai, India</h3>
+            <p>India's financial capital, a vibrant metropolis blending colonial architecture with Bollywood culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Gateway of India</li>
+              <li>Marine Drive</li>
+              <li>Chhatrapati Shivaji Terminus</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Vada Pav</li>
+              <li>Biryani</li>
+              <li>Pani Puri</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Spices and Curry Powders</li>
+              <li>Silk Sarees</li>
+              <li>Bollywood Film Memorabilia</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 20 Additional Cities Added -->
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Dublin.png" alt="Dublin, Ireland">
+          </div>
+          <div class="card-content">
+            <h3>Dublin, Ireland</h3>
+            <p>The charming capital of Ireland, known for its literary history, friendly pubs, and rich cultural scene.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Guinness Storehouse</li>
+              <li>Trinity College Library</li>
+              <li>Temple Bar</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Irish Stew</li>
+              <li>Soda Bread</li>
+              <li>Boxty</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Irish Whiskey</li>
+              <li>Celtic Jewelry</li>
+              <li>Claddagh Rings</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Oslo.png" alt="Oslo, Norway">
+          </div>
+          <div class="card-content">
+            <h3>Oslo, Norway</h3>
+            <p>The gateway to the fjords, offering incredible architecture, museums, and outdoor adventures.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Viking Ship Museum</li>
+              <li>Oslo Opera House</li>
+              <li>Akershus Fortress</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Rakfisk</li>
+              <li>Fårikål</li>
+              <li>Klippfisk</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Rosendals Rose Pattern</li>
+              <li>Lefse Maker</li>
+              <li>Norwegian Wool Sweaters</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Helsinki.png" alt="Helsinki, Finland">
+          </div>
+          <div class="card-content">
+            <h3>Helsinki, Finland</h3>
+            <p>A vibrant Nordic city combining modern design with classical architecture along the Baltic Sea.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Temppeliaukio Church</li>
+              <li>Finnish National Opera</li>
+              <li>Suomenlinna Fortress</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Salmon</li>
+              <li>Karjalanpiirakka</li>
+              <li>Lohikeitto</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Marimekko Products</li>
+              <li>Iittala Glassware</li>
+              <li>Salmiakki (Salty Licorice)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Reykjavik.png" alt="Reykjavik, Iceland">
+          </div>
+          <div class="card-content">
+            <h3>Reykjavik, Iceland</h3>
+            <p>The world's northernmost capital, serving as a gateway to incredible natural phenomena.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Blue Lagoon</li>
+              <li>Golden Circle</li>
+              <li>Harpa Concert Hall</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Lamb</li>
+              <li>Plokkfiskur</li>
+              <li>Skyr</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Lopapeysa Sweaters</li>
+              <li>Icelandic Wool Products</li>
+              <li>Volcanic Glassware</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Warsaw.png" alt="Warsaw, Poland">
+          </div>
+          <div class="card-content">
+            <h3>Warsaw, Poland</h3>
+            <p>A resilient city that has rebuilt itself, showcasing reconstructed old town and vibrant culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Old Town</li>
+              <li>Lazienki Park</li>
+              <li>Palace of Culture and Science</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Pierogi</li>
+              <li>Bigos</li>
+              <li>Sernik</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Amber Jewelry</li>
+              <li>Wodka</li>
+              <li>Traditional Polish Pottery</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Budapest.png" alt="Budapest, Hungary">
+          </div>
+          <div class="card-content">
+            <h3>Budapest, Hungary</h3>
+            <p>The "Paris of the East" with stunning architecture, thermal baths, and rich history.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Parliament Building</li>
+              <li>Buda Castle</li>
+              <li>Széchenyi Thermal Bath</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Goulash</li>
+              <li>Lángos</li>
+              <li>Túró Rudi</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Herend Porcelain</li>
+              <li>Tokaji Wine</li>
+              <li>Paprika Products</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Krakow.png" alt="Krakow, Poland">
+          </div>
+          <div class="card-content">
+            <h3>Krakow, Poland</h3>
+            <p>A historic city with one of Europe's most beautiful medieval town squares and rich cultural heritage.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Main Market Square</li>
+              <li>Wawel Castle</li>
+              <li>Wieliczka Salt Mine</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Oscypek</li>
+              <li>Żurek</li>
+              <li>Sękacz</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Wycinanki Paper Cutouts</li>
+              <li>Bolesławiec Ceramics</li>
+              <li>Amber Jewelry</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Stockholm.png" alt="Stockholm, Sweden">
+          </div>
+          <div class="card-content">
+            <h3>Stockholm, Sweden</h3>
+            <p>A beautiful city spread across 14 islands, known for its well-preserved old town and modern design.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Old Town (Gamla Stan)</li>
+              <li>Royal Palace</li>
+              <li>Vasa Museum</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Meatballs</li>
+              <li>Gravlax</li>
+              <li>Kanelbullar</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Swedish Glass (Orrefors)</li>
+              <li>Dala Horses</li>
+              <li>Swedish Fish (Candy)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Copenhagen.png" alt="Copenhagen, Denmark">
+          </div>
+          <div class="card-content">
+            <h3>Copenhagen, Denmark</h3>
+            <p>The fairy-tale capital of Denmark, home to the Little Mermaid, castles, and innovative cuisine.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Tivoli Gardens</li>
+              <li>Rosenborg Castle</li>
+              <li>Nyhavn Harbor</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Smørrebrød</li>
+              <li>Flæskeknus</li>
+              <li>Æbleskiver</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>LEGO Products</li>
+              <li>Royal Copenhagen Porcelain</li>
+              <li>Danish Pastries</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Zurich.png" alt="Zurich, Switzerland">
+          </div>
+          <div class="card-content">
+            <h3>Zurich, Switzerland</h3>
+            <p>A major financial center set on the Limmat River, with beautiful lakes, museums, and alpine access.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Old Town (Altstadt)</li>
+              <li>Lake Zurich</li>
+              <li>Kunsthaus Zurich</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Rösti</li>
+              <li>Birchermüesli</li>
+              <li>Zürcher Geschnetzeltes</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Swiss Chocolate</li>
+              <li>Swiss Army Knives</li>
+              <li>Cuckoo Clocks</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Brussels.png" alt="Brussels, Belgium">
+          </div>
+          <div class="card-content">
+            <h3>Brussels, Belgium</h3>
+            <p>The capital of Belgium and the EU, famous for its medieval town square, chocolate, and waffles.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Grand Place</li>
+              <li>Atomium</li>
+              <li>Manneken Pis</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Belgian Waffles</li>
+              <li>Moules-frites</li>
+              <li>Chocolate</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Belgian Chocolate</li>
+              <li>Lace Products</li>
+              <li>Trappist Beer</li>
+            </ul>
+          </div>
+        </div>
+
+
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Bucharest.png" alt="Bucharest, Romania">
+          </div>
+          <div class="card-content">
+            <h3>Bucharest, Romania</h3>
+            <p>The "Paris of the East" with wide boulevards, impressive architecture, and vibrant nightlife.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Palace of Parliament</li>
+              <li>Village Museum</li>
+              <li>Calea Victoriei</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Mici</li>
+              <li>Sarmale</li>
+              <li>Papanasi</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Romanian Wine</li>
+              <li>Traditional Pottery</li>
+              <li>Brânză de Burduf Cheese</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Sofia.png" alt="Sofia, Bulgaria">
+          </div>
+          <div class="card-content">
+            <h3>Sofia, Bulgaria</h3>
+            <p>One of Europe's oldest cities with Roman ruins, beautiful churches, and nearby ski resorts.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Alexander Nevsky Cathedral</li>
+              <li>Boyana Church</li>
+              <li>Vitosha Mountain</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Shopska Salad</li>
+              <li>Kavarma</li>
+              <li>Banitsa</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Rose Oil Products</li>
+              <li>Rakia</li>
+              <li>Traditional Crafts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Tallinn.png" alt="Tallinn, Estonia">
+          </div>
+          <div class="card-content">
+            <h3>Tallinn, Estonia</h3>
+            <p>A medieval gem with a beautifully preserved old town, Gothic architecture, and digital innovation.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Old Town</li>
+              <li>Toompea Castle</li>
+              <li>St. Olaf's Church</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Black Bread</li>
+              <li>Sült</li>
+              <li>Kama Dessert</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Kumis (Fermented Milk Drink)</li>
+              <li>Estonian Honey</li>
+              <li>Handicrafts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Riga.png" alt="Riga, Latvia">
+          </div>
+          <div class="card-content">
+            <h3>Riga, Latvia</h3>
+            <p>The largest Baltic city with magnificent Art Nouveau architecture and a vibrant cultural scene.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Old Town</li>
+              <li>Art Nouveau District</li>
+              <li>Central Market</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Grey Peas with Bacon</li>
+              <li>Pyragi</li>
+              <li>Riga Black Balsam</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Bernstein Products</li>
+              <li>Riga Black Balsam</li>
+              <li>Lace Products</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Vilnius.png" alt="Vilnius, Lithuania">
+          </div>
+          <div class="card-content">
+            <h3>Vilnius, Lithuania</h3>
+            <p>The charming capital with the largest medieval old town in the Baltics and baroque architecture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Old Town</li>
+              <li>Gediminas Castle</li>
+              <li>St. Anne's Church</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Cepelinai</li>
+              <li>Šaltibarščiai</li>
+              <li>Skilandis</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Ambražai Amber</li>
+              <li>Lithuanian Honey</li>
+              <li>Traditional Pottery</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Ljubljana.png" alt="Ljubljana, Slovenia">
+          </div>
+          <div class="card-content">
+            <h3>Ljubljana, Slovenia</h3>
+            <p>A green capital with a charming old town, numerous bridges, and easy access to nature.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Ljubljana Castle</li>
+              <li>Predjama Castle</li>
+              <li>Triple Bridge</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Štruklji</li>
+              <li>Ajvar</li>
+              <li>Potica</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Traditional Pottery</li>
+              <li>Štruklji Maker</li>
+              <li>Slovenian Wine</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Zagreb.png" alt="Zagreb, Croatia">
+          </div>
+          <div class="card-content">
+            <h3>Zagreb, Croatia</h3>
+            <p>The colorful capital with red-roofed houses, historic districts, and vibrant café culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Upper Town</li>
+              <li>Jelačić Square</li>
+              <li>Mimara Museum</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Prosciutto</li>
+              <li>Peka</li>
+              <li>Štrudla</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Lika Cheese</li>
+              <li>Rakija</li>
+              <li>Croatian Handicrafts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Bratislava.png" alt="Bratislava, Slovakia">
+          </div>
+          <div class="card-content">
+            <h3>Bratislava, Slovakia</h3>
+            <p>A compact capital with a hilltop castle and a relaxed atmosphere along the Danube River.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Bratislava Castle</li>
+              <li>Old Town</li>
+              <li>Devín Castle</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Bryndzové halušky</li>
+              <li>Segedín</li>
+              <li>Trdelník</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Heritage Lace</li>
+              <li>Slivovitz</li>
+              <li>Traditional Pottery</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Tbilisi.png" alt="Tbilisi, Georgia">
+          </div>
+          <div class="card-content">
+            <h3>Tbilisi, Georgia</h3>
+            <p>The vibrant capital where Europe meets Asia, with ancient churches, sulfur baths, and rich culture.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Narikala Fortress</li>
+              <li>Sameba Cathedral</li>
+              <li>Sulfur Bath District</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Khachapuri</li>
+              <li>Khinkali</li>
+              <li>Churchkhela</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Georgian Wine</li>
+              <li>Chacha</li>
+              <li>Traditional Textiles</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Osaka.png" alt="Osaka, Japan">
+          </div>
+          <div class="card-content">
+            <h3>Osaka, Japan</h3>
+            <p>The culinary capital of Japan, known for its modern architecture, vibrant food scene, and historic landmarks.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Osaka Castle</li>
+              <li>Dotonbori</li>
+              <li>Universal Studios Japan</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Takoyaki</li>
+              <li>Okonomiyaki</li>
+              <li>Kushikatsu</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Kit Kats (Japan exclusive flavors)</li>
+              <li>Osaka-themed Tenbin Maneki-neko</li>
+              <li>Traditional Furoshiki</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/NEOM.png" alt="NEOM, Saudi Arabia">
+          </div>
+          <div class="card-content">
+            <h3>NEOM, Saudi Arabia</h3>
+            <p>A futuristic cross-border city and tourist destination in the Tabuk Province of Saudi Arabia, part of Vision 2030.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>The Mirror Cliffs</li>
+              <li>Sindalah Island</li>
+              <li>The Line Concept</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Contemporary Saudi Cuisine</li>
+              <li>International Fusion Dishes</li>
+              <li>Traditional Kabsa</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>NEOM Branded Items</li>
+              <li>Modern Saudi Art Pieces</li>
+              <li>Futuristic Design Objects</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Riyadh.png" alt="Riyadh, Saudi Arabia">
+          </div>
+          <div class="card-content">
+            <h3>Riyadh, Saudi Arabia</h3>
+            <p>The political and administrative center of Saudi Arabia, featuring modern skyscrapers, cultural sites, and traditional markets.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Masmak Fortress</li>
+              <li>Kingdom Centre</li>
+              <li>National Museum of Saudi Arabia</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Kabsa</li>
+              <li>Mandi</li>
+              <li>Mattar Paneer</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Saudi Perfumes</li>
+              <li>Arabic Coffee Sets</li>
+              <li>Traditional Handicrafts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Doha.png" alt="Doha, Qatar">
+          </div>
+          <div class="card-content">
+            <h3>Doha, Qatar</h3>
+            <p>The capital city of Qatar, known for its desert landscape, modern architecture, and world-class museums along the Persian Gulf.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Museum of Islamic Art</li>
+              <li>Souq Waqif</li>
+              <li>The Pearl-Qatar</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Machboos</li>
+              <li>Omadah</li>
+              <li>Falafel</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Pearls and Jewelry</li>
+              <li>Qatari Coffee Pots</li>
+              <li>Traditional Thobes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Mexico.png" alt="Mexico City, Mexico">
+          </div>
+          <div class="card-content">
+            <h3>Mexico City, Mexico</h3>
+            <p>The vast capital of Mexico, offering rich Aztec and Spanish colonial history, world-class museums, and vibrant neighborhoods.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Chapultepec Castle</li>
+              <li>Teotihuacan Pyramids</li>
+              <li>Zócalo</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Tacos al Pastor</li>
+              <li>Mole Poblano</li>
+              <li>Churros</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Silver Jewelry</li>
+              <li>Mezcal</li>
+              <li>Colorful Serapes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Lima.png" alt="Lima, Peru">
+          </div>
+          <div class="card-content">
+            <h3>Lima, Peru</h3>
+            <p>The coastal capital of Peru, blending colonial architecture with modern development and renowned for its exceptional cuisine.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Historic Centre of Lima</li>
+              <li>Miraflores District</li>
+              <li>Larco Museum</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Ceviche</li>
+              <li>Lomo Saltado</li>
+              <li>Pisco Sour</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Alpaca Textiles</li>
+              <li>Pisco</li>
+              <li>Peruvian Cacao Products</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-img">
+            <img src="imags/Bengaluru.png" alt="Bengaluru, India">
+          </div>
+          <div class="card-content">
+            <h3>Bengaluru, India</h3>
+            <p>The vibrant capital of Karnataka, known as India's Silicon Valley with a mix of technology, culture, and pleasant climate.</p>
+            <h4>Must-See Places:</h4>
+            <ul>
+              <li>Tipu Sultan's Palace</li>
+              <li>Lalbagh Botanical Garden</li>
+              <li>UB City</li>
+            </ul>
+            <h4>Local Food:</h4>
+            <ul>
+              <li>Mysore Pak</li>
+              <li>Bisi Bele Bath</li>
+              <li>Filter Coffee</li>
+            </ul>
+            <h4>Souvenirs:</h4>
+            <ul>
+              <li>Mysore Sandal Products</li>
+              <li>Bangalore Blue Grapes Wine</li>
+              <li>Traditional Silk Sarees</li>
+            </ul>
+          </div>
+        </div>
+
       </section>
+
+      <!-- Pagination controls -->
+      <div class="pagination" id="pagination-container">
+        <!-- Pagination buttons will be dynamically inserted here -->
+      </div>
     </div>
   </main>
 
@@ -175,6 +1715,281 @@
   </footer>
 
   <script src="js/translations.js"></script>
-  <script src="js/main.js"></script>
+  <script>
+    // Pagination and search configuration
+    const ITEMS_PER_PAGE = 12;
+    let currentPage = 1;
+    let allCities = [];
+    let filteredCities = [];
+
+    // Function to initialize pagination
+    function initializePagination() {
+      // Get all city cards
+      const container = document.getElementById('cities-container');
+      const cityCards = Array.from(container.children);
+
+      // Filter out non-card elements (like the original wrapper divs if any)
+      allCities = cityCards.filter(element => element.classList.contains('card'));
+      filteredCities = [...allCities]; // Initially show all cities
+
+      // Update total cities count in the page info
+      document.getElementById('total-cities').textContent = filteredCities.length;
+
+      // Show first page
+      showPage(currentPage);
+
+      // Create pagination controls
+      createPaginationControls();
+
+      // Add event listener for search functionality
+      const searchInput = document.getElementById('city-search');
+      searchInput.addEventListener('input', handleSearch);
+    }
+
+    // Function to show a specific page
+    function showPage(page) {
+      const startIndex = (page - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      const pageCities = filteredCities.slice(startIndex, endIndex);
+
+      // Clear the container
+      const container = document.getElementById('cities-container');
+      container.innerHTML = '';
+
+      // Add cities for the current page
+      pageCities.forEach(city => {
+        container.appendChild(city.cloneNode(true));
+      });
+
+      // Update page info
+      const startIdx = startIndex + 1;
+      const endIdx = Math.min(endIndex, filteredCities.length);
+      document.getElementById('start-index').textContent = startIdx;
+      document.getElementById('end-index').textContent = endIdx;
+
+      // Update active page button
+      updateActivePageButton(page);
+    }
+
+    // Function to create pagination controls
+    function createPaginationControls() {
+      const totalPages = Math.ceil(filteredCities.length / ITEMS_PER_PAGE);
+      const paginationContainer = document.getElementById('pagination-container');
+      paginationContainer.innerHTML = '';
+
+      // Previous button
+      const prevButton = document.createElement('button');
+      prevButton.innerHTML = '&laquo; Previous';
+      prevButton.disabled = currentPage === 1;
+      prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      paginationContainer.appendChild(prevButton);
+
+      // Page buttons
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.classList.toggle('active', i === currentPage);
+        pageButton.addEventListener('click', () => {
+          currentPage = i;
+          showPage(currentPage);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+
+      // Next button
+      const nextButton = document.createElement('button');
+      nextButton.innerHTML = 'Next &raquo;';
+      nextButton.disabled = currentPage === totalPages;
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          showPage(currentPage);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      paginationContainer.appendChild(nextButton);
+    }
+
+    // Function to update the active page button
+    function updateActivePageButton(page) {
+      const pageButtons = document.querySelectorAll('#pagination-container button');
+      pageButtons.forEach(button => {
+        if (button.textContent == page) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+
+      // Update disabled state of prev/next buttons
+      const prevButton = document.querySelector('#pagination-container button:first-child');
+      const nextButton = document.querySelector('#pagination-container button:last-child');
+
+      if (prevButton && nextButton) {
+        prevButton.disabled = page === 1;
+        nextButton.disabled = page === Math.ceil(filteredCities.length / ITEMS_PER_PAGE);
+      }
+    }
+
+    // Function to handle search input
+    function handleSearch(event) {
+      const searchTerm = event.target.value.toLowerCase().trim();
+
+      if (searchTerm === '') {
+        // If search is empty, show all cities
+        filteredCities = [...allCities];
+      } else {
+        // Filter cities based on the search term - search in city name, description, and details
+        filteredCities = allCities.filter(city => {
+          const cityName = city.querySelector('h3').textContent.toLowerCase();
+          const cityDescription = city.querySelector('.card-content > p').textContent.toLowerCase();
+          const cityDetails = city.textContent.toLowerCase(); // Search in all content including must-see places, food, souvenirs
+
+          return cityName.includes(searchTerm) ||
+                 cityDescription.includes(searchTerm) ||
+                 cityDetails.includes(searchTerm);
+        });
+      }
+
+      // Reset to first page after search
+      currentPage = 1;
+
+      // Update total cities count in the page info
+      document.getElementById('total-cities').textContent = filteredCities.length;
+
+      // Update pagination controls and show first page
+      createPaginationControls();
+      showPage(currentPage);
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      initializePagination();
+      // Initialize language functionality after pagination is set up
+      setupLanguageSwitcher();
+    });
+
+    // Initialize language switcher functionality
+    function setupLanguageSwitcher() {
+      const langBtns = document.querySelectorAll('[data-lang]');
+      if (langBtns.length > 0) {
+        langBtns.forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lang = this.getAttribute('data-lang');
+            changeLanguage(lang);
+          });
+        });
+      } else {
+        // Fallback to old method if using the old header
+        const languageButtons = {
+          en: document.getElementById('lang-en'),
+          ar: document.getElementById('lang-ar'),
+          fr: document.getElementById('lang-fr')
+        };
+
+        if (languageButtons.en) {
+          languageButtons.en.addEventListener('click', () => changeLanguage('en'));
+        }
+        if (languageButtons.ar) {
+          languageButtons.ar.addEventListener('click', () => changeLanguage('ar'));
+        }
+        if (languageButtons.fr) {
+          languageButtons.fr.addEventListener('click', () => changeLanguage('fr'));
+        }
+      }
+    }
+
+    // Change the language
+    function changeLanguage(lang) {
+      localStorage.setItem('language', lang);
+      updateTranslations(lang);
+    }
+
+    // Update all elements with data-i18n attributes
+    function updateTranslations(lang) {
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = translations[lang][key];
+          } else {
+            element.textContent = translations[lang][key];
+          }
+        }
+      });
+    }
+    
+    // Paris Image Browser functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Only initialize if we're on the Paris card
+      const parisImages = [
+        'imags/paris1.jpg',
+        'imags/paris2.jpg',
+        'imags/paris3.jpg',
+        'imags/paris4.jpg',
+        'imags/paris5.jpg'
+      ];
+      
+      const currentImage = document.getElementById('paris-current-image');
+      const prevBtn = document.getElementById('paris-prev-btn');
+      const nextBtn = document.getElementById('paris-next-btn');
+      const indicators = document.querySelectorAll('#paris-indicators .indicator');
+      
+      if (currentImage && prevBtn && nextBtn && indicators.length > 0) {
+        let currentIndex = 0;
+        
+        function updateImage() {
+          // Set the image source
+          currentImage.src = parisImages[currentIndex];
+          currentImage.alt = `Paris view ${currentIndex + 1}`;
+          
+          // Update active indicator
+          indicators.forEach((indicator, index) => {
+            if (index === currentIndex) {
+              indicator.classList.add('active');
+            } else {
+              indicator.classList.remove('active');
+            }
+          });
+        }
+        
+        // Previous button event
+        prevBtn.addEventListener('click', function() {
+          currentIndex = (currentIndex - 1 + parisImages.length) % parisImages.length;
+          updateImage();
+        });
+        
+        // Next button event
+        nextBtn.addEventListener('click', function() {
+          currentIndex = (currentIndex + 1) % parisImages.length;
+          updateImage();
+        });
+        
+        // Indicator click events
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener('click', function() {
+            currentIndex = index;
+            updateImage();
+          });
+        });
+        
+        // Load the first image and handle potential errors
+        currentImage.src = parisImages[0];
+        currentImage.onerror = function() {
+          // If the image doesn't load, try the default placeholder
+          this.src = 'https://picsum.photos/300/200?random=4&paris';
+        };
+      }
+    });
+  </script>
 </body>
 </html>

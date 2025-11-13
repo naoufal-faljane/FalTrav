@@ -3,8 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="news">Latest News - FalTrav</title>
+  <title data-i18n="news">News - FalTrav</title>
   <link rel="stylesheet" href="css/style.css">
+
+</head>
+  <style>
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      padding: 0.5rem 1rem;
+      background-color: var(--light-bg);
+      border: 1px solid var(--primary-color);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .pagination button:hover,
+    .pagination button.active {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .page-info {
+      text-align: center;
+      margin: 1rem 0;
+      color: #666;
+      font-weight: 500;
+    }
+    
+    /* Override page header styles to remove blue */
+    .page-header {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+      color: #333 !important;
+      padding: 2rem 0 !important;
+      text-align: center !important;
+      margin-bottom: 2rem !important;
+    }
+    
+    .page-header h1 {
+      color: #2c6e49 !important;
+      font-size: 2.5rem !important;
+    }
+    
+    .page-header p {
+      color: #666 !important;
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -16,16 +72,15 @@
         </div>
         <ul class="nav-links">
           <li><a href="index.html" data-i18n="home">Home</a></li>
-          <li><a href="cities.html" data-i18n="cities">Cities Guide</a></li>
-          <li><a href="news.html" data-i18n="news">Latest News</a></li>
+          <li><a href="cities.html" data-i18n="cities">Cities</a></li>
+          <li><a href="news.html" data-i18n="news">News</a></li>
           <li><a href="shop.html" data-i18n="shop">Shop</a></li>
-          <li><a href="games.html" data-i18n="games">Games & Puzzles</a></li>
-          <li><a href="guides.html" data-i18n="guides">Travel Guides</a></li>
+          <li><a href="games.html" data-i18n="games">Games</a></li>
         </ul>
         <div class="language-switcher">
-          <button id="lang-en" title="English">🇬🇧</button>
-          <button id="lang-ar" title="Arabic">🇸🇦</button>
-          <button id="lang-fr" title="French">🇫🇷</button>
+          <button id="lang-en" title="English">EN</button>
+          <button id="lang-ar" title="Arabic">AR</button>
+          <button id="lang-fr" title="French">FR</button>
         </div>
       </nav>
     </div>
@@ -41,79 +96,195 @@
     </section>
 
     <div class="container">
-      <section class="cards-grid">
-        <div class="card">
+      <div class="page-info">
+        Showing <span id="start-index">1</span> - <span id="end-index">12</span> of <span id="total-articles">20</span> articles
+      </div>
+      <section class="cards-grid" id="news-container">
+        <div class="card" onclick="toggleCardContent(this)">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=8" alt="New Museum">
+            <img src="imags/Georgia Eliminates Visa Requirements for 30+ Countries.png" alt="Georgia Visa Policy">
           </div>
           <div class="card-content">
-            <h3>New Museum Opens in Cairo</h3>
-            <p class="date">May 15, 2025</p>
-            <p>The Grand Egyptian Museum has officially opened its doors to the public, showcasing ancient artifacts including Tutankhamun's complete collection.</p>
-            <a href="#" class="btn">Read More</a>
+            <h3>Georgia Eliminates Visa Requirements for 30+ Countries in 2025 – What Travelers Need to Know</h3>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="toggleCardContent(this)">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=9" alt="Festival">
+            <img src="imags/Saudia Launches Direct Flights from Riyadh to Bali Starting June 2025.png" alt="Saudia Bali Flight">
           </div>
           <div class="card-content">
-            <h3>Rio Carnival Dates Announced</h3>
-            <p class="date">May 10, 2025</p>
-            <p>The world-famous Rio Carnival will return in February 2026 with even more spectacular parades and cultural celebrations.</p>
-            <a href="#" class="btn">Read More</a>
+            <h3>Saudia Launches Direct Flights from Riyadh to Bali Starting June 2025</h3>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="toggleCardContent(this)">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=10" alt="Airport">
+            <img src="imags/Machu Picchu Reopens Full Access in March 2025 After Year-Long Conservation Work.png" alt="Machu Picchu Reopens">
           </div>
           <div class="card-content">
-            <h3>New International Airport in Bali</h3>
-            <p class="date">April 28, 2025</p>
-            <p>Bali's new international airport is set to open in December 2025, promising to reduce congestion and improve travel experience.</p>
-            <a href="#" class="btn">Read More</a>
+            <h3>Machu Picchu Reopens Full Access in March 2025 After Year-Long Conservation Work</h3>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="toggleCardContent(this)">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=11" alt="Hiking">
+            <img src="imags/New High-Speed Rail Links Lisbon to Prague.png" alt="European High-Speed Rail">
           </div>
           <div class="card-content">
-            <h3>New Hiking Trails in Swiss Alps</h3>
-            <p class="date">April 22, 2025</p>
-            <p>Switzerland has opened 50 kilometers of new hiking trails offering breathtaking views of the Alps and access to remote mountain villages.</p>
-            <a href="#" class="btn">Read More</a>
+            <h3>New High-Speed Rail Links Lisbon to Prague</h3>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="toggleCardContent(this)">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=12" alt="Cruise">
+            <img src="imags/Machu Picchu Implements New Reservation System.png" alt="Machu Picchu Reservation System">
           </div>
           <div class="card-content">
-            <h3>Eco-Friendly Cruise Initiative</h3>
-            <p class="date">April 18, 2025</p>
-            <p>Major cruise lines are launching a new initiative to reduce carbon emissions by 50% by 2030 through innovative technologies.</p>
-            <a href="#" class="btn">Read More</a>
+            <h3>Machu Picchu Implements New Reservation System</h3>
           </div>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="toggleCardContent(this)">
           <div class="card-img">
-            <img src="https://picsum.photos/300/200?random=13" alt="Visa">
+            <img src="imags/Venice Implements Anti-Tourism Measures.png" alt="Venice Anti-Tourism Measures">
           </div>
           <div class="card-content">
-            <h3>Visa-Free Travel Extended</h3>
-            <p class="date">April 12, 2025</p>
-            <p>Several European countries have extended visa-free travel periods for tourists from North America and Asia to 90 days.</p>
-            <a href="#" class="btn">Read More</a>
+            <h3>Venice Implements Anti-Tourism Measures</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/New Sahara Desert Tourism Routes Opened.png" alt="Sahara Desert Tourism">
+          </div>
+          <div class="card-content">
+            <h3>New Sahara Desert Tourism Routes Opened</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Alaska Glacial Melting Accelerates Tourism Concerns.png" alt="Alaska Glacial Melting">
+          </div>
+          <div class="card-content">
+            <h3>Alaska Glacial Melting Accelerates Tourism Concerns</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/New Antarctica Cruise Regulations Announced.png" alt="Antarctica Cruise Regulations">
+          </div>
+          <div class="card-content">
+            <h3>New Antarctica Cruise Regulations Announced</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/New Conservation Zones Open in Amazon Rainforest.png" alt="New Conservation Zones Open in Amazon Rainforest">
+          </div>
+          <div class="card-content">
+            <h3>New Conservation Zones Open in Amazon Rainforest</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Northern Lights Viewing Season Extended.png" alt="Northern Lights Viewing Season Extended">
+          </div>
+          <div class="card-content">
+            <h3>Northern Lights Viewing Season Extended</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/New Himalayan Trekking Routes Open in Nepal.png" alt="New Himalayan Trekking Routes Open in Nepal">
+          </div>
+          <div class="card-content">
+            <h3>New Himalayan Trekking Routes Open in Nepal</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Dubai Unveils New Skyscraper Tallest in World.png" alt="Dubai Unveils New Skyscraper Tallest in World">
+          </div>
+          <div class="card-content">
+            <h3>Dubai Unveils New Skyscraper Tallest in World</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Galápagos Islands Implement Conservation Tourism.png" alt="Galápagos Islands Implement Conservation Tourism">
+          </div>
+          <div class="card-content">
+            <h3>Galápagos Islands Implement Conservation Tourism</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/New Zealand Unveils New Adventure Tourism Zones.png" alt="New Zealand Unveils New Adventure Tourism Zones">
+          </div>
+          <div class="card-content">
+            <h3>New Zealand Unveils New Adventure Tourism Zones</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Cape Town Implements New Water Restrictions for Tourism.png" alt="Cape Town Implements New Water Restrictions for Tourism">
+          </div>
+          <div class="card-content">
+            <h3>Cape Town Implements New Water Restrictions for Tourism</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Caribbean Islands Complete Hurricane Recovery Tourism.png" alt="Caribbean Islands Complete Hurricane Recovery Tourism">
+          </div>
+          <div class="card-content">
+            <h3>Caribbean Islands Complete Hurricane Recovery Tourism</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Serengeti Migration Patterns Shift Due to Climate.png" alt="Serengeti Migration Patterns Shift Due to Climate">
+          </div>
+          <div class="card-content">
+            <h3>Serengeti Migration Patterns Shift Due to Climate</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Paris Olympics 2024 Preparations Affect Tourism.png" alt="Paris Olympics 2024 Preparations Affect Tourism">
+          </div>
+          <div class="card-content">
+            <h3>Paris Olympics 2024 Preparations Affect Tourism</h3>
+          </div>
+        </div>
+
+        <div class="card" onclick="toggleCardContent(this)">
+          <div class="card-img">
+            <img src="imags/Santorini Implements Daily Visitor Limits.png" alt="Santorini Implements Daily Visitor Limits">
+          </div>
+          <div class="card-content">
+            <h3>Santorini Implements Daily Visitor Limits</h3>
           </div>
         </div>
       </section>
+      
+      <!-- Pagination controls -->
+      <div class="pagination" id="pagination-container">
+        <!-- Pagination buttons will be dynamically inserted here -->
+      </div>
     </div>
   </main>
 
@@ -135,5 +306,238 @@
 
   <script src="js/translations.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    // Pagination configuration
+    const ITEMS_PER_PAGE = 12;
+    let currentPage = 1;
+    let allArticles = [];
+    let filteredArticles = [];
+
+    // Function to initialize pagination
+    function initializePagination() {
+      // Get all article cards
+      const container = document.getElementById('news-container');
+      const articleCards = Array.from(container.children);
+
+      // Filter out non-card elements
+      allArticles = articleCards.filter(element => element.classList.contains('card'));
+      filteredArticles = [...allArticles]; // Initially show all articles
+
+      // Update total articles count in the page info
+      document.getElementById('total-articles').textContent = filteredArticles.length;
+
+      // Show first page
+      showPage(currentPage);
+
+      // Create pagination controls
+      createPaginationControls();
+    }
+
+    // Function to show a specific page
+    function showPage(page) {
+      const startIndex = (page - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      const pageArticles = filteredArticles.slice(startIndex, endIndex);
+
+      // Clear the container
+      const container = document.getElementById('news-container');
+      container.innerHTML = '';
+
+      // Add page info back to the container
+      const pageInfo = document.querySelector('.page-info');
+      if (pageInfo) {
+        container.parentNode.insertBefore(pageInfo, container);
+      }
+
+      // Add articles for the current page
+      pageArticles.forEach(article => {
+        container.appendChild(article.cloneNode(true));
+      });
+
+      // Update page info
+      const startIdx = startIndex + 1;
+      const endIdx = Math.min(endIndex, filteredArticles.length);
+      document.getElementById('start-index').textContent = startIdx;
+      document.getElementById('end-index').textContent = endIdx;
+
+      // Update active page button
+      updateActivePageButton(page);
+    }
+
+    // Function to create pagination controls
+    function createPaginationControls() {
+      const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+      const paginationContainer = document.getElementById('pagination-container');
+      paginationContainer.innerHTML = '';
+
+      // Previous button
+      const prevButton = document.createElement('button');
+      prevButton.innerHTML = '&laquo; Previous';
+      prevButton.disabled = currentPage === 1;
+      prevButton.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage--;
+          showPage(currentPage);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      paginationContainer.appendChild(prevButton);
+
+      // Page buttons
+      for (let i = 1; i <= totalPages; i++) {
+        const pageButton = document.createElement('button');
+        pageButton.textContent = i;
+        pageButton.classList.toggle('active', i === currentPage);
+        pageButton.addEventListener('click', () => {
+          currentPage = i;
+          showPage(currentPage);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        paginationContainer.appendChild(pageButton);
+      }
+
+      // Next button
+      const nextButton = document.createElement('button');
+      nextButton.innerHTML = 'Next &raquo;';
+      nextButton.disabled = currentPage === totalPages;
+      nextButton.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage++;
+          showPage(currentPage);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+      paginationContainer.appendChild(nextButton);
+    }
+
+    // Function to update the active page button
+    function updateActivePageButton(page) {
+      const pageButtons = document.querySelectorAll('#pagination-container button');
+      pageButtons.forEach(button => {
+        if (button.textContent == page) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
+      });
+
+      // Update disabled state of prev/next buttons
+      const prevButton = document.querySelector('#pagination-container button:first-child');
+      const nextButton = document.querySelector('#pagination-container button:last-child');
+
+      if (prevButton && nextButton) {
+        prevButton.disabled = page === 1;
+        nextButton.disabled = page === Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+      }
+    }
+
+    // Function to toggle card content
+    function toggleCardContent(card) {
+      // Check if content is already expanded
+      if (card.classList.contains('expanded')) {
+        // Collapse the card
+        card.classList.remove('expanded');
+        card.style.height = 'auto';
+        
+        // Remove expanded content and restore original
+        const contentDiv = card.querySelector('.card-content');
+        if (contentDiv) {
+          contentDiv.innerHTML = '<h3>' + contentDiv.getAttribute('data-title') + '</h3>';
+        }
+      } else {
+        // Expand the card
+        card.classList.add('expanded');
+        
+        // Add the full content
+        const contentDiv = card.querySelector('.card-content');
+        if (contentDiv) {
+          // Store original title for later restoration
+          if (!contentDiv.hasAttribute('data-title')) {
+            const titleElement = contentDiv.querySelector('h3');
+            if (titleElement) {
+              contentDiv.setAttribute('data-title', titleElement.textContent);
+            }
+          }
+          
+          // Show the expanded content based on the title
+          let expandedContent = '';
+          const title = contentDiv.getAttribute('data-title');
+          
+          if (title.includes('Georgia Eliminates Visa')) {
+            expandedContent = `
+              <h3>Georgia Eliminates Visa Requirements for 30+ Countries in 2025 – What Travelers Need to Know</h3>
+              <p class="date">July 15, 2025</p>
+              <p>In a major move for global tourism, Georgia has announced the elimination of visa requirements for over 30 countries, effective January 2025. The new policy allows visitors from the USA, UK, UAE, Saudi Arabia, Canada, Australia, New Zealand, Japan, South Korea, and 25 other nations to enter without a visa for up to 365 days.</p>
+              <h4>Steps to Take:</h4>
+              <ul>
+                <li>Ensure your passport is valid for at least 6 months beyond your stay</li>
+                <li>Prepare proof of sufficient funds for your visit (typically $50-100 per day)</li>
+                <li>Research budget-friendly destinations like Tbilisi, Kazbegi, and Batumi for extended stays</li>
+              </ul>
+            `;
+          } else if (title.includes('Saudia Launches Direct')) {
+            expandedContent = `
+              <h3>Saudia Launches Direct Flights from Riyadh to Bali Starting June 2025</h3>
+              <p class="date">April 5, 2025</p>
+              <p>Saudia Airlines announces 3x weekly direct flights connecting Saudi Arabia's capital to Bali using Boeing 787-9 Dreamliner aircraft, cutting travel time to under 10 hours.</p>
+              <h4>Steps to Take:</h4>
+              <ul>
+                <li>Book early to secure economy tickets estimated at $600-800</li>
+                <li>Consider business class for the long-haul flight at $2,500-3,000</li>
+                <li>Explore Bali's cultural attractions like Tanah Lot and Uluwatu Temple</li>
+              </ul>
+            `;
+          } else if (title.includes('Machu Picchu Reopens')) {
+            expandedContent = `
+              <h3>Machu Picchu Reopens Full Access in March 2025 After Year-Long Conservation Work</h3>
+              <p class="date">February 10, 2025</p>
+              <p>Peru's iconic Incan citadel fully reopens March 15, 2025 with new visitor center, timed entry slots, and revised booking procedures after extensive conservation work.</p>
+              <h4>Steps to Take:</h4>
+              <ul>
+                <li>Book timed-entry tickets 4-6 months in advance through official channels</li>
+                <li>Reserve guided tours early as certified guides have limited daily slots</li>
+                <li>Plan visits during shoulder months (April-May or September-October) for fewer crowds</li>
+              </ul>
+            `;
+          } else {
+            // For other news items, we'll create a default expanded content
+            expandedContent = `
+              <h3>${contentDiv.getAttribute('data-title')}</h3>
+              <p class="date">[Date to be announced]</p>
+              <p>This is a breaking news item with important information for travelers. More details will be available when you click to read the full article.</p>
+              <h4>Steps to Take:</h4>
+              <ul>
+                <li>Monitor official sources for updates</li>
+                <li>Adjust travel plans accordingly</li>
+                <li>Stay informed about changes that may affect your trip</li>
+              </ul>
+            `;
+          }
+          
+          contentDiv.innerHTML = expandedContent;
+        }
+      }
+    }
+
+    // Add CSS for expanded card
+    const style = document.createElement('style');
+    style.textContent = `
+      .card.expanded {
+        height: auto !important;
+        min-height: 300px;
+        transition: height 0.3s ease;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      initializePagination();
+      // Initialize language functionality after pagination is set up
+      if (typeof setupLanguageSwitcher === 'function') {
+        setupLanguageSwitcher();
+      }
+    });
+  </script>
 </body>
 </html>

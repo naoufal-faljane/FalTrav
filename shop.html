@@ -5,6 +5,211 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="shop">Shop - FalTrav</title>
   <link rel="stylesheet" href="css/style.css">
+
+    /* Enhanced shop styles */
+    .page-header {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #333;
+      padding: 2rem 0;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: 10px 20px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: #2c6fbb;
+      color: white;
+      border-color: #2c6fbb;
+    }
+    
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      margin-bottom: 2rem;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    
+    .product-image {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+      background: #f8f9fa;
+    }
+    
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff6b6b;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      z-index: 2;
+    }
+    
+    .product-info {
+      padding: 20px;
+    }
+    
+    .product-info h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.2rem;
+      color: #2c3e50;
+      line-height: 1.4;
+    }
+    
+    .product-type {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    
+    .digital {
+      background-color: #e3f2fd;
+      color: #1976d2;
+    }
+    
+    .physical {
+      background-color: #e8f5e9;
+      color: #388e3c;
+    }
+    
+    .view-btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      background-color: #ffd861;
+      color: #2c3e50;
+      text-decoration: none;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background-color 0.3s;
+      text-align: center;
+      margin-top: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .view-btn:hover {
+      background-color: #fac843;
+      color: #2c3e50;
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    
+    .product-price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #e67e22;
+      margin: 10px 0;
+    }
+    
+    .product-rating {
+      color: #f1c40f;
+      margin-bottom: 10px;
+    }
+    
+    .product-rating i {
+      margin-right: 2px;
+    }
+    
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .page-header p {
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .filter-btn {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -16,16 +221,15 @@
         </div>
         <ul class="nav-links">
           <li><a href="index.html" data-i18n="home">Home</a></li>
-          <li><a href="cities.html" data-i18n="cities">Cities Guide</a></li>
-          <li><a href="news.html" data-i18n="news">Latest News</a></li>
+          <li><a href="cities.html" data-i18n="cities">Cities</a></li>
+          <li><a href="news.html" data-i18n="news">News</a></li>
           <li><a href="shop.html" data-i18n="shop">Shop</a></li>
-          <li><a href="games.html" data-i18n="games">Games & Puzzles</a></li>
-          <li><a href="guides.html" data-i18n="guides">Travel Guides</a></li>
+          <li><a href="games.html" data-i18n="games">Games</a></li>
         </ul>
         <div class="language-switcher">
-          <button id="lang-en" title="English">🇬🇧</button>
-          <button id="lang-ar" title="Arabic">🇸🇦</button>
-          <button id="lang-fr" title="French">🇫🇷</button>
+          <button id="lang-en" title="English">EN</button>
+          <button id="lang-ar" title="Arabic">AR</button>
+          <button id="lang-fr" title="French">FR</button>
         </div>
       </nav>
     </div>
@@ -50,93 +254,55 @@
 
       <!-- Product Grid -->
       <section class="product-grid">
-        <!-- Digital Products -->
-        <div class="product-card" data-type="digital">
-          <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=14" alt="Cairo Travel Map">
-          </div>
-          <div class="product-info">
-            <h3>Cairo Travel Map (PDF)</h3>
-            <span class="product-type digital" data-i18n="digital">Digital</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
-          </div>
-        </div>
-
-        <div class="product-card" data-type="digital">
-          <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=15" alt="Morocco Itinerary">
-          </div>
-          <div class="product-info">
-            <h3>Morocco Itinerary Template</h3>
-            <span class="product-type digital" data-i18n="digital">Digital</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
-          </div>
-        </div>
-
-        <div class="product-card" data-type="digital">
-          <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=16" alt="Japan Phrasebook">
-          </div>
-          <div class="product-info">
-            <h3>Japan Travel Phrasebook (eBook)</h3>
-            <span class="product-type digital" data-i18n="digital">Digital</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
-          </div>
-        </div>
-
-        <div class="product-card" data-type="digital">
-          <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=17" alt="Europe Guide">
-          </div>
-          <div class="product-info">
-            <h3>Europe Backpacking Guide (PDF)</h3>
-            <span class="product-type digital" data-i18n="digital">Digital</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
-          </div>
-        </div>
-
         <!-- Physical Products -->
         <div class="product-card" data-type="physical">
           <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=18" alt="Travel Journal">
+            <img src="imags/product1.PNG" alt="Travel Neck Pillows for Airplanes - 360°">
+            <span class="product-badge">Physical</span>
           </div>
           <div class="product-info">
-            <h3>Travel Journal</h3>
-            <span class="product-type physical" data-i18n="physical">Physical</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
+            <h3>Travel Neck Pillows for Airplanes - 360°</h3>
+            <div class="product-rating">
+              <span>★★★★★</span>
+              <span style="color: #666; font-size: 0.9rem; margin-left: 5px;">4.8</span>
+            </div>
+            <div class="product-price">€29.99</div>
+            <p style="font-size: 0.9rem; color: #666; margin: 10px 0;">I never knew a travel pillow could be so important until I tried this one! The 360° ergonomic design provides great neck support and completely eliminates stiffness on long flights. The memory foam is soft but firm enough to keep my head in place, and it was my first time sleeping comfortably on a plane.</p>
+            <a href="https://amzn.to/43Y7Alw" class="view-btn" target="_blank">View Detail in Amazon</a>
           </div>
         </div>
 
         <div class="product-card" data-type="physical">
           <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=19" alt="World Map Poster">
+            <img src="imags/product2.png" alt="Travel Inspira Luggage Scale">
+            <span class="product-badge">Physical</span>
           </div>
           <div class="product-info">
-            <h3>World Map Poster</h3>
-            <span class="product-type physical" data-i18n="physical">Physical</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
+            <h3>Travel Inspira Luggage Scale</h3>
+            <div class="product-rating">
+              <span>★★★★★</span>
+              <span style="color: #666; font-size: 0.9rem; margin-left: 5px;">4.8</span>
+            </div>
+            <div class="product-price">€9.99</div>
+            <p style="font-size: 0.9rem; color: #666; margin: 10px 0;">This little scale is easy to use, very light, and accurate, while also being well-built. Perfect traveling companion. When on long trips, it's very useful for figuring out the weight of your luggage or purchases. The battery seems to work without issues, and the backlit LCD display brightness is excellent.</p>
+            <a href="https://amzn.to/47Fd72S" class="view-btn" target="_blank">View Detail in Amazon</a>
           </div>
         </div>
 
         <div class="product-card" data-type="physical">
           <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=20" alt="Passport Holder">
+            <img src="imags/product3.png" alt="MIXC Portable Steam Sauna Box">
+            <span class="product-badge">Physical</span>
           </div>
           <div class="product-info">
-            <h3>Leather Passport Holder</h3>
-            <span class="product-type physical" data-i18n="physical">Physical</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
-          </div>
-        </div>
-
-        <div class="product-card" data-type="physical">
-          <div class="product-image">
-            <img src="https://picsum.photos/200/150?random=21" alt="Packing Cubes">
-          </div>
-          <div class="product-info">
-            <h3>Travel Packing Cubes Set</h3>
-            <span class="product-type physical" data-i18n="physical">Physical</span>
-            <button class="view-btn" data-i18n="viewProduct">View</button>
+            <h3>MIXC Portable Steam Sauna Box</h3>
+            <div class="product-rating">
+              <span>★★★★★</span>
+              <span style="color: #666; font-size: 0.9rem; margin-left: 5px;">5.0</span>
+            </div>
+            <div class="product-price">€142.99</div>
+            <p style="font-size: 0.9rem; color: #666; margin: 10px 0;">I was recommended this product from a work associate and those skeptical I broke down and ordered one yesterday. It was delivered today and I set it up in about 15 minutes and had it functioning in no time. I was amazed at the Quality of the product as well as how well it functioned! Easy five stars for me.</p>
+            <a href="https://amzn.to/4nPnuG9" class="view-btn" target="_blank">View Detail in Amazon</a>
           </div>
         </div>
       </section>

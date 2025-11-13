@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Brain Games – Play & Explore</title>
+
+    :root {
+      --primary-blue: #2a9df4;
+      --teal: #2c6e49;
+      --sandy-beige: #fefee3;
+      --light-bg: #f8f9fa;
+      --dark-bg: #212529;
+      --white: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --border-radius: 10px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: var(--sandy-beige);
+      transition: var(--transition);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--teal);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Header Styles */
+    header {
+      background: linear-gradient(135deg, var(--teal), var(--primary-blue));
+      color: var(--white);
+      padding: 2rem 0;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    header p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    /* Ad Banner Styles */
+    .ad-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .ad-banner {
+      background-color: #e9ecef;
+      border: 1px dashed #adb5bd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #6c757d;
+      font-weight: bold;
+    }
+
+    .ad-horizontal {
+      width: 100%;
+      max-width: 728px;
+      height: 90px;
+      margin: 0 auto;
+    }
+
+    .ad-vertical {
+      width: 160px;
+      height: 600px;
+      display: none; /* Hidden on mobile */
+    }
+
+    /* Game Grid Styles */
+    .games-section {
+      padding: 2rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--teal);
+      font-size: 2rem;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .game-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .game-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .game-icon {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--teal), var(--primary-blue));
+      color: white;
+      font-size: 3rem;
+    }
+
+    .game-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-content h3 {
+      margin-bottom: 0.75rem;
+      color: var(--teal);
+      font-size: 1.4rem;
+    }
+
+    .game-description {
+      margin-bottom: 1.5rem;
+      color: #555;
+      flex-grow: 1;
+    }
+
+    .play-btn {
+      display: inline-block;
+      background-color: var(--teal);
+      color: var(--white);
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    .play-btn:hover {
+      background-color: var(--primary-blue);
+      transform: scale(1.03);
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--dark-bg);
+      color: var(--white);
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1.7rem;
+      }
+
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ad-vertical {
+        display: none;
+      }
+
+      .ad-horizontal {
+        height: 60px;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .ad-vertical {
+        display: block;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1.5rem 0;
+      }
+
+      header h1 {
+        font-size: 1.7rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        width: 95%;
+      }
+    }
+
+    /* Game icon styling */
+    .game-icon i {
+      font-size: 3rem;
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>Travel Brain Games</h1>
+      <p>Challenge your mind while planning your next trip!</p>
+    </div>
+  </header>
+
+  <!-- Ad Placement -->
+  <div class="container">
+
+  </div>
+
+  <!-- Main Content -->
+  <main class="games-section">
+    <div class="container">
+      <h2 class="section-title">Explore Our Games</h2>
+      <div class="games-grid">
+        <!-- Game 1 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-globe-americas"></i>
+          </div>
+          <div class="game-content">
+            <h3>Country Capital Quiz</h3>
+            <p class="game-description">Test your knowledge of world capitals with our challenging quiz. How many can you identify correctly?</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 2 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-flag"></i>
+          </div>
+          <div class="game-content">
+            <h3>Flag Finder</h3>
+            <p class="game-description">Identify countries by their flags in this fast-paced recognition game. Perfect for geography enthusiasts!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 3 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-landmark"></i>
+          </div>
+          <div class="game-content">
+            <h3>Landmark Challenge</h3>
+            <p class="game-description">Can you recognize famous landmarks from around the world? Put your visual memory to the test!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 4 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-utensils"></i>
+          </div>
+          <div class="game-content">
+            <h3>Food Detective</h3>
+            <p class="game-description">Identify traditional dishes from different countries. A delicious challenge for food lovers!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 5 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-mountain"></i>
+          </div>
+          <div class="game-content">
+            <h3>Mountain Master</h3>
+            <p class="game-description">Recognize famous mountain ranges and peaks from around the world. Challenge your geography skills!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 6 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-water"></i>
+          </div>
+          <div class="game-content">
+            <h3>Ocean Explorer</h3>
+            <p class="game-description">Identify oceans, seas, and major water bodies. Perfect for oceanography enthusiasts!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 7 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-city"></i>
+          </div>
+          <div class="game-content">
+            <h3>City Silhouette</h3>
+            <p class="game-description">Recognize famous city skylines and architectural landmarks. How well do you know world cities?</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 8 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-language"></i>
+          </div>
+          <div class="game-content">
+            <h3>Language Quiz</h3>
+            <p class="game-description">Match languages to their countries of origin. Expand your knowledge of global languages!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 9 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-plane"></i>
+          </div>
+          <div class="game-content">
+            <h3>Flight Route Planner</h3>
+            <p class="game-description">Plan the most efficient routes between major world cities. Perfect for aspiring pilots!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+
+        <!-- Game 10 -->
+        <div class="game-card">
+          <div class="game-icon">
+            <i class="fas fa-map"></i>
+          </div>
+          <div class="game-content">
+            <h3>Map Puzzle</h3>
+            <p class="game-description">Reconstruct world maps by placing countries in their correct positions. A classic geography challenge!</p>
+            <button class="play-btn">Play Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Travel Brain Games. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Add functionality to play buttons
+    document.querySelectorAll('.play-btn').forEach(button => {
+      button.addEventListener('click', function() {
+        const gameTitle = this.parentElement.querySelector('h3').textContent;
+        alert(`Starting game: ${gameTitle}\n\nGame functionality would be implemented here.`);
+      });
+    });
+  </script>
+</body>
+</html>
