@@ -21,8 +21,6 @@
       ezstandalone.cmd = ezstandalone.cmd || [];
   </script>
   <!-- End Ezoic -->
-  <!-- Monetag Script -->
-  <script src="/monetag.js"></script>
   <style>
     .pagination {
       display: flex;
@@ -554,10 +552,6 @@
       }
     });
   </script>
-  <!-- Non-intrusive Monetag Ad -->
-  <div class="monetag-ad" style="width:300px; height:250px; margin:20px auto;">
-    <!-- Monetag will populate this area automatically -->
-  </div>
   <!-- Service Worker Registration -->
   <script>
     if ('serviceWorker' in navigator) {
@@ -565,6 +559,15 @@
         .then(() => console.log('Service Worker Registered'))
         .catch(err => console.error('Service Worker Failed:', err));
     }
+  </script>
+  <!-- Monetag Vignette Banner - Non-intrusive -->
+  <script async src="https://cdn.monetag.com/ads.js"></script>
+  <script>
+    window.monetag = window.monetag || [];
+    window.monetag.push({
+      zoneId: '10186520',
+      type: 'vignette'
+    });
   </script>
 </body>
 </html>
