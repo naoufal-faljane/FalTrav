@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monetag Test - FalTrav</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Monetag Script -->
+  <script src="/monetag.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">
+          <a href="index.html">FalTrav</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="cities.html">Cities</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="shop.html">Shop</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Monetag Ad Test</h1>
+        <p>This page is to test the Monetag integration</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <h2>Ad Placement Test</h2>
+      <p>Below is a placeholder for the Monetag ad:</p>
+      
+      <!-- Non-intrusive Monetag Ad -->
+      <div class="monetag-ad" style="width:300px; height:250px; margin:20px auto; border: 1px solid #ccc; background-color: #f9f9f9; display: flex; align-items: center; justify-content: center;">
+        Monetag Ad Space (300x250)
+      </div>
+      
+      <p>This is sample content to show how the ad integrates with the page content.</p>
+    </div>
+  </main>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Failed:', err));
+    }
+  </script>
+</body>
+</html>

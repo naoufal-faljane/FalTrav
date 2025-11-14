@@ -484,3 +484,10 @@ footer {
 [dir="rtl"] .footer-links {
   flex-direction: row-reverse;
 }
+
+/* Monetag Ad Styling */
+.monetag-ad {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+}

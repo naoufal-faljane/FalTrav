@@ -21,6 +21,8 @@
       ezstandalone.cmd = ezstandalone.cmd || [];
   </script>
   <!-- End Ezoic -->
+  <!-- Monetag Script -->
+  <script src="/monetag.js"></script>
 </head>
 <body>
   <header>
@@ -95,7 +97,19 @@
     </div>
   </footer>
 
+  <!-- Non-intrusive Monetag Ad -->
+  <div class="monetag-ad" style="width:300px; height:250px; margin:20px auto;">
+    <!-- Monetag will populate this area automatically -->
+  </div>
   <script src="js/translations.js"></script>
   <script src="js/main.js"></script>
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+        .then(() => console.log('Service Worker Registered'))
+        .catch(err => console.error('Service Worker Failed:', err));
+    }
+  </script>
 </body>
 </html>
