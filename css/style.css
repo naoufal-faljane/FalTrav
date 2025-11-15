@@ -346,7 +346,7 @@ main {
 
 .newsletter p {
   font-size: 1.1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   opacity: 0.9;
 }
 
@@ -355,6 +355,7 @@ main {
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
 
 .newsletter-form input {
@@ -373,6 +374,33 @@ main {
   transition: var(--transition);
   border: none;
   cursor: pointer;
+}
+
+.rss-subscribe {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.rss-subscribe a {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.rss-subscribe a:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.rss-icon::before {
+  content: "RSS";
+  margin-right: 0.5rem;
+  font-weight: bold;
 }
 
 /* Hero Section */

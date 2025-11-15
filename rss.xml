@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>FalTrav - Travel Updates</title>
+  <link>https://faltrav.com</link>
+  <description>Latest travel news, destinations, and updates from FalTrav</description>
+  <language>en-us</language>
+  <pubDate>Sat, 15 Nov 2025 00:00:00 GMT</pubDate>
+  <lastBuildDate>Sat, 15 Nov 2025 00:00:00 GMT</lastBuildDate>
+  <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+  <generator>FalTrav Travel Site</generator>
+  
+  <item>
+    <title>Welcome to FalTrav - Your Ultimate Travel Companion</title>
+    <link>https://faltrav.com</link>
+    <description>Welcome to FalTrav, your ultimate travel companion. Discover detailed guides for cities around the world with recommendations for attractions, food, and more.</description>
+    <pubDate>Sat, 15 Nov 2025 00:00:00 GMT</pubDate>
+    <guid>https://faltrav.com</guid>
+  </item>
+  
+  <item>
+    <title>Featured Destinations Added</title>
+    <link>https://faltrav.com/cities.html</link>
+    <description>We've added new featured destinations including Paris, Tokyo, and New York to our travel guides.</description>
+    <pubDate>Sat, 15 Nov 2025 00:00:00 GMT</pubDate>
+    <guid>https://faltrav.com/cities.html</guid>
+  </item>
+  
+  <item>
+    <title>Travel Tips & Guides Available</title>
+    <link>https://faltrav.com#travel-tips</link>
+    <description>Check out our new travel tips section with expert advice on packing efficiently, cultural etiquette, and travel safety.</description>
+    <pubDate>Sat, 15 Nov 2025 00:00:00 GMT</pubDate>
+    <guid>https://faltrav.com#travel-tips</guid>
+  </item>
+  
+</channel>
+</rss>

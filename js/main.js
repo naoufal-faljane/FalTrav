@@ -201,10 +201,18 @@ function setupNewsletterForm() {
         return;
       }
 
-      // Here you would normally send the email to your server
-      // For now, just show a success message
-      alert('Thank you for subscribing to our newsletter!');
+      // Open the user's email client to send email to faltrav25@gmail.com
+      const subject = encodeURIComponent('New Newsletter Subscription');
+      const body = encodeURIComponent(`New subscriber: ${email}\n\nThis email was submitted from the FalTrav website newsletter form.`);
+      window.location.href = `mailto:faltrav25@gmail.com?subject=${subject}&body=${body}`;
+
+      // Clear the form
       emailInput.value = '';
+      
+      // Show a message to the user
+      setTimeout(function() {
+        alert('Thank you for subscribing to our newsletter! An email has been prepared to send to faltrav25@gmail.com. Please complete and send the email in your email client.');
+      }, 500);
     });
   }
 }
