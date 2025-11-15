@@ -21,7 +21,7 @@ function setupLanguageSwitcher() {
       ar: document.getElementById('lang-ar'),
       fr: document.getElementById('lang-fr')
     };
-    
+
     if (languageButtons.en) {
       languageButtons.en.addEventListener('click', () => changeLanguage('en'));
     }
@@ -68,7 +68,7 @@ function setLanguage(lang) {
     ar: document.getElementById('lang-ar'),
     fr: document.getElementById('lang-fr')
   };
-  
+
   Object.keys(languageButtons).forEach(key => {
     if (languageButtons[key]) {
       if (key === lang) {
@@ -150,13 +150,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (allButton) {
     allButton.classList.add('active');
   }
-  
+
   // Initialize language switcher
   setupLanguageSwitcher();
-  
+
   // Initialize shop filters if on shop page
   setupShopFilters();
-  
+
+  // Initialize newsletter form
+  setupNewsletterForm();
+
   // Check for cookie consent on pages that have the banner
   if (document.getElementById('cookie-consent')) {
     if (!localStorage.getItem('cookieConsent')) {
@@ -166,14 +169,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle cookie consent
     const acceptBtn = document.getElementById('accept-cookies');
     const rejectBtn = document.getElementById('reject-cookies');
-    
+
     if (acceptBtn) {
       acceptBtn.addEventListener('click', function() {
         localStorage.setItem('cookieConsent', 'accepted');
         document.getElementById('cookie-consent').classList.add('d-none');
       });
     }
-    
+
     if (rejectBtn) {
       rejectBtn.addEventListener('click', function() {
         localStorage.setItem('cookieConsent', 'rejected');
@@ -182,3 +185,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+// Set up newsletter subscription
+function setupNewsletterForm() {
+  const newsletterForm = document.querySelector('.newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const emailInput = this.querySelector('input[type="email"]');
+      const email = emailInput.value;
+
+      // Simple validation
+      if (!validateEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      // Here you would normally send the email to your server
+      // For now, just show a success message
+      alert('Thank you for subscribing to our newsletter!');
+      emailInput.value = '';
+    });
+  }
+}
+
+// Email validation helper
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
