@@ -74,6 +74,18 @@
     .page-header p {
       color: #666 !important;
     }
+    
+    /* Style for article links */
+    .card-link {
+      text-decoration: none;
+      display: block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
   </style>
 </head>
 <body>
@@ -86,6 +98,7 @@
         </div>
         <ul class="nav-links">
           <li><a href="index.html" data-i18n="home">Home</a></li>
+          <li><a href="articles.html" data-i18n="articles">Articles</a></li>
           <li><a href="cities.html" data-i18n="cities">Cities</a></li>
           <li><a href="news.html" data-i18n="news">News</a></li>
           <li><a href="shop.html" data-i18n="shop">Shop</a></li>
@@ -113,23 +126,27 @@
         Showing <span id="start-index">1</span> - <span id="end-index">12</span> of <span id="total-articles">20</span> articles
       </div>
       <section class="cards-grid" id="news-container">
-        <div class="card" onclick="toggleCardContent(this)">
-          <div class="card-img">
-            <img src="imags/Georgia Eliminates Visa Requirements for 30+ Countries.png" alt="Georgia Visa Policy">
+        <a href="articles/georgia-visa-requirements-2025.html" class="card-link">
+          <div class="card">
+            <div class="card-img">
+              <img src="imags/Georgia Eliminates Visa Requirements for 30+ Countries.png" alt="Georgia Visa Policy">
+            </div>
+            <div class="card-content">
+              <h3>Georgia Eliminates Visa Requirements for 30+ Countries in 2025 – What Travelers Need to Know</h3>
+            </div>
           </div>
-          <div class="card-content">
-            <h3>Georgia Eliminates Visa Requirements for 30+ Countries in 2025 – What Travelers Need to Know</h3>
-          </div>
-        </div>
+        </a>
 
-        <div class="card" onclick="toggleCardContent(this)">
-          <div class="card-img">
-            <img src="imags/Saudia Launches Direct Flights from Riyadh to Bali Starting June 2025.png" alt="Saudia Bali Flight">
+        <a href="articles/saudia-flights-bali.html" class="card-link">
+          <div class="card">
+            <div class="card-img">
+              <img src="imags/Saudia Launches Direct Flights from Riyadh to Bali Starting June 2025.png" alt="Saudia Bali Flight">
+            </div>
+            <div class="card-content">
+              <h3>Saudia Launches Direct Flights from Riyadh to Bali Starting June 2025</h3>
+            </div>
           </div>
-          <div class="card-content">
-            <h3>Saudia Launches Direct Flights from Riyadh to Bali Starting June 2025</h3>
-          </div>
-        </div>
+        </a>
 
         <div class="card" onclick="toggleCardContent(this)">
           <div class="card-img">
@@ -569,7 +586,7 @@
       type: 'vignette'
     });
   </script>
+<script>(function(s){s.dataset.zone='10191074',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
-<script>(function(s){s.dataset.zone='10191076',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 </body>
 </html>

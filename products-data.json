@@ -1,0 +1,90 @@
+[
+  {
+    "id": "travel-journal",
+    "name": "Travel Journal",
+    "type": "physical",
+    "price": "4.99",
+    "image": "https://picsum.photos/300/200?random=1",
+    "rating": "4.8",
+    "badge": "Physical",
+    "link": "products/travel-journal.html",
+    "tags": ["travel", "journal", "record", "writing", "memories"]
+  },
+  {
+    "id": "world-map-poster",
+    "name": "World Map Poster",
+    "type": "physical",
+    "price": "7.99",
+    "image": "https://picsum.photos/300/200?random=2",
+    "rating": "4.7",
+    "badge": "Physical",
+    "link": "products/world-map-poster.html",
+    "tags": ["travel", "map", "planning", "decoration", "geography"]
+  },
+  {
+    "id": "packing-cubes-set",
+    "name": "Packing Cubes Set",
+    "type": "physical",
+    "price": "12.99",
+    "image": "https://picsum.photos/300/200?random=3",
+    "rating": "4.9",
+    "badge": "Physical",
+    "link": "products/packing-cubes-set.html",
+    "tags": ["travel", "packing", "organization", "efficiency"]
+  },
+  {
+    "id": "europe-backpacking-guide",
+    "name": "Europe Backpacking Guide",
+    "type": "digital",
+    "price": "9.99",
+    "image": "https://picsum.photos/300/200?random=4",
+    "rating": "4.6",
+    "badge": "Digital",
+    "link": "products/europe-backpacking-guide.html",
+    "tags": ["travel", "guide", "europe", "backpacking", "planning"]
+  },
+  {
+    "id": "japan-phrasebook",
+    "name": "Japan Phrasebook",
+    "type": "digital",
+    "price": "7.99",
+    "image": "https://picsum.photos/300/200?random=5",
+    "rating": "4.5",
+    "badge": "Digital",
+    "link": "products/japan-phrasebook.html",
+    "tags": ["travel", "guide", "japan", "language", "communication"]
+  },
+  {
+    "id": "morocco-itinerary",
+    "name": "Morocco Itinerary",
+    "type": "digital",
+    "price": "8.99",
+    "image": "https://picsum.photos/300/200?random=6",
+    "rating": "4.7",
+    "badge": "Digital",
+    "link": "products/morocco-itinerary.html",
+    "tags": ["travel", "itinerary", "morocco", "planning", "schedule"]
+  },
+  {
+    "id": "leather-passport-holder",
+    "name": "Leather Passport Holder",
+    "type": "physical",
+    "price": "24.99",
+    "image": "https://picsum.photos/300/200?random=7",
+    "rating": "4.8",
+    "badge": "Physical",
+    "link": "products/leather-passport-holder.html",
+    "tags": ["travel", "documents", "organization", "accessory", "protection"]
+  },
+  {
+    "id": "cairo-travel-map",
+    "name": "Cairo Travel Map",
+    "type": "physical",
+    "price": "5.99",
+    "image": "https://picsum.photos/300/200?random=8",
+    "rating": "4.4",
+    "badge": "Physical",
+    "link": "products/cairo-travel-map.html",
+    "tags": ["travel", "map", "cairo", "navigation", "planning"]
+  }
+]
