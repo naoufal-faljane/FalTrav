@@ -719,27 +719,27 @@ export default function DestinationPage() {
       {/* Hero Section */}
       <div className="relative h-[60vh] w-full">
         <img 
-          src={destination.image} 
-          alt={destination.name} 
+          src={String(destination.image)} 
+          alt={String(destination.name)} 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
         <Container className="absolute bottom-0 left-0 right-0">
           <div className="pb-12">
             <div className="flex flex-wrap gap-2 mb-4">
-              <Badge variant="secondary">{destination.category}</Badge>
-              <Badge variant="outline">{destination.continent}</Badge>
-              <Badge variant="outline">{destination.season}</Badge>
+              <Badge variant="secondary">{String(destination.category)}</Badge>
+              <Badge variant="outline">{String(destination.continent)}</Badge>
+              <Badge variant="outline">{String(destination.season)}</Badge>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white">{destination.name}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white">{String(destination.name)}</h1>
             <div className="flex items-center gap-4 mt-2 text-white/80">
               <div className="flex items-center gap-1">
                 <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <span>{destination.rating} ({destination.reviews} reviews)</span>
+                <span>{String(destination.rating)} ({String(destination.reviews)} reviews)</span>
               </div>
               <div className="flex items-center gap-1">
                 <MapPin className="h-4 w-4" />
-                <span>{destination.country}</span>
+                <span>{String(destination.country)}</span>
               </div>
             </div>
           </div>
@@ -762,8 +762,8 @@ export default function DestinationPage() {
               </div>
               <Card>
                 <CardContent className="p-6">
-                  <p className="text-lg mb-4">{destination.description}</p>
-                  <p className="text-muted-foreground">{destination.guide}</p>
+                  <p className="text-lg mb-4">{String(destination.description)}</p>
+                  <p className="text-muted-foreground">{String(destination.guide)}</p>
                 </CardContent>
               </Card>
             </motion.section>
@@ -781,7 +781,7 @@ export default function DestinationPage() {
                     <div className="bg-primary text-primary-foreground rounded-full p-2">
                       <Camera className="h-4 w-4" />
                     </div>
-                    <span>{highlight}</span>
+                    <span>{String(highlight)}</span>
                   </div>
                 ))}
               </div>
@@ -798,7 +798,7 @@ export default function DestinationPage() {
                 {destination.images.map((image: string, index: number) => (
                   <div key={index} className="aspect-video rounded-lg overflow-hidden">
                     <img 
-                      src={image} 
+                      src={String(image)} 
                       alt={`Gallery ${index + 1}`} 
                       className="w-full h-full object-cover"
                     />
@@ -823,7 +823,7 @@ export default function DestinationPage() {
                     {destination.souvenirs.map((souvenir: string, index: number) => (
                       <div key={index} className="flex items-start gap-3 py-2">
                         <span className="text-primary">•</span>
-                        <p>{souvenir}</p>
+                        <p>{String(souvenir)}</p>
                       </div>
                     ))}
                   </div>
@@ -847,7 +847,7 @@ export default function DestinationPage() {
                     {destination.restaurants.map((restaurant: string, index: number) => (
                       <div key={index} className="flex items-start gap-3">
                         <span className="text-primary mt-1">•</span>
-                        <p>{restaurant}</p>
+                        <p>{String(restaurant)}</p>
                       </div>
                     ))}
                   </div>
@@ -870,8 +870,8 @@ export default function DestinationPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {Object.entries(destination.costs).map(([key, value], index) => (
                       <div key={index} className="flex justify-between py-2 border-b border-border/50">
-                        <span className="text-muted-foreground">{key}</span>
-                        <span className="font-medium">{value}</span>
+                        <span className="text-muted-foreground">{String(key)}</span>
+                        <span className="font-medium">{String(value)}</span>
                       </div>
                     ))}
                   </div>
@@ -895,7 +895,7 @@ export default function DestinationPage() {
                     {destination.mustSee.map((place: string, index: number) => (
                       <div key={index} className="flex items-start gap-3 py-2">
                         <span className="text-primary">•</span>
-                        <p>{place}</p>
+                        <p>{String(place)}</p>
                       </div>
                     ))}
                   </div>
@@ -919,7 +919,7 @@ export default function DestinationPage() {
                     {destination.cheapestPlaces.map((place: string, index: number) => (
                       <div key={index} className="flex items-start gap-3 py-2">
                         <span className="text-primary">•</span>
-                        <p>{place}</p>
+                        <p>{String(place)}</p>
                       </div>
                     ))}
                   </div>
@@ -943,7 +943,7 @@ export default function DestinationPage() {
                     {destination.tips.map((tip: string, index: number) => (
                       <div key={index} className="flex items-start gap-3 py-2">
                         <span className="text-primary">•</span>
-                        <p>{tip}</p>
+                        <p>{String(tip)}</p>
                       </div>
                     ))}
                   </div>
@@ -963,10 +963,10 @@ export default function DestinationPage() {
               <Card className="p-6 sticky top-24">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-2xl font-bold">${destination.price}</h3>
+                    <h3 className="text-2xl font-bold">${String(destination.price)}</h3>
                     <p className="text-muted-foreground">per person</p>
                   </div>
-                  <Badge>{destination.duration}</Badge>
+                  <Badge>{String(destination.duration)}</Badge>
                 </div>
 
                 <div className="space-y-3 mb-6">
@@ -974,28 +974,28 @@ export default function DestinationPage() {
                     <span className="text-muted-foreground">Duration</span>
                     <span className="flex items-center gap-1">
                       <Clock className="h-4 w-4" />
-                      {destination.duration}
+                      {String(destination.duration)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">Best for</span>
                     <span className="flex items-center gap-1">
                       <Users className="h-4 w-4" />
-                      {destination.travelers}
+                      {String(destination.travelers)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">Best season</span>
                     <span className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
-                      {destination.season}
+                      {String(destination.season)}
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">Price</span>
                     <span className="flex items-center gap-1">
                       <DollarSign className="h-4 w-4" />
-                      ${destination.price}
+                      ${String(destination.price)}
                     </span>
                   </div>
                 </div>
@@ -1008,7 +1008,7 @@ export default function DestinationPage() {
                   <h4 className="font-medium mb-2">Best for:</h4>
                   <div className="flex flex-wrap gap-2">
                     {destination.bestFor.map((tag: string, index: number) => (
-                      <Badge key={index} variant="outline">{tag}</Badge>
+                      <Badge key={index} variant="outline">{String(tag)}</Badge>
                     ))}
                   </div>
                 </div>
@@ -1032,14 +1032,14 @@ export default function DestinationPage() {
                         <div className="flex">
                           <div className="w-1/3">
                             <img 
-                              src={dest.image} 
-                              alt={dest.name} 
+                              src={String(dest.image)} 
+                              alt={String(dest.name)} 
                               className="h-full w-full object-cover group-hover:scale-105 transition-transform"
                             />
                           </div>
                           <div className="w-2/3 p-3">
-                            <h4 className="font-semibold">{dest.name}</h4>
-                            <p className="text-sm text-muted-foreground">${dest.price}</p>
+                            <h4 className="font-semibold">{String(dest.name)}</h4>
+                            <p className="text-sm text-muted-foreground">${String(dest.price)}</p>
                           </div>
                         </div>
                       </Card>
