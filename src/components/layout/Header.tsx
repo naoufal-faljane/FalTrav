@@ -51,7 +51,7 @@ const Header = () => {
           <div className="flex items-center justify-center flex-1">
             <NavigationMenu>
               <NavigationMenuList className="flex space-x-2">
-                {['Home', 'Destinations', 'Deals', 'News', 'Shop', 'Books'].map((item) => (
+                {['Home', 'Destinations', 'News', 'Shop', 'Books'].map((item) => (
                   <NavigationMenuItem key={item}>
                     <Link
                       href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
@@ -92,7 +92,7 @@ const Header = () => {
                   <div className="w-full mb-4">
                     <SearchComponent />
                   </div>
-                  {['Home', 'Destinations', 'Deals', 'News', 'Shop', 'Books'].map((item) => (
+                  {['Home', 'Destinations', 'News', 'Shop', 'Books'].map((item) => (
                     <Link
                       key={item}
                       href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
@@ -136,7 +136,7 @@ const Header = () => {
                   <div className="w-full mb-4">
                     <SearchComponent />
                   </div>
-                  {['Home', 'Destinations', 'Deals', 'News', 'Shop', 'Books'].map((item) => (
+                  {['Home', 'Destinations', 'News', 'Shop', 'Books'].map((item) => (
                     <Link
                       key={item}
                       href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}

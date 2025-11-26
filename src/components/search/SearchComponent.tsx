@@ -17,8 +17,8 @@ const mockSearchResults = [
   { id: 6, title: 'Lonely Planet Japan Guide', category: 'book', path: '/books/japan-guide' },
   { id: 7, title: 'Top 10 Destinations for 2024', category: 'article', path: '/news/top-destinations-2024' },
   { id: 8, title: 'Essential Packing Tips', category: 'article', path: '/news/packing-tips' },
-  { id: 9, title: 'Bali Paradise Escape Deal', category: 'deal', path: '/deals/bali-escape' },
-  { id: 10, title: 'European Adventure Package', category: 'deal', path: '/deals/europe-adventure' },
+  { id: 9, title: 'Travel Photography Workshop', category: 'course', path: '/courses/photography' },
+  { id: 10, title: 'Best Travel Apps for 2024', category: 'article', path: '/news/best-travel-apps' },
 ];
 
 interface SearchResult {
@@ -80,7 +80,7 @@ const SearchComponent = () => {
         </Button>
         <Input
           type="text"
-          placeholder="Search destinations, deals, products..."
+          placeholder="Search destinations, products, articles..."
           className="pl-10 pr-10 rounded-full w-full min-w-[160px] sm:min-w-[200px] md:w-64 bg-background/80 backdrop-blur border border-border/30 shadow-sm focus:ring-2 focus:ring-primary/30"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}

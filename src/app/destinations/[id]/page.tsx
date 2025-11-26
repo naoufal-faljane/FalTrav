@@ -18,7 +18,7 @@ const destinations = [
     country: 'Indonesia',
     continent: 'Asia',
     description: 'Tropical paradise with stunning beaches, rice terraces, and rich culture',
-    image: 'https://images.unsplash.com/photo-1534723452862-4c874e1e2af9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Bali, Indonesia.png',
     rating: 4.8,
     reviews: 1240,
     price: 599,
@@ -36,10 +36,48 @@ const destinations = [
     ],
     bestFor: ['Beach Lovers', 'Culture Enthusiasts', 'Adventure Seekers'],
     images: [
-      'https://images.unsplash.com/photo-1534723452862-4c874e1e2af9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Bali, Indonesia.png',
       'https://images.unsplash.com/photo-1516920536045-af6c5ec6b99b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1518638176868-65d31c3aabd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Traditional batik textiles',
+      'Hand-carved wooden masks',
+      'Silver jewelry from Celuk village',
+      'Bali coffee and spices'
+    ],
+    restaurants: [
+      'Locavore - farm-to-table fine dining',
+      'Warung Made - authentic local cuisine',
+      'Sardine - fresh seafood in a beautiful setting',
+      'Bebek Bengil (Dirty Duck) - famous duck dish'
+    ],
+    costs: {
+      'Budget per day': '$30-50',
+      'Mid-range per day': '$50-100',
+      'Luxury per day': '$150+',
+      'Avg. meal (local)': '$2-10',
+      'Avg. meal (international)': '$10-25',
+      'Transportation': '$5-15/day'
+    },
+    mustSee: [
+      'Ubud Monkey Forest',
+      'Tirta Empul Temple (Holy Spring)',
+      'Pura Lempuyang (Gates of Heaven)',
+      'Jatiluwih Rice Terraces (UNESCO site)'
+    ],
+    cheapestPlaces: [
+      'Gianyar Regency (authentic villages)',
+      'Amed (peaceful fishing villages)',
+      'Canggu (bohemian beach town)',
+      'Sidemen Valley (off-the-beaten-path)'
+    ],
+    tips: [
+      'Bargain respectfully at markets but with a smile',
+      'Dress modestly when visiting temples',
+      'Stay hydrated during the hot season',
+      'Book accommodations in advance during peak season'
     ]
   },
   {
@@ -48,7 +86,7 @@ const destinations = [
     country: 'Greece',
     continent: 'Europe',
     description: 'Iconic white buildings and breathtaking sunsets overlooking the Aegean Sea',
-    image: 'https://images.unsplash.com/photo-1566528580372-39c4e5a0a8e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Santorini, Greece.png',
     rating: 4.7,
     reviews: 890,
     price: 899,
@@ -66,10 +104,48 @@ const destinations = [
     ],
     bestFor: ['Romantic Getaways', 'Photography', 'Fine Dining'],
     images: [
-      'https://images.unsplash.com/photo-1566528580372-39c4e5a0a8e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Santorini, Greece.png',
       'https://images.unsplash.com/photo-1587314161406-4e65fccb10ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1587314161405-5c9f0b5be39b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1587314161405-6bdfb1d003a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Local volcanic wine',
+      'Santorini cherry tomatoes in olive oil',
+      'Handmade jewelry with local minerals',
+      'Traditional Greek pottery'
+    ],
+    restaurants: [
+      'Dimitris Ammoudi Taverna - waterfront dining',
+      'Metaxi Mas - sunset views with Greek cuisine',
+      'Selene - high-end local ingredients',
+      'Taverna Romantica - authentic Greek dishes'
+    ],
+    costs: {
+      'Budget per day': '$60-100',
+      'Mid-range per day': '$100-200',
+      'Luxury per day': '$300+',
+      'Avg. meal (local)': '$15-25',
+      'Avg. meal (international)': '$25-45',
+      'Transportation': '$10-30/day'
+    },
+    mustSee: [
+      'Sunset in Oia (one of the world\'s best)',
+      'Ancient Thera archaeological site',
+      'Santorini wineries and tasting tours',
+      'Akrotiri lighthouse'
+    ],
+    cheapestPlaces: [
+      'Pyrgos (traditional village with fewer crowds)',
+      'Megalo Chorio (authentic and affordable)',
+      'Perissa (black sand beach with budget options)',
+      'Kamari (family-friendly with good value)'
+    ],
+    tips: [
+      'Visit Oia early morning to avoid tourist crowds',
+      'Take advantage of the bus system to get around',
+      'Book sunset dinner reservations in advance',
+      'Pack comfortable shoes for walking on cobblestones'
     ]
   },
   {
@@ -78,7 +154,7 @@ const destinations = [
     country: 'Japan',
     continent: 'Asia',
     description: 'Ancient temples, traditional gardens, and beautiful cherry blossoms',
-    image: 'https://images.unsplash.com/photo-1546604010-4f8a7b0dab7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Kyoto, Japan.png',
     rating: 4.9,
     reviews: 1120,
     price: 1299,
@@ -96,10 +172,48 @@ const destinations = [
     ],
     bestFor: ['Cultural Immersion', 'History Lovers', 'Garden Enthusiasts'],
     images: [
-      'https://images.unsplash.com/photo-1546604010-4f8a7b0dab7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Kyoto, Japan.png',
       'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1541686525943-65bcb6efb0b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1545569342-4f3e190d4e3c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Traditional Kyoto fan (sensu)',
+      'Kiyomizu-yaki pottery',
+      'Matcha tea and traditional sweets',
+      'Furoshiki wrapping cloths'
+    ],
+    restaurants: [
+      'Kikunoi Kyoto - Michelin-starred kaiseki cuisine',
+      'Nishiki Warai - famous okonomiyaki',
+      'Gion Kappo Sakamoto - intimate dining experience',
+      'Ippudo Ramen - excellent Japanese noodles'
+    ],
+    costs: {
+      'Budget per day': '$70-120',
+      'Mid-range per day': '$120-250',
+      'Luxury per day': '$350+',
+      'Avg. meal (local)': '$10-25',
+      'Avg. meal (international)': '$25-50',
+      'Transportation': '$10-20/day'
+    },
+    mustSee: [
+      'Philosopher\'s Path during cherry blossom season',
+      'Traditional tea ceremony experience',
+      'Nishiki Market food tour',
+      'Traditional ryokan stay'
+    ],
+    cheapestPlaces: [
+      'Arashiyama (beautiful area with budget options)',
+      'Gion (expensive area but good for window shopping)',
+      'Fushimi (famous for sake breweries)',
+      'Pontocho (narrow alley with many dining choices)'
+    ],
+    tips: [
+      'Get a Kyoto City Bus Pass for unlimited travel',
+      'Visit temples early morning to avoid crowds',
+      'Learn basic Japanese phrases as English is limited',
+      'Reserve temples and experiences in advance during peak times'
     ]
   },
   {
@@ -108,7 +222,7 @@ const destinations = [
     country: 'Switzerland',
     continent: 'Europe',
     description: 'Majestic mountains, pristine lakes, and charming alpine villages',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Swiss Alps, Switzerland.png',
     rating: 4.9,
     reviews: 756,
     price: 1599,
@@ -126,10 +240,48 @@ const destinations = [
     ],
     bestFor: ['Skiing', 'Hiking', 'Luxury Retreats'],
     images: [
-      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Swiss Alps, Switzerland.png',
       'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1507699622108-3be547d2a73b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Swiss Army knives',
+      'Swiss chocolate (Lindt, Cailler, etc.)',
+      'Traditional Swiss cowbells',
+      'Swiss cheese and fondue sets'
+    ],
+    restaurants: [
+      'Schwarzwaldstube - 2 Michelin stars in Baiersbronn',
+      'Alpenhof Restaurant - traditional Swiss in Zermatt',
+      'Chez Donati - mountain hut dining',
+      'Café du Centre - authentic local experience'
+    ],
+    costs: {
+      'Budget per day': '$120-180',
+      'Mid-range per day': '$180-300',
+      'Luxury per day': '$400+',
+      'Avg. meal (local)': '$30-50',
+      'Avg. meal (international)': '$40-70',
+      'Transportation': '$30-50/day'
+    },
+    mustSee: [
+      'Jungfraujoch (Top of Europe)',
+      'Rhine Falls (Europe\'s largest waterfall)',
+      'Château de Chillon (medieval castle on Lake Geneva)',
+      'Aletsch Glacier (UNESCO site)'
+    ],
+    cheapestPlaces: [
+      'Interlaken (adventure hub with budget options)',
+      'Grindelwald (family-friendly with good value)',
+      'Andermatt (up-and-coming with fewer tourists)',
+      'Lauterbrunnen Valley (stunning scenery, more affordable)'
+    ],
+    tips: [
+      'Invest in a Swiss Travel Pass for unlimited public transport',
+      'Book mountain excursions early in the day',
+      'Carry cash as some small mountain huts don\'t accept cards',
+      'Pack layers as weather changes quickly in mountains'
     ]
   },
   {
@@ -138,7 +290,7 @@ const destinations = [
     country: 'Morocco',
     continent: 'Africa',
     description: 'Vibrant souks, stunning architecture, and rich cultural experiences',
-    image: 'https://images.unsplash.com/photo-1517914466335-78a1e4650bcc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Marrakech, Morocco.png',
     rating: 4.6,
     reviews: 930,
     price: 799,
@@ -156,10 +308,48 @@ const destinations = [
     ],
     bestFor: ['Cultural Immersion', 'Shopping', 'Culinary Experiences'],
     images: [
-      'https://images.unsplash.com/photo-1517914466335-78a1e4650bcc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Marrakech, Morocco.png',
       'https://images.unsplash.com/photo-1566528580372-39c4e5a0a8e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1566528580372-39c4e5a0a8e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1566528580372-39c4e5a0a8e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Handwoven Berber carpets',
+      'Argan oil and beauty products',
+      'Moroccan lanterns and metalwork',
+      'Spices from the souks (cumin, paprika, ras el hanout)'
+    ],
+    restaurants: [
+      'Le Jardin - beautiful courtyard dining',
+      'Dar Moha - sophisticated Moroccan cuisine',
+      'Café des Épices - terrace views over spice market',
+      'Nomad - rooftop dining with city views'
+    ],
+    costs: {
+      'Budget per day': '$35-60',
+      'Mid-range per day': '$60-100',
+      'Luxury per day': '$150+',
+      'Avg. meal (local)': '$5-15',
+      'Avg. meal (international)': '$15-30',
+      'Transportation': '$5-20/day'
+    },
+    mustSee: [
+      'Jemaa el-Fnaa at sunset and night',
+      'Yves Saint Laurent Museum and Majorelle Garden',
+      'Saadian Tombs restoration',
+      'Atlas Mountains day trip'
+    ],
+    cheapestPlaces: [
+      'Gueliz (modern district, budget hotels)',
+      'Riad area (traditional accommodations, good value)',
+      'Oukaimeden (mountain escape with budget options)',
+      'Essaouira (coastal city with better prices)'
+    ],
+    tips: [
+      'Haggle respectfully in the souks but with good humor',
+      'Dress modestly to respect local customs',
+      'Carry small bills for tips and small purchases',
+      'Stay hydrated and avoid tap water (drink bottled water)'
     ]
   },
   {
@@ -168,7 +358,7 @@ const destinations = [
     country: 'Canada',
     continent: 'North America',
     description: 'Stunning mountain landscapes, turquoise lakes, and abundant wildlife',
-    image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Banff National Park, Canada.png',
     rating: 4.9,
     reviews: 1042,
     price: 1199,
@@ -186,10 +376,48 @@ const destinations = [
     ],
     bestFor: ['Hiking', 'Wildlife Watching', 'Photography'],
     images: [
-      'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Banff National Park, Canada.png',
       'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Maple syrup products',
+      'Inuit art and carvings',
+      'Canadian whisky',
+      'Rocky Mountain tea and local honey'
+    ],
+    restaurants: [
+      'The Bison - farm-to-table Canadian cuisine',
+      'Rimrock Resort Hotel - fine dining with mountain views',
+      'Nourish Bistro - healthy and organic options',
+      'Grizzly House - fondue and game meat specialties'
+    ],
+    costs: {
+      'Budget per day': '$80-120',
+      'Mid-range per day': '$120-220',
+      'Luxury per day': '$300+',
+      'Avg. meal (local)': '$15-30',
+      'Avg. meal (international)': '$25-45',
+      'Transportation': '$20-50/day'
+    },
+    mustSee: [
+      'Peyto Lake (distinctive bow-shaped lake)',
+      'Johnston Canyon ice walk',
+      'Bow Lake and Bow Glacier Falls',
+      'Vermilion Lakes (stunning sunset views)'
+    ],
+    cheapestPlaces: [
+      'Canmore (just outside park, more affordable)',
+      'Lake Louise (expensive but worth it)',
+      'Highway 93 corridor (scenic but budget-friendly)',
+      'Calgary (larger city with better prices)'
+    ],
+    tips: [
+      'Book accommodations and activities months in advance during summer',
+      'Bring layers as mountain weather changes quickly',
+      'Pack bear spray and know how to use it',
+      'Enter park early in the morning to avoid crowds'
     ]
   },
   {
@@ -198,7 +426,7 @@ const destinations = [
     country: 'Kenya',
     continent: 'Africa',
     description: 'Wildlife exploration in Maasai Mara during the Great Migration',
-    image: 'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Safari, Kenya.png',
     rating: 4.9,
     reviews: 1024,
     price: 2499,
@@ -216,10 +444,48 @@ const destinations = [
     ],
     bestFor: ['Wildlife Photography', 'Adventure Seekers', 'Nature Lovers'],
     images: [
-      'https://images.unsplash.com/photo-1546182990-dffeafbe841d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Safari, Kenya.png',
       'https://images.unsplash.com/photo-154747108a3448449df1ed6d6c0c27b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1524439016562-591d3c6a5d0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1523809811638-0ac919d55b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Maasai beadwork and jewelry',
+      'Hand-carved soapstone animals',
+      'Coffee from Kenyan highlands',
+      'Traditional batik fabrics'
+    ],
+    restaurants: [
+      'Carnivore Restaurant - Nairobi meat specialty',
+      'Pellucid Rock Restaurant - Amboseli with Kilimanjaro views',
+      'Kiko Restaurant - high-end Nairobi dining',
+      'Camp dining (most safari lodges have excellent meals)'
+    ],
+    costs: {
+      'Budget per day': '$100-200',
+      'Mid-range per day': '$200-400',
+      'Luxury per day': '$600+',
+      'Avg. meal (local)': '$15-25',
+      'Avg. meal (safari)': '$25-40',
+      'Transportation': '$150-300/day'
+    },
+    mustSee: [
+      'Great Migration river crossing',
+      'Big Five game drives',
+      'Maasai cultural experience',
+      'Hot air balloon safari at sunrise'
+    ],
+    cheapestPlaces: [
+      'Amboseli (less crowded, more affordable)',
+      'Tsavo National Park (larger but less expensive)',
+      'Lake Nakuru (flamingo viewing and value options)',
+      'Budget camps near Maasai Mara'
+    ],
+    tips: [
+      'Get required vaccinations 4-6 weeks before travel',
+      'Pack neutral-colored clothing for safaris',
+      'Bring a good camera with a zoom lens',
+      'Expect early morning wake-up calls for game drives (6am+)'
     ]
   },
   {
@@ -228,7 +494,7 @@ const destinations = [
     country: 'USA',
     continent: 'North America',
     description: 'The city that never sleeps with iconic landmarks and diverse culture',
-    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/New York City, USA.png',
     rating: 4.5,
     reviews: 2100,
     price: 999,
@@ -246,10 +512,48 @@ const destinations = [
     ],
     bestFor: ['City Lovers', 'Cultural Experiences', 'Foodies'],
     images: [
-      'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/New York City, USA.png',
       'https://images.unsplash.com/photo-1506197603421-c8c76f2561a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'NYC coffee and bagels (famous local products)',
+      'Statue of Liberty replicas',
+      'Broadway theater merchandise',
+      'Local chocolate and candy (like Junior\'s Cheesecake products)'
+    ],
+    restaurants: [
+      'Le Bernardin - 3 Michelin stars seafood',
+      'Katz\'s Delicatessen - famous pastrami',
+      'Joe\'s Pizza - iconic New York pizza',
+      'Xi\'an Famous Foods - excellent Chinese noodles'
+    ],
+    costs: {
+      'Budget per day': '$100-150',
+      'Mid-range per day': '$150-300',
+      'Luxury per day': '$400+',
+      'Avg. meal (local)': '$20-40',
+      'Avg. meal (fine dining)': '$60-150',
+      'Transportation': '$10-30/day'
+    },
+    mustSee: [
+      '9/11 Memorial and Museum',
+      'High Line elevated park',
+      'Brooklyn Bridge and view of Manhattan',
+      'One World Observatory for city views'
+    ],
+    cheapestPlaces: [
+      'Brooklyn (great food and views across the river)',
+      'Queens (authentic multicultural experiences)',
+      'Harlem (cultural richness with value options)',
+      'Upper West Side (museums and Central Park access)'
+    ],
+    tips: [
+      'Get a MetroCard or use contactless payment for public transport',
+      'Book Broadway shows in advance for better prices',
+      'Walk as much as possible - that\'s the best way to see NYC',
+      'Beware of street vendors selling fake merchandise in tourist areas'
     ]
   },
   {
@@ -258,7 +562,7 @@ const destinations = [
     country: 'Japan',
     continent: 'Asia',
     description: 'Modern metropolis blending traditional culture with cutting-edge technology',
-    image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Tokyo, Japan.png',
     rating: 4.8,
     reviews: 1876,
     price: 1499,
@@ -276,10 +580,48 @@ const destinations = [
     ],
     bestFor: ['Cultural Fusion', 'Technology Enthusiasts', 'Food Lovers'],
     images: [
-      'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Tokyo, Japan.png',
       'https://images.unsplash.com/photo-1502136969935-8d8eef54d77b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'KitKat flavors (Japan has unique varieties)',
+      'Traditional fans and origami',
+      'Maneki-neko (lucky cat figurines)',
+      'Japanese green tea and matcha products'
+    ],
+    restaurants: [
+      'Sukiyabashi Jiro - 3 Michelin stars sushi',
+      'Ichiran Ramen - famous ramen chain',
+      'Tsukiji Outer Market - fresh seafood and sushi',
+      'Golden Gai area - small traditional eateries'
+    ],
+    costs: {
+      'Budget per day': '$80-120',
+      'Mid-range per day': '$120-250',
+      'Luxury per day': '$350+',
+      'Avg. meal (local)': '$10-25',
+      'Avg. meal (specialty)': '$30-60',
+      'Transportation': '$8-15/day'
+    },
+    mustSee: [
+      'TeamLab Digital Art Museum',
+      'Meiji Shrine in Yoyogi Park',
+      'Cherry blossom viewing at Ueno Park',
+      'Robot Restaurant (unique Tokyo experience)'
+    ],
+    cheapestPlaces: [
+      'Asakusa (traditional area with good value)',
+      'Ueno (museums and parks at reasonable prices)',
+      'Shimokitazawa (bohemian area with budget options)',
+      'Koenji (alternative Tokyo neighborhood)'
+    ],
+    tips: [
+      'Purchase a Pasmo or Suica card for public transportation',
+      'Download translation apps as English is limited',
+      'Tipping is not customary in Japan',
+      'Reserve high-end restaurants weeks in advance'
     ]
   },
   {
@@ -288,7 +630,7 @@ const destinations = [
     country: 'Australia',
     continent: 'Oceania',
     description: 'Harbor city with iconic Opera House and beautiful beaches',
-    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Sydney, Australia.png',
     rating: 4.7,
     reviews: 1320,
     price: 1799,
@@ -306,10 +648,48 @@ const destinations = [
     ],
     bestFor: ['Beach Lovers', 'City Exploration', 'Nature Activities'],
     images: [
-      'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      '/img/destinations/Sydney, Australia.png',
       'https://images.unsplash.com/photo-1506926729481-1fb6c6c15d10?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1506399165489-9914f1231d76?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1506926862613-49053fefb526?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Aboriginal artwork and dot paintings',
+      'Kangaroo leather products',
+      'Lamingtons and Tim Tams (iconic Australian snacks)',
+      'Opals (Australia produces 95% of the world\'s opals)'
+    ],
+    restaurants: [
+      'Quay - renowned fine dining with Opera House views',
+      'The Boathouse on Blackwattle Bay - exceptional seafood',
+      'Mr. Wong - modern Chinese in a stunning setting',
+      'Icebergs Dining Room - Italian with ocean views'
+    ],
+    costs: {
+      'Budget per day': '$100-150',
+      'Mid-range per day': '$150-250',
+      'Luxury per day': '$350+',
+      'Avg. meal (local)': '$20-35',
+      'Avg. meal (waterfront)': '$40-70',
+      'Transportation': '$10-25/day'
+    },
+    mustSee: [
+      'Sydney Opera House behind-the-scenes tour',
+      'Manly Beach (take the ferry for the views)',
+      'Royal Botanic Garden (free with spectacular views)',
+      'Blue Mountains day trip'
+    ],
+    cheapestPlaces: [
+      'Newtown (vibrant bohemian area with budget options)',
+      'Parramatta (Western Sydney, more affordable)',
+      'Palm Beach (northern beaches, less touristy)',
+      'Cronulla (southern beaches, good value)'
+    ],
+    tips: [
+      'Use an Opal card for all public transportation',
+      'Be aware of dangerous marine life (jellyfish season varies by area)',
+      'Apply sunscreen regularly - UV levels are high',
+      'Book harbor cruises and Opera House tours in advance'
     ]
   },
 ];
@@ -425,6 +805,150 @@ export default function DestinationPage() {
                   </div>
                 ))}
               </div>
+            </motion.section>
+
+            {/* Souvenirs */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <Camera className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-bold">Local Souvenirs</h2>
+              </div>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    {destination.souvenirs.map((souvenir: string, index: number) => (
+                      <div key={index} className="flex items-start gap-3 py-2">
+                        <span className="text-primary">•</span>
+                        <p>{souvenir}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+
+            {/* Best Restaurants */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <MapPin className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-bold">Best Restaurants</h2>
+              </div>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="space-y-4">
+                    {destination.restaurants.map((restaurant: string, index: number) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <span className="text-primary mt-1">•</span>
+                        <p>{restaurant}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+
+            {/* Cost Information */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <DollarSign className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-bold">Cost Information</h2>
+              </div>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {Object.entries(destination.costs).map(([key, value], index) => (
+                      <div key={index} className="flex justify-between py-2 border-b border-border/50">
+                        <span className="text-muted-foreground">{key}</span>
+                        <span className="font-medium">{value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+
+            {/* Must-See Places */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <MapPin className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-bold">Must-See Places</h2>
+              </div>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    {destination.mustSee.map((place: string, index: number) => (
+                      <div key={index} className="flex items-start gap-3 py-2">
+                        <span className="text-primary">•</span>
+                        <p>{place}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+
+            {/* Best Budget Areas */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <MapPin className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-bold">Best Budget Areas</h2>
+              </div>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    {destination.cheapestPlaces.map((place: string, index: number) => (
+                      <div key={index} className="flex items-start gap-3 py-2">
+                        <span className="text-primary">•</span>
+                        <p>{place}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+
+            {/* Travel Tips */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9 }}
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <MapPin className="h-5 w-5 text-primary" />
+                <h2 className="text-2xl font-bold">Travel Tips</h2>
+              </div>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    {destination.tips.map((tip: string, index: number) => (
+                      <div key={index} className="flex items-start gap-3 py-2">
+                        <span className="text-primary">•</span>
+                        <p>{tip}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </motion.section>
           </div>
 

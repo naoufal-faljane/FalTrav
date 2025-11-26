@@ -14,13 +14,14 @@ const shopItems = [
     id: 1,
     name: 'Adventure Backpack',
     description: 'Durable 50L backpack with laptop compartment',
-    price: 89.99,
-    originalPrice: 119.99,
-    image: 'https://images.unsplash.com/photo-1596178065887-1198b0e5f1ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    price: 68.99,
+    originalPrice: null,
+    image: '/src/app/shop/img/product1.png',
     rating: 4.7,
     reviews: 124,
     category: 'Bags',
-    tags: ['Backpacks', 'Hiking', 'Travel']
+    tags: ['Backpacks', 'Hiking', 'Travel'],
+    affiliateLink: 'https://amzn.to/3XPN0QK'
   },
   {
     id: 2,
@@ -251,9 +252,12 @@ export default function ShopPage() {
                         <span className="text-muted-foreground text-xs sm:text-sm line-through">${item.originalPrice}</span>
                       </div>
                     )}
-                    <Button className="w-full text-xs sm:text-sm">
+                    <Button 
+                      className="w-full text-xs sm:text-sm"
+                      onClick={() => item.affiliateLink ? window.open(item.affiliateLink, '_blank') : null}
+                    >
                       <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
-                      Add to Cart
+                      {item.affiliateLink ? 'Buy on Amazon' : 'Add to Cart'}
                     </Button>
                   </div>
                 </CardContent>

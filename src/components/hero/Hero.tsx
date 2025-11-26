@@ -45,7 +45,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            Explore amazing destinations, find exclusive deals, and get inspired for your next journey.
+            Explore amazing destinations and get inspired for your next journey.
           </motion.p>
         </motion.div>
 

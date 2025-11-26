@@ -17,7 +17,7 @@ export default function AboutPage() {
               
               <p className="text-lg text-muted-foreground mb-4">
                 Our team of travel enthusiasts, photographers, and adventurers work tirelessly to bring you the 
-                best travel experiences, deals, and resources. From hidden gems in familiar places to once-in-a-lifetime 
+                best travel experiences and resources. From hidden gems in familiar places to once-in-a-lifetime 
                 adventures in remote corners of the world, we're here to help you discover it all.
               </p>
               

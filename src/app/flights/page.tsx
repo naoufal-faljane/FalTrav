@@ -46,7 +46,7 @@ export default function FlightsPage() {
             <Plane className="h-12 w-12 mb-4" />
             <h1 className="text-3xl sm:text-4xl font-bold mb-2">Find Flights</h1>
             <p className="text-primary-foreground/80 max-w-2xl">
-              Compare and book flights from hundreds of airlines worldwide. Find the best prices and deals for your next adventure.
+              Compare and book flights from hundreds of airlines worldwide. Find the best prices for your next adventure.
             </p>
           </div>
         </Container>

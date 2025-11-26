@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="text-center md:text-center">
             <h3 className="text-lg font-bold mb-4">FalTrav</h3>
             <p className="text-sm text-muted-foreground">
-              Discover amazing destinations, find travel deals, and get inspired for your next adventure.
+              Discover amazing destinations and get inspired for your next adventure.
             </p>
           </div>
 
@@ -18,7 +18,6 @@ const Footer = () => {
             <h4 className="text-sm font-semibold mb-4">Explore</h4>
             <ul className="space-y-2">
               <li><Link href="/destinations" className="text-sm text-muted-foreground hover:text-foreground">Destinations</Link></li>
-              <li><Link href="/deals" className="text-sm text-muted-foreground hover:text-foreground">Travel Deals</Link></li>
               <li><Link href="/news" className="text-sm text-muted-foreground hover:text-foreground">Travel News</Link></li>
               <li><Link href="/shop" className="text-sm text-muted-foreground hover:text-foreground">Travel Shop</Link></li>
               <li><Link href="/books" className="text-sm text-muted-foreground hover:text-foreground">Travel Books</Link></li>

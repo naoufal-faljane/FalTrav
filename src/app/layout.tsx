@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'FalTrav - Discover Amazing Destinations',
-  description: 'Find travel deals, read tips, shop gear, and explore books about your favorite destinations',
+  description: 'Read tips, shop gear, and explore books about your favorite destinations',
 };
 
 export default function RootLayout({
