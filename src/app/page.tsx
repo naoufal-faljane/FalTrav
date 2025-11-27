@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { usePageViewTracker } from '@/lib/analytics';
 import Hero from '@/components/hero/Hero';
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
@@ -48,6 +49,8 @@ const quickLinks = [
 ];
 
 export default function Home() {
+  usePageViewTracker();
+
   return (
     <div>
       <Hero />

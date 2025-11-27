@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { usePageViewTracker } from '@/lib/analytics';
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Heart, Star, ShoppingCart, Camera, CameraIcon, Package } from 'lucide-react';
+import { Star, ShoppingCart, Camera, CameraIcon, Package } from 'lucide-react';
 
 // Mock data for travel shop items
 const shopItems = [
@@ -16,7 +17,7 @@ const shopItems = [
     description: 'Durable 50L backpack with laptop compartment',
     price: 68.99,
     originalPrice: null,
-    image: '/src/app/shop/img/product1.png',
+    image: '/img/product1.png',
     rating: 4.7,
     reviews: 124,
     category: 'Bags',
@@ -27,140 +28,152 @@ const shopItems = [
     id: 2,
     name: 'Luxury Leather Travel Bag',
     description: 'Premium leather tote for business travelers',
-    price: 199.99,
+    price: 25.99,
     originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1491637639811-60e27cb27870?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product2.png',
     rating: 4.9,
     reviews: 86,
     category: 'Bags',
-    tags: ['Luggage', 'Business', 'Luxury']
+    tags: ['Luggage', 'Business', 'Luxury'],
+    affiliateLink: 'https://amzn.to/43Rperh'
   },
   {
     id: 3,
     name: 'Weekender Duffle',
     description: 'Perfect for weekend getaways',
-    price: 79.99,
+    price: 5.98,
     originalPrice: 99.99,
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product3.png',
     rating: 4.5,
     reviews: 67,
     category: 'Bags',
-    tags: ['Duffel', 'Weekend', 'Travel']
+    tags: ['Duffel', 'Weekend', 'Travel'],
+    affiliateLink: 'https://amzn.to/3XOuGaO'
   },
   // Cameras
   {
     id: 4,
     name: 'Travel Action Camera',
     description: 'Waterproof camera for adventures',
-    price: 149.99,
+    price: 55.99,
     originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product4.png',
     rating: 4.6,
     reviews: 98,
     category: 'Cameras',
-    tags: ['Action', 'Waterproof', 'Adventure']
+    tags: ['Action', 'Waterproof', 'Adventure'],
+    affiliateLink: 'https://amzn.to/3XOuGaO'
   },
   {
     id: 5,
     name: 'Mirrorless Camera',
     description: 'Compact high-quality travel camera',
-    price: 899.99,
+    price: 819,
     originalPrice: 999.99,
-    image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product5.png',
     rating: 4.8,
     reviews: 154,
     category: 'Cameras',
-    tags: ['Photography', 'Mirrorless', 'Travel']
+    tags: ['Photography', 'Mirrorless', 'Travel'],
+    affiliateLink: 'https://amzn.to/483qwll'
   },
   {
     id: 6,
     name: '360° Travel Camera',
     description: 'Capture immersive spherical footage',
-    price: 299.99,
+    price: 299,
     originalPrice: 349.99,
-    image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product6.png',
     rating: 4.4,
     reviews: 72,
     category: 'Cameras',
-    tags: ['360°', 'VR', 'Video']
+    tags: ['360°', 'VR', 'Video'],
+    affiliateLink: 'https://amzn.to/3M3trC7'
   },
   // Outfits
   {
     id: 7,
     name: 'Travel Clothing Set',
     description: 'Quick-dry, wrinkle-resistant travel clothes',
-    price: 89.99,
+    price: 18.69,
     originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product7.png',
     rating: 4.3,
     reviews: 134,
     category: 'Outfits',
-    tags: ['Clothing', 'Travel', 'Quick-dry']
+    tags: ['Clothing', 'Travel', 'Quick-dry'],
+    affiliateLink: 'https://amzn.to/48iLtaZ'
   },
   {
     id: 8,
     name: 'Convertible Travel Pants',
     description: 'Pants that convert to shorts',
-    price: 59.99,
+    price: 19.99,
     originalPrice: 79.99,
-    image: 'https://images.unsplash.com/photo-1593088777538-5db9f8a6a7a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product8.png',
     rating: 4.7,
     reviews: 89,
     category: 'Outfits',
-    tags: ['Pants', 'Convertible', 'Hiking']
+    tags: ['Pants', 'Convertible', 'Hiking'],
+    affiliateLink: 'https://amzn.to/4p4fCSA'
   },
   {
     id: 9,
     name: 'Travel Rain Jacket',
     description: 'Lightweight, packable rain protection',
-    price: 129.99,
+    price: 14.99,
     originalPrice: null,
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product9.png',
     rating: 4.8,
     reviews: 102,
     category: 'Outfits',
-    tags: ['Jackets', 'Rain', 'Outdoor']
+    tags: ['Jackets', 'Rain', 'Outdoor'],
+    affiliateLink: 'https://amzn.to/43UHoZb'
   },
   // Gadgets
   {
     id: 10,
     name: 'Portable Charger',
     description: '10000mAh power bank with fast charging',
-    price: 34.99,
+    price: 119.99,
     originalPrice: 45.99,
-    image: 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product10.png',
     rating: 4.6,
     reviews: 210,
     category: 'Gadgets',
-    tags: ['Charger', 'Electronics', 'Travel']
+    tags: ['Charger', 'Electronics', 'Travel'],
+    affiliateLink: 'https://amzn.to/4ocNQ4R'
   },
   {
     id: 11,
     name: 'Travel Adapter',
     description: 'Universal adapter for 150+ countries',
-    price: 22.99,
+    price: 16.14,
     originalPrice: 29.99,
-    image: 'https://images.unsplash.com/photo-1611233090834-177228b118e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product11.png',
     rating: 4.8,
     reviews: 176,
     category: 'Gadgets',
-    tags: ['Adapter', 'Electronics', 'Power']
+    tags: ['Adapter', 'Electronics', 'Power'],
+    affiliateLink: 'https://amzn.to/4p6D2qm'
   },
   {
     id: 12,
     name: 'Packing Cubes Set',
     description: 'Set of 6 compression cubes for organization',
-    price: 32.99,
+    price: 14.99,
     originalPrice: 42.99,
-    image: 'https://images.unsplash.com/photo-1596178065887-1198b0e5f1ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/product12.png',
     rating: 4.7,
     reviews: 201,
     category: 'Gadgets',
-    tags: ['Organization', 'Packing', 'Travel']
+    tags: ['Organization', 'Packing', 'Travel'],
+    affiliateLink: 'https://amzn.to/48hbBTw'
   },
 ];
 
 export default function ShopPage() {
+  usePageViewTracker();
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   const categories = ['All', 'Bags', 'Cameras', 'Outfits', 'Gadgets'];
@@ -189,7 +202,10 @@ export default function ShopPage() {
                   ? 'bg-primary text-primary-foreground'
                   : 'border border-input hover:bg-accent hover:text-accent-foreground'
               }`}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => {
+                setSelectedCategory(category);
+                trackEvent('filter_applied', 'shop', category, 0);
+              }}
             >
               {category}
             </button>
@@ -212,20 +228,17 @@ export default function ShopPage() {
                     alt={item.name}
                     className="w-full h-full object-cover transition-transform group-hover:scale-105"
                   />
-                  <Button
-                    size="icon"
-                    variant="outline"
-                    className="absolute top-2 right-2 rounded-full bg-background/70 backdrop-blur-sm hover:bg-background text-xs"
-                  >
-                    <Heart className="h-3 w-3 sm:h-4 sm:w-4 fill-current text-muted-foreground" />
-                  </Button>
+
                   {item.originalPrice && (
                     <div className="absolute top-2 left-2 bg-destructive text-destructive-foreground text-[10px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
                       SALE
                     </div>
                   )}
                 </div>
-                <CardContent className="p-3 sm:p-4 flex flex-col flex-grow">
+                <CardContent 
+                  className="p-3 sm:p-4 flex flex-col flex-grow" 
+                  onMouseEnter={() => trackEvent('hover_item', 'shop', item.name, item.price)}
+                >
                   <div className="flex justify-between items-start mb-1">
                     <h3 className="font-bold line-clamp-1 text-sm sm:text-base">{item.name}</h3>
                     <span className="text-base sm:text-lg font-bold text-primary">${item.price}</span>
@@ -254,7 +267,11 @@ export default function ShopPage() {
                     )}
                     <Button 
                       className="w-full text-xs sm:text-sm"
-                      onClick={() => item.affiliateLink ? window.open(item.affiliateLink, '_blank') : null}
+                      onClick={() => {
+                        trackAddToCart(item.name, item.category, item.price);
+                        trackEvent('click_add_to_cart', 'shop', item.name, item.price);
+                        if (item.affiliateLink) window.open(item.affiliateLink, '_blank');
+                      }}
                     >
                       <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4 mr-2" />
                       {item.affiliateLink ? 'Buy on Amazon' : 'Add to Cart'}
@@ -269,17 +286,3 @@ export default function ShopPage() {
         {filteredItems.length === 0 && (
           <div className="text-center py-8 sm:py-12">
             <h3 className="text-lg sm:text-xl font-medium">No products found</h3>
-            <p className="text-muted-foreground mt-2">Try selecting a different category</p>
-          </div>
-        )}
-
-        {/* Load More Button */}
-        <div className="text-center mt-8 sm:mt-12">
-          <button className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm sm:text-base">
-            Load More Products
-          </button>
-        </div>
-      </Container>
-    </div>
-  );
-}

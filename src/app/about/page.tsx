@@ -1,7 +1,10 @@
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
+import { usePageViewTracker } from '@/lib/analytics';
 
 export default function AboutPage() {
+  usePageViewTracker();
+
   return (
     <div className="min-h-screen bg-background py-12">
       <Container>
