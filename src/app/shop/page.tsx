@@ -286,3 +286,11 @@ export default function ShopPage() {
         {filteredItems.length === 0 && (
           <div className="text-center py-8 sm:py-12">
             <h3 className="text-lg sm:text-xl font-medium">No products found</h3>
+          </div>
+        )}
+
+
+      </Container>
+    </div>
+  );
+}
