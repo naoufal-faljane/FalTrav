@@ -5,7 +5,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 declare global {
   interface Window {
-    gtag: Function;
+    gtag: (...args: any[]) => void;
     dataLayer: any[];
   }
 }
@@ -18,7 +18,7 @@ export const usePageViewTracker = () => {
     // Initialize GA if not already done
     if (typeof window !== 'undefined' && (!window.gtag || typeof window.gtag !== 'function')) {
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
+      function gtag(..._args: any[]) {
         window.dataLayer.push(arguments);
       }
       window.gtag = gtag;
@@ -56,7 +56,7 @@ export const ensureGtagInitialized = () => {
   if (typeof window !== 'undefined' && !window.gtag) {
     // Set up gtag if it's not already defined
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function() {
+    window.gtag = function(..._args: any[]) {
       window.dataLayer.push(arguments);
     };
     
