@@ -3,6 +3,11 @@
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
+type GtagCommand = 
+  | ['config', string, Record<string, any>?]
+  | ['event', string, Record<string, any>]
+  | ['js', Date];
+
 declare global {
   interface Window {
     gtag: ((...args: any[]) => void) | undefined;
@@ -14,7 +19,7 @@ declare global {
 export const initGtag = () => {
   if (typeof window !== 'undefined' && !window.gtag) {
     window.dataLayer = window.dataLayer || [];
-    
+
     // Define gtag function that pushes to dataLayer - properly typed to accept any arguments
     window.gtag = function(...args: any[]) {
       window.dataLayer.push(args);
@@ -41,7 +46,7 @@ export const usePageViewTracker = () => {
   // We use a try/catch to avoid issues when not in a suspense boundary
   const pathname = usePathname();
   let searchParamsString = '';
-  
+
   try {
     const searchParams = useSearchParams();
     searchParamsString = searchParams.toString();
