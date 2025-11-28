@@ -112,9 +112,26 @@ const FlightSearchPage = () => {
   };
 
   const fetchFlightResults = async () => {
-    if (!fromPlace || !toPlace || !departureDate) return;
+    if (!fromPlace || !toPlace || !departureDate) {
+      console.error('Missing required fields for flight search:', { fromPlace, toPlace, departureDate });
+      return;
+    }
+
+    // Additional validation for required properties
+    if (!fromPlace.code || !toPlace.code) {
+      console.error('Missing place codes:', { fromPlace, toPlace });
+      return;
+    }
+
     setIsLoading(true);
     try {
+      console.log('Making flight API call with data:', {
+        origin: fromPlace.code,
+        destination: toPlace.code,
+        departure_at: departureDate,
+        return_at: returnDate
+      });
+      
       const response = await fetch('/api/flights', {
         method: 'POST',
         headers: {
@@ -129,7 +146,9 @@ const FlightSearchPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const errorText = await response.text();
+        console.error('Flight API error response:', errorText);
+        throw new Error(`API error: ${response.status} - ${errorText}`);
       }
 
       const data = await response.json();

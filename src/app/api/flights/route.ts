@@ -6,8 +6,12 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!origin || !destination || !departure_at) {
+      console.error('Missing required fields:', { origin, destination, departure_at });
       return new Response(
-        JSON.stringify({ error: 'Missing required fields: origin, destination, departure_at' }),
+        JSON.stringify({ 
+          error: 'Missing required fields: origin, destination, departure_at',
+          details: { origin: !!origin, destination: !!destination, departure_at: !!departure_at }
+        }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
