@@ -1,18 +1,15 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Calendar as CalendarIcon, Plane, MapPin, Clock } from 'lucide-react';
+import { Plane, MapPin, Clock, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { Calendar } from '@/components/ui/calendar';
 import { motion } from 'framer-motion';
 
-// Types
 type Place = {
   code: string;
   name: string;
@@ -22,7 +19,7 @@ type Place = {
 };
 
 type CalendarDay = {
-  day: string; // Date string in YYYY-MM-DD format
+  day: string;
   min_price?: number;
   return_at?: string;
 };
@@ -30,43 +27,38 @@ type CalendarDay = {
 type FlightResult = {
   origin: string;
   destination: string;
-  departure_at: string; // ISO date string
-  return_at?: string; // ISO date string
+  departure_at: string;
+  return_at?: string;
   price: number;
   airline: string;
+  flight_number?: string;
   duration: number;
   transfers: number;
 };
 
 const FlightSearchPage = () => {
-  // Form state
   const [fromValue, setFromValue] = useState('');
   const [toValue, setToValue] = useState('');
   const [fromPlace, setFromPlace] = useState<Place | null>(null);
   const [toPlace, setToPlace] = useState<Place | null>(null);
-  const [departureDate, setDepartureDate] = useState<Date | undefined>(undefined);
-  const [returnDate, setReturnDate] = useState<Date | undefined>(undefined);
+  const [departureDate, setDepartureDate] = useState<string | undefined>(undefined);
+  const [returnDate, setReturnDate] = useState<string | undefined>(undefined);
   const [passengers, setPassengers] = useState(1);
   const [tripType, setTripType] = useState<'one-way' | 'round-trip'>('round-trip');
-  
-  // Autocomplete state
+
   const [fromSuggestions, setFromSuggestions] = useState<Place[]>([]);
   const [toSuggestions, setToSuggestions] = useState<Place[]>([]);
   const [showFromSuggestions, setShowFromSuggestions] = useState(false);
   const [showToSuggestions, setShowToSuggestions] = useState(false);
-  
-  // Calendar state
+
   const [calendarPrices, setCalendarPrices] = useState<CalendarDay[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<FlightResult[]>([]);
-  
-  // Refs for handling outside clicks
   const fromRef = useRef<HTMLDivElement>(null);
   const toRef = useRef<HTMLDivElement>(null);
 
-  // Fetch auto-complete suggestions
   const fetchSuggestions = async (input: string, type: 'from' | 'to') => {
-    if (input.length < 2) {
+    if (!input || input.length < 2) {
       if (type === 'from') {
         setFromSuggestions([]);
         setShowFromSuggestions(false);
@@ -76,15 +68,9 @@ const FlightSearchPage = () => {
       }
       return;
     }
-    
     try {
-      // Using a server route to handle CORS for the autocomplete API
-      const response = await fetch(
-        `/api/flights/autocomplete?term=${input}&locale=en`
-      );
-      
-      if (!response.ok) {
-        console.error('Autocomplete API error:', response.status, response.statusText);
+      const res = await fetch(`/api/flights/autocomplete?term=${encodeURIComponent(input)}&locale=en`);
+      if (!res.ok) {
         if (type === 'from') {
           setFromSuggestions([]);
           setShowFromSuggestions(false);
@@ -94,10 +80,7 @@ const FlightSearchPage = () => {
         }
         return;
       }
-      
-      const data: Place[] = await response.json();
-      console.log('Autocomplete data received:', data);
-      
+      const data: Place[] = await res.json();
       if (type === 'from') {
         setFromSuggestions(data);
         setShowFromSuggestions(true);
@@ -105,8 +88,7 @@ const FlightSearchPage = () => {
         setToSuggestions(data);
         setShowToSuggestions(true);
       }
-    } catch (error) {
-      console.error('Error fetching suggestions:', error);
+    } catch (e) {
       if (type === 'from') {
         setFromSuggestions([]);
         setShowFromSuggestions(false);
@@ -117,148 +99,119 @@ const FlightSearchPage = () => {
     }
   };
 
-  // Fetch calendar prices
   const fetchCalendarPrices = async (origin: string, destination: string) => {
     if (!origin || !destination) return;
-    
     try {
-      const response = await fetch(
-        `/api/flights?type=prices-calendar&origin=${origin}&destination=${destination}`
-      );
-      
-      if (!response.ok) {
-        console.error('Calendar API error:', response.status, response.statusText);
-        return;
-      }
-      
-      const data: CalendarDay[] = await response.json();
-      console.log('Calendar data received:', data);
-      
-      setCalendarPrices(data);
-    } catch (error) {
-      console.error('Error fetching calendar prices:', error);
+      const res = await fetch(`/api/flights/prices-calendar?origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}`);
+      if (!res.ok) return;
+      const data: CalendarDay[] = await res.json();
+      setCalendarPrices(data || []);
+    } catch (e) {
+      console.error(e);
     }
   };
 
-  // Fetch flight results
   const fetchFlightResults = async () => {
     if (!fromPlace || !toPlace || !departureDate) return;
-    
     setIsLoading(true);
-    
     try {
-      const departureFormatted = format(departureDate, 'yyyy-MM-dd');
-      const returnFormatted = returnDate ? format(returnDate, 'yyyy-MM-dd') : '';
-      
-      const params = new URLSearchParams({
-        origin: fromPlace.code,
-        destination: toPlace.code,
-        departure_at: departureFormatted,
-        ...(returnDate && { return_at: returnFormatted }),
+      const response = await fetch('/api/flights', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          origin: fromPlace.code,
+          destination: toPlace.code,
+          departure_at: departureDate,
+          ...(returnDate ? { return_at: returnDate } : {}),
+        }),
       });
-      
-      const url = `/api/flights?type=prices_for_dates&${params}`;
-      console.log('Flight search URL:', url);
-      
-      const response = await fetch(url);
-      
+
       if (!response.ok) {
-        console.error('Flight search API error:', response.status, response.statusText);
-        return;
+        throw new Error(`API error: ${response.status}`);
       }
-      
+
       const data = await response.json();
-      console.log('Flight results received:', data);
       
-      // Transform response to match our FlightResult type
-      // The API returns data in the `data` property
-      const transformedResults: FlightResult[] = (data.data || []).map((item: any) => ({
-        origin: item.origin,
-        destination: item.destination,
-        departure_at: item.departure_at,
-        return_at: item.return_at,
-        price: item.price,
-        airline: item.airline,
-        duration: item.duration,
-        transfers: item.number_of_changes || 0,
+      // Process the response data
+      let entries = [];
+      if (data.data && typeof data.data === 'object') {
+        // If data.data is an object, get its values
+        entries = Object.values(data.data);
+      } else if (Array.isArray(data.data)) {
+        // If data.data is an array, use it directly
+        entries = data.data;
+      } else {
+        entries = [];
+      }
+
+      const transformed: FlightResult[] = entries.slice(0, 20).map((item: any) => ({
+        origin: item.origin || fromPlace.code,
+        destination: item.destination || toPlace.code,
+        departure_at: item.departure_at || departureDate,
+        return_at: item.return_at || returnDate,
+        price: typeof item.price === 'number' ? item.price : (item.value || 0),
+        airline: item.airline || item.carrier_code || 'Unknown',
+        duration: item.duration || 0,
+        transfers: item.transfers ?? item.number_of_changes ?? 0,
       }));
-      
-      setResults(transformedResults);
-      console.log('Transformed results:', transformedResults);
-    } catch (error) {
-      console.error('Error fetching flight results:', error);
+      setResults(transformed);
+    } catch (e) {
+      console.error('Error fetching flights:', e);
+      setResults([]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Handle search
   const handleSearch = () => {
     if (!fromPlace || !toPlace || !departureDate) return;
     fetchFlightResults();
   };
 
-  // Handle outside clicks for autocomplete
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (fromRef.current && !fromRef.current.contains(event.target as Node)) {
-        setShowFromSuggestions(false);
-      }
-      if (toRef.current && !toRef.current.contains(event.target as Node)) {
-        setShowToSuggestions(false);
-      }
+    const onClickOutside = (ev: MouseEvent) => {
+      if (fromRef.current && !fromRef.current.contains(ev.target as Node)) setShowFromSuggestions(false);
+      if (toRef.current && !toRef.current.contains(ev.target as Node)) setShowToSuggestions(false);
     };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    document.addEventListener('mousedown', onClickOutside);
+    return () => document.removeEventListener('mousedown', onClickOutside);
   }, []);
 
-  // Fetch calendar prices when origin/destination changes
   useEffect(() => {
-    if (fromPlace && toPlace) {
-      fetchCalendarPrices(fromPlace.code, toPlace.code);
-    }
+    if (fromPlace && toPlace) fetchCalendarPrices(fromPlace.code, toPlace.code);
   }, [fromPlace, toPlace]);
 
-  // Get price for a specific date
-  const getPriceForDate = (date: Date | undefined) => {
-  if (!date || isNaN(date.getTime())) return null;
-
-  const dateStr = format(date, 'yyyy-MM-dd');
-
-  const match = calendarPrices.find(
-    day => day.day === dateStr
-  );
-
-  return match ? match.min_price : null;
-};
-
-
-  // Format duration (in minutes) to hours and minutes
-  const formatDuration = (minutes: number) => {
-    if (isNaN(minutes) || minutes < 0) return 'N/A';
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours}h ${mins}m`;
+  const getPriceForDate = (dateStr?: string) => {
+    if (!dateStr) return null;
+    const match = calendarPrices.find((d) => d.day === dateStr);
+    return match ? match.min_price ?? null : null;
   };
 
-  // Swap origin and destination
+  const formatDuration = (minutes: number) => {
+    if (!minutes || isNaN(minutes)) return 'N/A';
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return `${h}h ${m}m`;
+  };
+
   const swapPlaces = () => {
-    setFromValue(toValue);
-    setToValue(fromValue);
-    const tempPlace = fromPlace;
+    setFromValue((p) => {
+      const prev = p;
+      setToValue(prev);
+      return toValue;
+    });
+    const tmp = fromPlace;
     setFromPlace(toPlace);
-    setToPlace(tempPlace);
+    setToPlace(tmp);
   };
 
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-center mb-8">Find Your Flight</h1>
-        
-        {/* Search Form */}
+
         <Card className="mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -267,24 +220,12 @@ const FlightSearchPage = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {/* Trip Type Selector */}
             <div className="flex gap-4 mb-6">
-              <Button
-                variant={tripType === 'round-trip' ? 'default' : 'outline'}
-                onClick={() => setTripType('round-trip')}
-              >
-                Round Trip
-              </Button>
-              <Button
-                variant={tripType === 'one-way' ? 'default' : 'outline'}
-                onClick={() => setTripType('one-way')}
-              >
-                One Way
-              </Button>
+              <Button variant={tripType === 'round-trip' ? 'default' : 'outline'} onClick={() => setTripType('round-trip')}>Round Trip</Button>
+              <Button variant={tripType === 'one-way' ? 'default' : 'outline'} onClick={() => setTripType('one-way')}>One Way</Button>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Origin and Destination */}
               <div className="space-y-4">
                 <div className="relative" ref={fromRef}>
                   <Label htmlFor="from">From</Label>
@@ -301,13 +242,12 @@ const FlightSearchPage = () => {
                       className="pl-10"
                     />
                   </div>
-                  
-                  {/* Autocomplete Suggestions */}
+
                   {showFromSuggestions && fromSuggestions.length > 0 && (
                     <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto">
-                      {fromSuggestions.map((place, index) => (
+                      {fromSuggestions.map((place, i) => (
                         <div
-                          key={index}
+                          key={i}
                           className="p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
                           onClick={() => {
                             setFromPlace(place);
@@ -316,26 +256,19 @@ const FlightSearchPage = () => {
                           }}
                         >
                           <div className="font-medium">{place.name}</div>
-                          <div className="text-sm text-gray-500">
-                            {place.country_code} • {place.code}
-                          </div>
+                          <div className="text-sm text-gray-500">{place.country_code} • {place.code}</div>
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                
+
                 <div className="flex justify-center my-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    onClick={swapPlaces}
-                    className="rounded-full"
-                  >
+                  <Button variant="outline" size="icon" onClick={swapPlaces} className="rounded-full">
                     <Plane className="h-4 w-4 rotate-90" />
                   </Button>
                 </div>
-                
+
                 <div className="relative" ref={toRef}>
                   <Label htmlFor="to">To</Label>
                   <div className="relative mt-1">
@@ -351,13 +284,12 @@ const FlightSearchPage = () => {
                       className="pl-10"
                     />
                   </div>
-                  
-                  {/* Autocomplete Suggestions */}
+
                   {showToSuggestions && toSuggestions.length > 0 && (
                     <div className="absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto">
-                      {toSuggestions.map((place, index) => (
+                      {toSuggestions.map((place, i) => (
                         <div
-                          key={index}
+                          key={i}
                           className="p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
                           onClick={() => {
                             setToPlace(place);
@@ -366,184 +298,115 @@ const FlightSearchPage = () => {
                           }}
                         >
                           <div className="font-medium">{place.name}</div>
-                          <div className="text-sm text-gray-500">
-                            {place.country_code} • {place.code}
-                          </div>
+                          <div className="text-sm text-gray-500">{place.country_code} • {place.code}</div>
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
               </div>
-              
-              {/* Dates and Passengers */}
+
               <div className="space-y-4">
                 <div>
                   <Label>Departure Date</Label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          'w-full justify-start text-left font-normal mt-1',
-                          !departureDate && 'text-muted-foreground'
-                        )}
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        {departureDate ? format(departureDate, 'PPP') : 'Pick a date'}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar
-                        mode="single"
-                        selected={departureDate}
-                        onSelect={setDepartureDate}
-                        initialFocus
-                        modifiers={{
-                          hasPrice: (date) => !!getPriceForDate(date),
-                        }}
-                        modifiersClassNames={{
-                          hasPrice: 'bg-green-100 hover:bg-green-200 text-green-800',
-                        }}
-                        components={{
-                          Day: ({ date, ...props }) => {
-                            const price = getPriceForDate(date);
-                            return (
-                              <div className="relative">
-                                <div {...props} />
-                                {price && (
-                                  <span className="absolute bottom-0 left-0 right-0 text-xs text-center text-green-600 font-medium">
-                                    ${price}
-                                  </span>
-                                )}
-                              </div>
-                            );
-                          },
-                        }}
-                        footer={() => {
-                          const price = departureDate ? getPriceForDate(departureDate) : null;
-                          return price ? (
-                            <div className="p-3 text-center text-sm font-medium">
-                              Price: ${price}
-                            </div>
-                          ) : null;
-                        }}
-                      />
-                    </PopoverContent>
-                  </Popover>
-</div>
-
-{tripType === "round-trip" && (
-  <div>
-    <Label>Return Date</Label>
-
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn(
-            "w-full justify-start text-left font-normal mt-1",
-            !returnDate && "text-muted-foreground"
-          )}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {returnDate ? format(returnDate, "PPP") : "Pick a date"}
-        </Button>
-      </PopoverTrigger>
-
-      <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={returnDate}
-          onSelect={setReturnDate}
-          initialFocus
-          modifiers={{
-            hasPrice: (date) => !!getPriceForDate(date),
-          }}
-          modifiersClassNames={{
-            hasPrice: "bg-green-100 text-green-800",
-          }}
-          render={{
-            day: (dayProps) => {
-              const price = getPriceForDate(dayProps.date);
-
-              return (
-                <div className="relative">
-                  <button {...dayProps} />
-                  {price && (
-                    <span className="absolute bottom-0 left-0 right-0 text-[10px] text-green-600 font-semibold text-center">
-                      ${price}
-                    </span>
+                  <Input
+                    type="date"
+                    value={departureDate ?? ''}
+                    onChange={(e) => setDepartureDate(e.target.value || undefined)}
+                    className={cn('mt-1')}
+                  />
+                  {departureDate && (
+                    <div className="text-sm text-gray-500 mt-1">
+                      {format(new Date(departureDate), 'PPP')} {getPriceForDate(departureDate) ? `• ${getPriceForDate(departureDate)} USD` : ''}
+                    </div>
                   )}
                 </div>
-              );
-            },
-          }}
-          footer={
-            returnDate && getPriceForDate(returnDate) ? (
-              <div className="p-3 text-center text-sm font-medium">
-                Price: ${getPriceForDate(returnDate)}
-              </div>
-            ) : null
-          }
-        />
-      </PopoverContent>
-    </Popover>
-  </div>
-)}
-                
+
+                {tripType === 'round-trip' && (
+                  <div>
+                    <Label>Return Date</Label>
+                    <Input
+                      type="date"
+                      value={returnDate ?? ''}
+                      onChange={(e) => setReturnDate(e.target.value || undefined)}
+                      className={cn('mt-1')}
+                    />
+                    {returnDate && (
+                      <div className="text-sm text-gray-500 mt-1">
+                        {format(new Date(returnDate), 'PPP')} {getPriceForDate(returnDate) ? `• ${getPriceForDate(returnDate)} USD` : ''}
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <div>
                   <Label htmlFor="passengers">Passengers</Label>
                   <div className="flex mt-1">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setPassengers(Math.max(1, passengers - 1))}
-                    >
-                      -
-                    </Button>
-                    <Input
-                      id="passengers"
-                      type="number"
-                      value={passengers}
-                      readOnly
-                      className="text-center mx-2"
-                    />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setPassengers(passengers + 1)}
-                    >
-                      +
-                    </Button>
+                    <Button type="button" variant="outline" size="sm" onClick={() => setPassengers(Math.max(1, passengers - 1))}>-</Button>
+                    <Input id="passengers" type="number" value={String(passengers)} readOnly className="text-center mx-2" />
+                    <Button type="button" variant="outline" size="sm" onClick={() => setPassengers(passengers + 1)}>+</Button>
                   </div>
                 </div>
               </div>
             </div>
-            
-            <Button 
-              className="w-full mt-6" 
-              onClick={handleSearch}
-              disabled={!fromPlace || !toPlace || !departureDate}
-            >
+
+            <Button className="w-full mt-6 flex items-center justify-center gap-2" onClick={handleSearch} disabled={!fromPlace || !toPlace || !departureDate}>
+              <Search className="h-4 w-4" />
               Search Flights
             </Button>
           </CardContent>
         </Card>
-        
-        {/* Flight Results */}
+
         {results.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.3 }}
+            className="overflow-x-auto"
           >
             <h2 className="text-2xl font-bold mb-4">Available Flights</h2>
-            <div className="space-y-4">
-              {results.map((flight, index) => (
-                <Card key={index}>
+            
+            {/* Table view for results */}
+            <table className="min-w-full bg-white border border-gray-200 rounded-lg overflow-hidden">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Airline</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">From</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">To</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Departure</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Return</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Transfers</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Price</th>
+                  <th className="py-3 px-4 text-left text-sm font-semibold text-gray-700">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {results.map((flight, idx) => (
+                  <tr key={idx} className="hover:bg-gray-50">
+                    <td className="py-3 px-4 text-sm text-gray-700">{flight.airline}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700">{flight.origin}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700">{flight.destination}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700">{new Date(flight.departure_at).toLocaleDateString()}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700">{flight.return_at ? new Date(flight.return_at).toLocaleDateString() : 'N/A'}</td>
+                    <td className="py-3 px-4 text-sm text-gray-700">{flight.transfers} {flight.transfers === 1 ? 'stop' : 'stops'}</td>
+                    <td className="py-3 px-4 text-sm font-semibold text-primary">${flight.price}</td>
+                    <td className="py-3 px-4">
+                      <Button 
+                        size="sm" 
+                        onClick={() => window.open(`https://www.aviasales.com/search?origin=${flight.origin}&destination=${flight.destination}&depart_date=${departureDate}&return_date=${returnDate ?? ''}`, '_blank')}
+                      >
+                        Book
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            
+            {/* Alternative card view (commented out but available as option) */}
+            {/* <div className="space-y-4 mt-6 md:hidden">
+              {results.map((flight, idx) => (
+                <Card key={idx}>
                   <CardContent className="p-4">
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 w-full">
                       <div className="flex-1">
@@ -555,42 +418,34 @@ const FlightSearchPage = () => {
                         <div className="flex flex-wrap gap-4 mt-2 text-sm text-gray-500">
                           <div className="flex items-center">
                             <Clock className="mr-1 h-4 w-4" />
-                            <span>{new Date(flight.departure_at).toLocaleDateString()}</span>
+                            <span>{new Date(flight.departure_at).toLocaleString()}</span>
                           </div>
                           <div>Carrier: {flight.airline}</div>
                           <div>Duration: {formatDuration(flight.duration)}</div>
                         </div>
                       </div>
-                      
+
                       <div className="flex flex-col items-end">
-                        <div className="text-2xl font-bold text-primary">
-                          ${flight.price}
-                        </div>
-                        <div className="text-sm text-gray-500 mt-1">
-                          {flight.transfers} {flight.transfers === 1 ? 'stop' : 'stops'}
-                        </div>
-                        <Button className="mt-2">Select</Button>
+                        <div className="text-2xl font-bold text-primary">${flight.price}</div>
+                        <div className="text-sm text-gray-500 mt-1">{flight.transfers} {flight.transfers === 1 ? 'stop' : 'stops'}</div>
+                        <Button className="mt-2" onClick={() => window.open(`https://www.aviasales.com/search?origin=${flight.origin}&destination=${flight.destination}&depart_date=${departureDate}&return_date=${returnDate ?? ''}`, '_blank')}>Book Now</Button>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
-            </div>
+            </div> */}
           </motion.div>
         )}
-        
-        {/* Loading State */}
+
         {isLoading && (
           <div className="flex justify-center items-center h-32">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
           </div>
         )}
-        
-        {/* No Results */}
-        {results.length === 0 && !isLoading && departureDate && (
-          <div className="text-center py-8 text-gray-500">
-            No flights found for the selected dates. Try different dates or destinations.
-          </div>
+
+        {!isLoading && results.length === 0 && departureDate && (
+          <div className="text-center py-8 text-gray-500">No flights found for the selected dates. Try different dates or destinations.</div>
         )}
       </div>
     </div>

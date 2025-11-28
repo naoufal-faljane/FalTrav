@@ -42,12 +42,27 @@ export const usePageViewTracker = () => {
 };
 
 export const trackEvent = (action: string, category: string, label: string, value?: number) => {
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (typeof window !== 'undefined' && window.gtag && typeof window.gtag === 'function') {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,
       value: value,
     });
+  }
+};
+
+// Additional helper to ensure GA is initialized
+export const ensureGtagInitialized = () => {
+  if (typeof window !== 'undefined' && !window.gtag) {
+    // Set up gtag if it's not already defined
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function() {
+      window.dataLayer.push(arguments);
+    };
+    
+    // Initialize with the tracking ID
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-WR9K1KTMF0');
   }
 };
 

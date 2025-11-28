@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { usePageViewTracker } from '@/lib/analytics';
+import { usePageViewTracker, trackEvent, trackAddToCart } from '@/lib/analytics';
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Star, ShoppingCart, Camera, CameraIcon, Package } from 'lucide-react';
+import { Star, ShoppingCart } from 'lucide-react';
 
 // Mock data for travel shop items
 const shopItems = [

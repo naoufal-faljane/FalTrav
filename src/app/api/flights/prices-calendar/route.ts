@@ -1,13 +1,15 @@
 import { NextRequest } from 'next/server';
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const { origin, destination, departure_at, return_at } = await request.json();
+    const { searchParams } = new URL(request.url);
+    const origin = searchParams.get('origin');
+    const destination = searchParams.get('destination');
 
     // Validate required fields
-    if (!origin || !destination || !departure_at) {
+    if (!origin || !destination) {
       return new Response(
-        JSON.stringify({ error: 'Missing required fields: origin, destination, departure_at' }),
+        JSON.stringify({ error: 'Missing required fields: origin, destination' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -15,20 +17,18 @@ export async function POST(request: NextRequest) {
     const params = new URLSearchParams({
       origin,
       destination,
-      departure_at,
       currency: 'usd',
       token: '3fade1e333ca9f1374ebf46f820a2feb',
-      ...(return_at && { return_at }),
     });
 
-    const apiUrl = `https://api.travelpayouts.com/aviasales/v3/prices_for_dates?${params.toString()}`;
-    
+    const apiUrl = `https://api.travelpayouts.com/aviasales/v3/prices_calendar?${params}`;
+
     const response = await fetch(apiUrl);
 
     if (!response.ok) {
       return new Response(
-        JSON.stringify({ 
-          error: `Travelpayouts API error: ${response.status} ${response.statusText}` 
+        JSON.stringify({
+          error: `Travelpayouts API error: ${response.status} ${response.statusText}`
         }),
         { status: response.status, headers: { 'Content-Type': 'application/json' } }
       );
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
       },
     });
   } catch (error: any) {
-    console.error('Flight API error:', error);
+    console.error('Flight prices calendar API error:', error);
     return new Response(
       JSON.stringify({ error: 'Internal server error', details: error.message }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
