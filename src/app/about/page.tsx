@@ -1,3 +1,5 @@
+'use client';
+
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { usePageViewTracker } from '@/lib/analytics';

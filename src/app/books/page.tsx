@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Container from '@/components/layout/Container';
 import BooksClient from '@/components/BooksClient';
 import { travelBooks } from '@/data/travelBooks';
-import { usePageViewTracker } from '@/lib/analytics';
+import PageViewTracker from '@/components/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'Travel Books',
@@ -10,10 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function BooksPage() {
-  usePageViewTracker();
-
   return (
     <div className="py-8">
+      <PageViewTracker />
       <Container>
         <h1 className="text-3xl font-bold mb-6">Travel Books</h1>
         <BooksClient books={travelBooks} />

@@ -5,44 +5,76 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
+    gtag: ((...args: any[]) => void) | undefined;
     dataLayer: any[];
   }
 }
 
+// Initialize Google Analytics
+export const initGtag = () => {
+  if (typeof window !== 'undefined' && !window.gtag) {
+    window.dataLayer = window.dataLayer || [];
+    
+    // Define gtag function that pushes to dataLayer
+    window.gtag = function(..._args: any[]) {
+      window.dataLayer.push(arguments);
+    };
+
+    // Load Google Analytics script
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=G-WR9K1KTMF0`;
+    document.head.appendChild(script);
+
+    // Initialize gtag with our tracking ID
+    script.onload = () => {
+      window.gtag!('js', new Date());
+      window.gtag!('config', 'G-WR9K1KTMF0', {
+        page_title: document.title,
+        page_location: window.location.href,
+      });
+    };
+  }
+};
+
+// Hook to track page views
 export const usePageViewTracker = () => {
+  // We use a try/catch to avoid issues when not in a suspense boundary
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  let searchParamsString = '';
+  
+  try {
+    const searchParams = useSearchParams();
+    searchParamsString = searchParams.toString();
+  } catch (e) {
+    // If we're not in a suspense boundary, we can't access searchParams
+    // So we'll extract them from the URL directly
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      searchParamsString = url.searchParams.toString();
+    }
+  }
 
   useEffect(() => {
-    // Initialize GA if not already done
-    if (typeof window !== 'undefined' && (!window.gtag || typeof window.gtag !== 'function')) {
-      window.dataLayer = window.dataLayer || [];
-      function gtag(..._args: any[]) {
-        window.dataLayer.push(arguments);
-      }
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', 'G-WR9K1KTMF0', {
-        page_title: document.title,
-        page_location: window.location.href
-      });
-    }
-
-    // Track page view when route changes
     if (typeof window !== 'undefined' && window.gtag) {
-      const url = pathname + searchParams.toString();
+      const url = pathname + (searchParamsString ? '?' + searchParamsString : '');
       window.gtag('config', 'G-WR9K1KTMF0', {
         page_path: url,
         page_title: document.title,
-        page_location: window.location.origin + url
+        page_location: window.location.origin + url,
       });
     }
-  }, [pathname, searchParams]);
+  }, [pathname, searchParamsString]);
 };
 
-export const trackEvent = (action: string, category: string, label: string, value?: number) => {
-  if (typeof window !== 'undefined' && window.gtag && typeof window.gtag === 'function') {
+// Function to track custom events
+export const trackEvent = (
+  action: string,
+  category: string,
+  label: string,
+  value?: number
+) => {
+  if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,
@@ -51,23 +83,12 @@ export const trackEvent = (action: string, category: string, label: string, valu
   }
 };
 
-// Additional helper to ensure GA is initialized
-export const ensureGtagInitialized = () => {
-  if (typeof window !== 'undefined' && !window.gtag) {
-    // Set up gtag if it's not already defined
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function(..._args: any[]) {
-      window.dataLayer.push(arguments);
-    };
-    
-    // Initialize with the tracking ID
-    window.gtag('js', new Date());
-    window.gtag('config', 'G-WR9K1KTMF0');
-  }
-};
-
-// Additional event tracking functions
-export const trackPurchase = (value: number, currency: string = 'USD', transactionId?: string) => {
+// Additional helper functions for common GA4 events
+export const trackPurchase = (
+  value: number,
+  currency: string = 'USD',
+  transactionId?: string
+) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'purchase', {
       value: value,
@@ -77,7 +98,11 @@ export const trackPurchase = (value: number, currency: string = 'USD', transacti
   }
 };
 
-export const trackAddToCart = (itemName: string, itemCategory: string, value: number) => {
+export const trackAddToCart = (
+  itemName: string,
+  itemCategory: string,
+  value: number
+) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'add_to_cart', {
       items: [{
@@ -89,7 +114,9 @@ export const trackAddToCart = (itemName: string, itemCategory: string, value: nu
   }
 };
 
-export const trackViewItemList = (items: Array<{item_name: string, item_category: string, value: number}>) => {
+export const trackViewItemList = (
+  items: Array<{item_name: string, item_category: string, value: number}>
+) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'view_item_list', {
       items: items
@@ -97,7 +124,11 @@ export const trackViewItemList = (items: Array<{item_name: string, item_category
   }
 };
 
-export const trackViewItem = (itemName: string, itemCategory: string, value: number) => {
+export const trackViewItem = (
+  itemName: string,
+  itemCategory: string,
+  value: number
+) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'view_item', {
       items: [{
