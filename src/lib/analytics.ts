@@ -15,9 +15,9 @@ export const initGtag = () => {
   if (typeof window !== 'undefined' && !window.gtag) {
     window.dataLayer = window.dataLayer || [];
     
-    // Define gtag function that pushes to dataLayer
-    window.gtag = function(..._args: any[]) {
-      window.dataLayer.push(arguments);
+    // Define gtag function that pushes to dataLayer - properly typed to accept any arguments
+    window.gtag = function(...args: any[]) {
+      window.dataLayer.push(args);
     };
 
     // Load Google Analytics script
@@ -26,9 +26,8 @@ export const initGtag = () => {
     script.src = `https://www.googletagmanager.com/gtag/js?id=G-WR9K1KTMF0`;
     document.head.appendChild(script);
 
-    // Initialize gtag with our tracking ID
+    // Initialize gtag with our tracking ID (GA4 syntax - only the config command)
     script.onload = () => {
-      window.gtag!('js', new Date());
       window.gtag!('config', 'G-WR9K1KTMF0', {
         page_title: document.title,
         page_location: window.location.href,
