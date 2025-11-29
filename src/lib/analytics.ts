@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { 
+import {
   initGtag as enhancedInitGtag,
   useEnhancedPageViewTracker as useEnhancedPageViewTracking,
   trackEventWithLocation,
@@ -88,7 +88,7 @@ export const trackViewItem = (
 };
 
 // Enhanced version of the functions that automatically include location
-export { 
+export {
   trackViewDestination,
   trackViewArticle, 
   trackViewBook,
