@@ -9,17 +9,13 @@ declare global {
 // Initialize Google Analytics
 export const initGA = () => {
   if (typeof window !== 'undefined') {
-    // Create dataLayer if it doesn't exist
-    if (!window.dataLayer) {
-      window.dataLayer = [];
-    }
+    // Initialize dataLayer
+    window.dataLayer = window.dataLayer || [];
 
     // Define gtag function to push to dataLayer
-    if (!window.gtag) {
-      window.gtag = function(...args: any[]) {
-        window.dataLayer.push(args);
-      };
-    }
+    window.gtag = window.gtag || function(...args: any[]) {
+      window.dataLayer.push(args);
+    };
 
     // Load the gtag script
     const gtagScript = document.createElement('script');
