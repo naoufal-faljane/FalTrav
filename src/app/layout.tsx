@@ -5,6 +5,9 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
 import Script from 'next/script';
+import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider';
+import { InteractionTracker } from '@/components/analytics/InteractionTracker';
+import { AdProvider } from '@/contexts/AdContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +27,7 @@ export default function RootLayout({
         {/* Google Analytics */}
         <Script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=G-WR9K1KTMF0`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'}`}
         />
         <Script
           id="gtag-init"
@@ -34,8 +37,11 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-WR9K1KTMF0', {
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX'}', {
                 page_path: window.location.pathname,
+                page_title: document.title,
+                page_location: window.location.href,
+                send_page_view: true
               });
             `,
           }}
@@ -48,11 +54,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col bg-background">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <AdProvider>
+            <div className="relative flex min-h-screen flex-col bg-background">
+              <Header />
+              <main className="flex-1">
+                <InteractionTracker>
+                  {children}
+                </InteractionTracker>
+              </main>
+              <AnalyticsProvider />
+              <Footer />
+            </div>
+          </AdProvider>
         </ThemeProvider>
         <Script
           data-noptimize="1"

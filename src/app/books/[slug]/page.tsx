@@ -6,15 +6,27 @@ import { Star, ChevronLeft, Bookmark, Share2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { travelBooks } from '@/data/travelBooks';
+import { notFound } from 'next/navigation';
+import BookAnalytics from '@/components/analytics/BookAnalytics';
 
-async function getBookById(id: string) {
-  const bookId = parseInt(id);
-  return travelBooks.find(book => book.id === bookId) || null;
+// Helper function to convert title to slug
+function createSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-'); // Replace spaces with hyphens
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const book = await getBookById(params.id);
-  
+async function getBookBySlug(slug: string) {
+  const book = travelBooks.find(book => 
+    createSlug(book.title) === slug
+  );
+  return book || null;
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const book = await getBookBySlug(params.slug);
+
   if (!book) {
     return {
       title: 'Book Not Found',
@@ -40,24 +52,16 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default async function BookDetailPage({ params }: { params: { id: string } }) {
-  const book = await getBookById(params.id);
+export default async function BookDetailPage({ params }: { params: { slug: string } }) {
+  const book = await getBookBySlug(params.slug);
 
   if (!book) {
-    return (
-      <div className="min-h-screen bg-background py-8">
-        <Container>
-          <div className="text-center py-12">
-            <h1 className="text-2xl font-bold mb-4">Book not found</h1>
-            <p className="text-muted-foreground">The book you're looking for doesn't exist.</p>
-          </div>
-        </Container>
-      </div>
-    );
+    notFound();
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-100">
+      <BookAnalytics />
       {/* Header with back button */}
       <div className="bg-white/80 backdrop-blur-sm border-b border-stone-200 sticky top-0 z-10">
         <Container>

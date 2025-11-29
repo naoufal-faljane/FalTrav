@@ -6,9 +6,28 @@ import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, MapPin, Clock, Users, Camera, BookOpen, Calendar, DollarSign } from 'lucide-react';
+import { Star, MapPin, Clock, Users, Camera, BookOpen, Calendar, DollarSign, ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
+import { usePageViewTracker } from '@/lib/analytics';
+import { useAdContext } from '@/contexts/AdContext';
+
+// Helper function to convert slug back to destination name
+function slugToName(slug: string): string {
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+    .replace(', Indonesia', ', Indonesia')
+    .replace(', Greece', ', Greece')
+    .replace(', Japan', ', Japan')
+    .replace(', Switzerland', ', Switzerland')
+    .replace(', Morocco', ', Morocco')
+    .replace(', Canada', ', Canada')
+    .replace(', Kenya', ', Kenya')
+    .replace(', Usa', ', USA')
+    .replace(', Australia', ', Australia');
+}
 
 // Mock data for destinations
 const destinations = [
@@ -621,433 +640,245 @@ const destinations = [
       'Purchase a Pasmo or Suica card for public transportation',
       'Download translation apps as English is limited',
       'Tipping is not customary in Japan',
-      'Reserve high-end restaurants weeks in advance'
+      'Reserve high-end restaurants in advance'
     ]
-  },
-  {
-    id: 10,
-    name: 'Sydney, Australia',
-    country: 'Australia',
-    continent: 'Oceania',
-    description: 'Harbor city with iconic Opera House and beautiful beaches',
-    image: '/img/destinations/Sydney, Australia.png',
-    rating: 4.7,
-    reviews: 1320,
-    price: 1799,
-    duration: '10 days',
-    travelers: '2-4 people',
-    category: 'City',
-    season: 'Spring/Summer',
-    guide: 'Sydney travel guide: Home to the iconic Opera House and Harbour Bridge. Best visited during Australian spring (September-November) or summer for beach weather. Don\'t miss the Sydney Harbor cruise and nearby Blue Mountains.',
-    highlights: [
-      'Sydney Opera House',
-      'Harbour Bridge',
-      'Bondi Beach',
-      'Blue Mountains',
-      'Darling Harbour'
-    ],
-    bestFor: ['Beach Lovers', 'City Exploration', 'Nature Activities'],
-    images: [
-      '/img/destinations/Sydney, Australia.png',
-      'https://images.unsplash.com/photo-1506926729481-1fb6c6c15d10?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1506399165489-9914f1231d76?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1506926862613-49053fefb526?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-    ],
-    souvenirs: [
-      'Aboriginal artwork and dot paintings',
-      'Kangaroo leather products',
-      'Lamingtons and Tim Tams (iconic Australian snacks)',
-      'Opals (Australia produces 95% of the world\'s opals)'
-    ],
-    restaurants: [
-      'Quay - renowned fine dining with Opera House views',
-      'The Boathouse on Blackwattle Bay - exceptional seafood',
-      'Mr. Wong - modern Chinese in a stunning setting',
-      'Icebergs Dining Room - Italian with ocean views'
-    ],
-    costs: {
-      'Budget per day': '$100-150',
-      'Mid-range per day': '$150-250',
-      'Luxury per day': '$350+',
-      'Avg. meal (local)': '$20-35',
-      'Avg. meal (waterfront)': '$40-70',
-      'Transportation': '$10-25/day'
-    },
-    mustSee: [
-      'Sydney Opera House behind-the-scenes tour',
-      'Manly Beach (take the ferry for the views)',
-      'Royal Botanic Garden (free with spectacular views)',
-      'Blue Mountains day trip'
-    ],
-    cheapestPlaces: [
-      'Newtown (vibrant bohemian area with budget options)',
-      'Parramatta (Western Sydney, more affordable)',
-      'Palm Beach (northern beaches, less touristy)',
-      'Cronulla (southern beaches, good value)'
-    ],
-    tips: [
-      'Use an Opal card for all public transportation',
-      'Be aware of dangerous marine life (jellyfish season varies by area)',
-      'Apply sunscreen regularly - UV levels are high',
-      'Book harbor cruises and Opera House tours in advance'
-    ]
-  },
+  }
 ];
 
 export default function DestinationPage() {
-  const { id } = useParams();
+  const { slug } = useParams<{ slug: string }>();
   const [destination, setDestination] = useState<any>(null);
+  const { AdPlacement } = useAdContext();
 
   useEffect(() => {
-    if (id) {
-      const destId = parseInt(Array.isArray(id) ? id[0] : id);
-      const foundDestination = destinations.find(dest => dest.id === destId);
+    usePageViewTracker();
+    
+    if (slug) {
+      const destinationName = slugToName(slug);
+      const foundDestination = destinations.find(d => d.name === destinationName);
       setDestination(foundDestination);
     }
-  }, [id]);
+  }, [slug]);
 
   if (!destination) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-lg">Loading destination...</p>
-      </div>
-    );
+    return <div className="min-h-screen flex items-center justify-center">Destination not found</div>;
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="relative h-[60vh] w-full">
-        <img 
-          src={String(destination.image)} 
-          alt={String(destination.name)} 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-        <Container className="absolute bottom-0 left-0 right-0">
-          <div className="pb-12">
-            <div className="flex flex-wrap gap-2 mb-4">
-              <Badge variant="secondary">{String(destination.category)}</Badge>
-              <Badge variant="outline">{String(destination.continent)}</Badge>
-              <Badge variant="outline">{String(destination.season)}</Badge>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-white">{String(destination.name)}</h1>
-            <div className="flex items-center gap-4 mt-2 text-white/80">
-              <div className="flex items-center gap-1">
-                <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                <span>{String(destination.rating)} ({String(destination.reviews)} reviews)</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <MapPin className="h-4 w-4" />
-                <span>{String(destination.country)}</span>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </div>
-
-      <Container className="py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
-            {/* Travel Guide */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <BookOpen className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-bold">Travel Guide</h2>
-              </div>
-              <Card>
-                <CardContent className="p-6">
-                  <p className="text-lg mb-4">{String(destination.description)}</p>
-                  <p className="text-muted-foreground">{String(destination.guide)}</p>
-                </CardContent>
-              </Card>
-            </motion.section>
-
-            {/* Highlights */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">Top Highlights</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {destination.highlights.map((highlight: string, index: number) => (
-                  <div key={index} className="flex items-center gap-3 p-4 border rounded-lg">
-                    <div className="bg-primary text-primary-foreground rounded-full p-2">
-                      <Camera className="h-4 w-4" />
-                    </div>
-                    <span>{String(highlight)}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            {/* Image Gallery */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">Gallery</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {destination.images.map((image: string, index: number) => (
-                  <div key={index} className="aspect-video rounded-lg overflow-hidden">
-                    <img 
-                      src={String(image)} 
-                      alt={`Gallery ${index + 1}`} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            </motion.section>
-
-            {/* Souvenirs */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <Camera className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-bold">Local Souvenirs</h2>
-              </div>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2">
-                    {destination.souvenirs.map((souvenir: string, index: number) => (
-                      <div key={index} className="flex items-start gap-3 py-2">
-                        <span className="text-primary">•</span>
-                        <p>{String(souvenir)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.section>
-
-            {/* Best Restaurants */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <MapPin className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-bold">Best Restaurants</h2>
-              </div>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    {destination.restaurants.map((restaurant: string, index: number) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <span className="text-primary mt-1">•</span>
-                        <p>{String(restaurant)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.section>
-
-            {/* Cost Information */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <DollarSign className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-bold">Cost Information</h2>
-              </div>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {Object.entries(destination.costs).map(([key, value], index) => (
-                      <div key={index} className="flex justify-between py-2 border-b border-border/50">
-                        <span className="text-muted-foreground">{String(key)}</span>
-                        <span className="font-medium">{String(value)}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.section>
-
-            {/* Must-See Places */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <MapPin className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-bold">Must-See Places</h2>
-              </div>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2">
-                    {destination.mustSee.map((place: string, index: number) => (
-                      <div key={index} className="flex items-start gap-3 py-2">
-                        <span className="text-primary">•</span>
-                        <p>{String(place)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.section>
-
-            {/* Best Budget Areas */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <MapPin className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-bold">Best Budget Areas</h2>
-              </div>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2">
-                    {destination.cheapestPlaces.map((place: string, index: number) => (
-                      <div key={index} className="flex items-start gap-3 py-2">
-                        <span className="text-primary">•</span>
-                        <p>{String(place)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.section>
-
-            {/* Travel Tips */}
-            <motion.section
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <MapPin className="h-5 w-5 text-primary" />
-                <h2 className="text-2xl font-bold">Travel Tips</h2>
-              </div>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2">
-                    {destination.tips.map((tip: string, index: number) => (
-                      <div key={index} className="flex items-start gap-3 py-2">
-                        <span className="text-primary">•</span>
-                        <p>{String(tip)}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.section>
+    <div className="min-h-screen bg-background py-8">
+      <Container>
+        <div className="max-w-4xl mx-auto">
+          {/* Ad placement before content */}
+          <div className="mb-6">
+            <AdPlacement position="destination-top" type="mobile" />
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Booking Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Card className="p-6 sticky top-24">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold">${String(destination.price)}</h3>
-                    <p className="text-muted-foreground">per person</p>
-                  </div>
-                  <Badge>{String(destination.duration)}</Badge>
-                </div>
+          <Link href="/destinations" className="flex items-center gap-2 text-primary mb-6">
+            <ChevronLeft className="h-4 w-4" />
+            <span>Back to Destinations</span>
+          </Link>
 
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Duration</span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      {String(destination.duration)}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Best for</span>
-                    <span className="flex items-center gap-1">
-                      <Users className="h-4 w-4" />
-                      {String(destination.travelers)}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Best season</span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      {String(destination.season)}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Price</span>
-                    <span className="flex items-center gap-1">
-                      <DollarSign className="h-4 w-4" />
-                      ${String(destination.price)}
-                    </span>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="relative h-64 sm:h-96 rounded-xl overflow-hidden mb-8">
+              <img
+                src={destination.image}
+                alt={destination.name}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-6">
+                  <h1 className="text-2xl sm:text-4xl font-bold">{destination.name}</h1>
+                  <div className="flex items-center gap-2">
+                    <Badge variant="secondary" className="text-sm">{destination.category}</Badge>
+                    <Badge variant="outline" className="text-sm">{destination.continent}</Badge>
                   </div>
                 </div>
+                <div className="flex flex-wrap items-center gap-4 mt-3 sm:mt-4">
+                  <div className="flex items-center gap-1">
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <span className="font-medium">{destination.rating}</span>
+                    <span className="text-muted-foreground text-sm">({destination.reviews} reviews)</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-muted-foreground">
+                    <Clock className="h-4 w-4" />
+                    <span>{destination.duration}</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-muted-foreground">
+                    <Users className="h-4 w-4" />
+                    <span>{destination.travelers}</span>
+                  </div>
+                  <div className="flex items-center gap-1 text-muted-foreground">
+                    <MapPin className="h-4 w-4" />
+                    <span>{destination.country}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                <Button className="w-full">
-                  Book Now
-                </Button>
-                
-                <div className="mt-4 pt-4 border-t">
-                  <h4 className="font-medium mb-2">Best for:</h4>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4">About {destination.name.split(',')[0]}</h2>
+                  <p className="text-muted-foreground leading-relaxed">{destination.guide}</p>
+                </div>
+
+                {/* Ad placement in the middle of content */}
+                <div className="mb-8">
+                  <AdPlacement position="destination-middle" type="rectangle" />
+                </div>
+
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4">Top Highlights</h2>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {destination.highlights.map((highlight: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-muted-foreground">{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4">Best For</h2>
                   <div className="flex flex-wrap gap-2">
-                    {destination.bestFor.map((tag: string, index: number) => (
-                      <Badge key={index} variant="outline">{String(tag)}</Badge>
+                    {destination.bestFor.map((item: string, index: number) => (
+                      <Badge key={index} variant="secondary">{item}</Badge>
                     ))}
                   </div>
                 </div>
-              </Card>
-            </motion.div>
 
-            {/* Related Destinations */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <h3 className="font-bold mb-4">Similar Destinations</h3>
-              <div className="space-y-3">
-                {destinations
-                  .filter(dest => dest.id !== destination.id && dest.continent === destination.continent)
-                  .slice(0, 2)
-                  .map(dest => (
-                    <Link href={`/destinations/${dest.id}`} key={dest.id} className="block">
-                      <Card className="overflow-hidden group">
-                        <div className="flex">
-                          <div className="w-1/3">
-                            <img 
-                              src={String(dest.image)} 
-                              alt={String(dest.name)} 
-                              className="h-full w-full object-cover group-hover:scale-105 transition-transform"
-                            />
-                          </div>
-                          <div className="w-2/3 p-3">
-                            <h4 className="font-semibold">{String(dest.name)}</h4>
-                            <p className="text-sm text-muted-foreground">${String(dest.price)}</p>
-                          </div>
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4">Travel Tips</h2>
+                  <ul className="space-y-2">
+                    {destination.tips.map((tip: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-muted-foreground">{tip}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4">Cost Breakdown</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {Object.entries(destination.costs).map(([item, cost], index) => (
+                      <div key={index} className="flex justify-between items-center p-3 bg-muted rounded-lg">
+                        <span className="text-muted-foreground">{item}</span>
+                        <span className="font-medium">{cost}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4">Must-See Places</h2>
+                  <div className="space-y-3">
+                    {destination.mustSee.map((place: string, index: number) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <div className="w-2 h-2 bg-primary-foreground rounded-full" />
                         </div>
-                      </Card>
-                    </Link>
-                  ))}
+                        <p className="text-muted-foreground">{place}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </motion.div>
-          </div>
+
+              <div className="space-y-6">
+                <div className="bg-card p-4 sm:p-6 rounded-xl shadow-sm">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-lg font-bold">Trip Details</h3>
+                    <div className="text-2xl font-bold text-primary">${destination.price}</div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Calendar className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm font-medium">Best Season</span>
+                      </div>
+                      <p className="text-muted-foreground">{destination.season}</p>
+                    </div>
+                    
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Users className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm font-medium">Ideal Group Size</span>
+                      </div>
+                      <p className="text-muted-foreground">{destination.travelers}</p>
+                    </div>
+                    
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <Clock className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm font-medium">Duration</span>
+                      </div>
+                      <p className="text-muted-foreground">{destination.duration}</p>
+                    </div>
+                    
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <DollarSign className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-sm font-medium">Budget</span>
+                      </div>
+                      <p className="text-muted-foreground">From ${destination.price}</p>
+                    </div>
+                  </div>
+                  
+                  <Button className="w-full mt-6">Book This Trip</Button>
+                </div>
+
+                <div className="bg-card p-4 sm:p-6 rounded-xl shadow-sm">
+                  <h3 className="text-lg font-bold mb-4">Souvenirs to Buy</h3>
+                  <ul className="space-y-2">
+                    {destination.souvenirs.map((item: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-muted-foreground text-sm">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-card p-4 sm:p-6 rounded-xl shadow-sm">
+                  <h3 className="text-lg font-bold mb-4">Where to Dine</h3>
+                  <ul className="space-y-2">
+                    {destination.restaurants.map((restaurant: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-muted-foreground text-sm">{restaurant}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-card p-4 sm:p-6 rounded-xl shadow-sm">
+                  <h3 className="text-lg font-bold mb-4">Budget-Friendly Areas</h3>
+                  <ul className="space-y-2">
+                    {destination.cheapestPlaces.map((place: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-muted-foreground text-sm">{place}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Ad placement in sidebar */}
+                <div>
+                  <AdPlacement position="destination-sidebar" type="rectangle" />
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </Container>
     </div>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useAdContext } from '@/contexts/AdContext';
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -173,6 +174,13 @@ export default function NewsPage() {
           </div>
         </div>
 
+        {/* Smartlink Ad */}
+        <div className="mb-8 sm:mb-10">
+          <div className="max-w-3xl mx-auto">
+            <AdPlacement position="news-top" type="smartlink" />
+          </div>
+        </div>
+
         {/* News Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto">
           {filteredArticles.length > 0 ? (
@@ -238,12 +246,7 @@ export default function NewsPage() {
           )}
         </div>
 
-        {/* Load More Button */}
-        <div className="text-center mt-8 sm:mt-12">
-          <button className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm sm:text-base">
-            Load More Articles
-          </button>
-        </div>
+
       </Container>
     </div>
   );

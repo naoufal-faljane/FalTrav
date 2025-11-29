@@ -9,6 +9,14 @@ import { Badge } from '@/components/ui/badge';
 import { Star, MapPin, Clock, Users, Filter } from 'lucide-react';
 import Link from 'next/link';
 
+// Helper function to create URL-friendly slugs
+function createSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-'); // Replace spaces with hyphens
+}
+
 // Mock data for destinations
 const destinations = [
   {
@@ -285,7 +293,7 @@ export default function DestinationsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Link href={`/destinations/${destination.id}`}>
+                <Link href={`/destinations/${createSlug(destination.name)}`}>
                   <Card className="overflow-hidden group h-full flex flex-col cursor-pointer">
                     <div className="relative h-40 sm:h-48 overflow-hidden">
                       <img

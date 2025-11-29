@@ -2,11 +2,13 @@
 
 import { motion } from 'framer-motion';
 import { usePageViewTracker } from '@/lib/analytics';
+import { useAdContext } from '@/contexts/AdContext';
 import Hero from '@/components/hero/Hero';
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plane, Map, Camera, BookOpen } from 'lucide-react';
+import Image from 'next/image';
 
 // Mock data for featured destinations
 const featuredDestinations = [
@@ -14,21 +16,21 @@ const featuredDestinations = [
     id: 1,
     name: 'Bali, Indonesia',
     description: 'Tropical paradise with stunning beaches and rich culture',
-    image: 'https://images.unsplash.com/photo-1534723452862-4c874e1e2af9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Bali, Indonesia.png',
     price: '$599',
   },
   {
     id: 2,
     name: 'Santorini, Greece',
     description: 'Iconic white buildings and breathtaking sunsets',
-    image: 'https://images.unsplash.com/photo-1566528580372-39c4e5a0a8e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Santorini, Greece.png',
     price: '$899',
   },
   {
     id: 3,
     name: 'Kyoto, Japan',
     description: 'Ancient temples and beautiful cherry blossoms',
-    image: 'https://images.unsplash.com/photo-1546604010-4f8a7b0dab7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/img/destinations/Kyoto, Japan.png',
     price: '$1299',
   },
   {
@@ -44,8 +46,8 @@ const featuredDestinations = [
 const quickLinks = [
   { title: 'Find Flights', icon: Plane, path: '/flights' },
   { title: 'Book Hotels', icon: Map, path: '/hotels' },
-  { title: 'Travel Photos', icon: Camera, path: '/photos' },
-  { title: 'Travel Guides', icon: BookOpen, path: '/guides' },
+  { title: 'Travel Photos', icon: Camera, path: '/travel-photos' },
+  { title: 'Travel Guides', icon: BookOpen, path: '/travel-guides' },
 ];
 
 export default function Home() {
@@ -83,7 +85,9 @@ export default function Home() {
         <Container>
           <div className="flex flex-col items-center mb-8">
             <h2 className="text-2xl sm:text-3xl font-bold text-center">Featured Destinations</h2>
-            <Button variant="outline" className="mt-4">View All</Button>
+            <Button asChild variant="outline" className="mt-4">
+              <a href="/destinations">View All</a>
+            </Button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
@@ -95,11 +99,12 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 className="mx-auto max-w-xs"
               >
-                <Card className="overflow-hidden group">
+                <Card className="overflow-hidden group cursor-pointer" onClick={() => window.location.href = `/destinations/${destination.id}`}>
                   <div className="relative h-40 sm:h-48 overflow-hidden">
-                    <img
+                    <Image
                       src={destination.image}
                       alt={destination.name}
+                      fill
                       className="w-full h-full object-cover transition-transform group-hover:scale-105"
                     />
                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -110,12 +115,24 @@ export default function Home() {
                     <p className="text-muted-foreground text-sm mb-2 text-center">{destination.description}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-xl font-bold text-primary">{destination.price}</span>
-                      <Button size="sm">Explore</Button>
+                      <Button size="sm" onClick={(e) => {
+                        e.stopPropagation();
+                        window.location.href = `/destinations/${destination.id}`;
+                      }}>Explore</Button>
                     </div>
                   </CardContent>
                 </Card>
               </motion.div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Smartlink Ad */}
+      <section className="py-8">
+        <Container className="flex justify-center">
+          <div className="w-full max-w-2xl">
+            <AdPlacement position="homepage-smartlink" type="smartlink" />
           </div>
         </Container>
       </section>
@@ -126,27 +143,51 @@ export default function Home() {
           <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center">Travel Tips & Inspiration</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[1, 2, 3].map((item, index) => (
+            {[
+              { 
+                title: 'How to Stay Safe While Traveling Alone',
+                description: 'Essential safety tips for solo travelers to ensure a secure and enjoyable journey.',
+                image: '/img/news/How to Stay Safe While Traveling Alone.png'
+              },
+              { 
+                title: 'Cultural Etiquette Around the World',
+                description: 'Navigate different cultural norms and customs with respect and awareness in various countries.',
+                image: '/img/news/Cultural Etiquette Around the World.png'
+              },
+              { 
+                title: 'Off-the-Beaten-Path Destinations in Southeast Asia',
+                description: 'Hidden gems that offer authentic experiences away from mass tourism.',
+                image: '/img/news/Off-the-Beaten-Path Destinations in Southeast Asia.png'
+              }
+            ].map((tip, index) => (
               <motion.div
-                key={item}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card>
-                  <div className="h-40 bg-muted flex items-center justify-center">
-                    <span className="text-sm text-muted-foreground">Travel Tip Image</span>
+                <Card className="overflow-hidden group cursor-pointer" onClick={() => {
+                  const slug = encodeURIComponent(tip.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''));
+                  window.location.href = `/news/${slug}`;
+                }}>
+                  <div className="relative h-40 overflow-hidden">
+                    <Image
+                      src={tip.image}
+                      alt={tip.title}
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
+                    />
                   </div>
                   <CardContent className="p-4">
-                    <h3 className="font-bold text-base sm:text-lg mb-2">Essential Travel Tips for {index === 0 ? 'First-Time Travelers' : index === 1 ? 'Europe' : 'Southeast Asia'}</h3>
+                    <h3 className="font-bold text-base sm:text-lg mb-2">{tip.title}</h3>
                     <p className="text-muted-foreground text-sm mb-4">
-                      {index === 0
-                        ? 'Learn the basics of planning your first international trip with these essential tips.'
-                        : index === 1
-                        ? 'Discover the best routes, countries to visit, and cultural nuances for your European adventure.'
-                        : 'Explore Southeast Asia on a budget with these insider tips and recommendations.'}
+                      {tip.description}
                     </p>
-                    <Button variant="outline" size="sm">Read More</Button>
+                    <Button variant="outline" size="sm" onClick={(e) => {
+                      e.stopPropagation();
+                      const slug = encodeURIComponent(tip.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''));
+                      window.location.href = `/news/${slug}`;
+                    }}>Read More</Button>
                   </CardContent>
                 </Card>
               </motion.div>

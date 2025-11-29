@@ -73,18 +73,10 @@ export default function ContactPage() {
                   </div>
                   
                   <div className="flex items-start gap-3">
-                    <Phone className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">Phone Number</p>
-                      <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-3">
                     <Mail className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">Email Address</p>
-                      <p className="text-muted-foreground">info@wanderlust.com</p>
+                      <p className="text-muted-foreground">faltrav25@gmail.com</p>
                     </div>
                   </div>
                   
@@ -106,11 +98,10 @@ export default function ContactPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground mb-4">
-                    For customer support, please contact us at <span className="text-primary">support@wanderlust.com</span> 
-                    or call our support line at <span className="text-primary">+1 (555) 987-6543</span>.
+                    For customer support, please contact us at <span className="text-primary">faltrav25@gmail.com</span>.
                   </p>
                   <p className="text-muted-foreground">
-                    For press inquiries, please reach out to <span className="text-primary">press@wanderlust.com</span>.
+                    For press inquiries, please reach out to <span className="text-primary">faltrav25@gmail.com</span>.
                   </p>
                 </CardContent>
               </Card>

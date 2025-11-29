@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Facebook, Instagram, Twitter, Mail } from 'lucide-react';
+import { useAdContext } from '@/contexts/AdContext';
 
 const Footer = () => {
+  const { AdPlacement } = useAdContext();
+
   return (
     <footer className="border-t border-border/40 bg-background/95 backdrop-blur">
       <div className="container py-12 md:py-16 px-4 md:px-6">
@@ -37,17 +40,25 @@ const Footer = () => {
           <div className="text-center">
             <h4 className="text-sm font-semibold mb-4">Connect</h4>
             <div className="flex space-x-4 justify-center">
-              <Button variant="ghost" size="sm">
-                <Facebook className="h-4 w-4" />
+              <Button variant="ghost" size="sm" asChild>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+                  <Facebook className="h-4 w-4" />
+                </a>
               </Button>
-              <Button variant="ghost" size="sm">
-                <Instagram className="h-4 w-4" />
+              <Button variant="ghost" size="sm" asChild>
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                  <Instagram className="h-4 w-4" />
+                </a>
               </Button>
-              <Button variant="ghost" size="sm">
-                <Twitter className="h-4 w-4" />
+              <Button variant="ghost" size="sm" asChild>
+                <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer">
+                  <Twitter className="h-4 w-4" />
+                </a>
               </Button>
-              <Button variant="ghost" size="sm">
-                <Mail className="h-4 w-4" />
+              <Button variant="ghost" size="sm" asChild>
+                <a href="mailto:faltrav25@gmail.com">
+                  <Mail className="h-4 w-4" />
+                </a>
               </Button>
             </div>
             <div className="mt-4">
@@ -63,8 +74,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
-        <div className="mt-12 pt-8 border-t border-border/40 text-center">
+
+        {/* Ad placement in footer */}
+        <div className="mt-8">
+          <AdPlacement position="footer-top" type="mobile" />
+        </div>
+
+        <div className="mt-8 pt-8 border-t border-border/40 text-center">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} FalTrav. All rights reserved.
           </p>

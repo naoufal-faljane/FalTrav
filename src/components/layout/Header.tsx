@@ -14,11 +14,14 @@ import {
 } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
 import SearchComponent from '@/components/search/SearchComponent';
+import { useAdContext } from '@/contexts/AdContext';
+import { AdPlacement } from '@/components/ads/AdComponent';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const { AdPlacement: AdPlacementComponent } = useAdContext();
 
   useEffect(() => setMounted(true), []);
 
@@ -157,6 +160,11 @@ const Header = () => {
           <div className="w-full max-w-md">
             <SearchComponent />
           </div>
+        </div>
+        
+        {/* Header ad placement (only shown on certain pages for better performance) */}
+        <div className="hidden md:block px-4 pb-2">
+          <AdPlacementComponent position="header-bottom" type="mobile" />
         </div>
       </>
     </header>

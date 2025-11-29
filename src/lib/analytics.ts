@@ -2,89 +2,32 @@
 
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { 
+  initGtag as enhancedInitGtag,
+  useEnhancedPageViewTracker as useEnhancedPageViewTracking,
+  trackEventWithLocation,
+  trackViewDestination,
+  trackViewArticle,
+  trackViewBook,
+  trackViewGuide,
+  trackUserInteraction,
+  trackPageViewDetails
+} from '@/lib/enhanced-analytics';
 
-type GtagCommand = 
-  | ['config', string, Record<string, any>?]
-  | ['event', string, Record<string, any>]
-  | ['js', Date];
+// Initialize Google Analytics (using enhanced version)
+export const initGtag = enhancedInitGtag;
 
-declare global {
-  interface Window {
-    gtag: ((...args: any[]) => void) | undefined;
-    dataLayer: any[];
-  }
-}
+// Hook to track page views (using enhanced version)
+export const usePageViewTracker = useEnhancedPageViewTracking;
 
-// Initialize Google Analytics
-export const initGtag = () => {
-  if (typeof window !== 'undefined' && !window.gtag) {
-    window.dataLayer = window.dataLayer || [];
-
-    // Define gtag function that pushes to dataLayer - properly typed to accept any arguments
-    window.gtag = function(...args: any[]) {
-      window.dataLayer.push(args);
-    };
-
-    // Load Google Analytics script
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=G-WR9K1KTMF0`;
-    document.head.appendChild(script);
-
-    // Initialize gtag with our tracking ID (GA4 syntax - only the config command)
-    script.onload = () => {
-      window.gtag!('config', 'G-WR9K1KTMF0', {
-        page_title: document.title,
-        page_location: window.location.href,
-      });
-    };
-  }
-};
-
-// Hook to track page views
-export const usePageViewTracker = () => {
-  // We use a try/catch to avoid issues when not in a suspense boundary
-  const pathname = usePathname();
-  let searchParamsString = '';
-
-  try {
-    const searchParams = useSearchParams();
-    searchParamsString = searchParams.toString();
-  } catch (e) {
-    // If we're not in a suspense boundary, we can't access searchParams
-    // So we'll extract them from the URL directly
-    if (typeof window !== 'undefined') {
-      const url = new URL(window.location.href);
-      searchParamsString = url.searchParams.toString();
-    }
-  }
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      const url = pathname + (searchParamsString ? '?' + searchParamsString : '');
-      window.gtag('config', 'G-WR9K1KTMF0', {
-        page_path: url,
-        page_title: document.title,
-        page_location: window.location.origin + url,
-      });
-    }
-  }, [pathname, searchParamsString]);
-};
-
-// Function to track custom events
+// Function to track custom events with location
 export const trackEvent = (
   action: string,
   category: string,
   label: string,
   value?: number
 ) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', action, {
-      event_category: category,
-      event_label: label,
-      value: value,
-    });
-  }
+  trackEventWithLocation(action, category, label, undefined, value);
 };
 
 // Additional helper functions for common GA4 events
@@ -142,4 +85,35 @@ export const trackViewItem = (
       }]
     });
   }
+};
+
+// Enhanced version of the functions that automatically include location
+export { 
+  trackViewDestination,
+  trackViewArticle, 
+  trackViewBook,
+  trackViewGuide,
+  trackUserInteraction,
+  trackPageViewDetails
+};
+
+// Track button clicks
+export const trackButtonClick = (buttonName: string, category: string = 'Button Click') => {
+  trackUserInteraction('click', buttonName, { event_category: category });
+};
+
+// Track link clicks
+export const trackLinkClick = (linkText: string, linkUrl: string) => {
+  trackUserInteraction('click', linkText, { 
+    event_category: 'Link Click',
+    link_url: linkUrl 
+  });
+};
+
+// Track form submissions
+export const trackFormSubmission = (formId: string, formName: string) => {
+  trackUserInteraction('form_submit', formName, { 
+    event_category: 'Form Submission',
+    form_id: formId 
+  });
 };
