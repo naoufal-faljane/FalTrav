@@ -9,6 +9,7 @@ import remarkGfm from 'remark-gfm';
 import Container from '@/components/layout/Container';
 import { useAdContext } from '@/contexts/AdContext';
 import { usePageViewTracker } from '@/lib/analytics';
+import { trackViewBook } from '@/lib/enhanced-analytics';
 
 interface Book {
   id: number;
@@ -32,6 +33,12 @@ interface BookDetailClientProps {
 export default function BookDetailClient({ book }: BookDetailClientProps) {
   const { AdPlacement } = useAdContext();
   usePageViewTracker(); // This is the equivalent of BookAnalytics
+
+  useEffect(() => {
+    // Track book view with location data if available
+    const userLocation = (window as any).userLocation;
+    trackViewBook(book.title, `book-${book.id}`, userLocation);
+  }, [book.id, book.title]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-100">

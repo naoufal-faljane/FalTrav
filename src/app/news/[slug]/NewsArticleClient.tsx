@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePageViewTracker } from '@/lib/analytics';
+import { trackViewArticle } from '@/lib/enhanced-analytics';
 import Container from '@/components/layout/Container';
 import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, User } from 'lucide-react';
@@ -173,6 +174,12 @@ export default function NewsArticleClient({ slug }: { slug: string }) {
     const foundArticle = newsArticles.find(a => a.title === title);
     setArticle(foundArticle || null);
     setLoading(false);
+
+    // Track article view with location data if available
+    if (foundArticle) {
+      const userLocation = (window as any).userLocation;
+      trackViewArticle(foundArticle.title, `news-${foundArticle.id}`, userLocation);
+    }
   }, [slug]);
 
   if (loading) {

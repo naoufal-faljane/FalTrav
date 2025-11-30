@@ -670,13 +670,6 @@ export default function DestinationPage() {
       const destinationName = slugToName(slug);
       const foundDestination = destinations.find(d => d.name === destinationName);
       setDestination(foundDestination);
-      
-      // Track destination view with location data if available
-      if (foundDestination) {
-        const userLocation = (window as any).userLocation;
-        trackViewDestination(foundDestination.name, userLocation);
-      }
-    }
     }
   }, [slug]);
 
