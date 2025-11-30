@@ -132,7 +132,7 @@ export default function Home() {
       <section className="py-6">
         <Container className="flex justify-center">
           <div className="w-full max-w-2xl">
-            <AdPlacement position="homepage-top" type="mobile" />
+            <AdPlacement position="homepage-top" type="banner" />
           </div>
         </Container>
       </section>
@@ -150,7 +150,7 @@ export default function Home() {
       <section className="py-6">
         <Container className="flex justify-center">
           <div className="w-full max-w-4xl">
-            <AdPlacement position="homepage-middle" type="rectangle" />
+            <AdPlacement position="homepage-middle" type="banner" />
           </div>
         </Container>
       </section>

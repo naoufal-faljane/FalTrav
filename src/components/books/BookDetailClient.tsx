@@ -8,8 +8,22 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Container from '@/components/layout/Container';
 import { useAdContext } from '@/contexts/AdContext';
-import { Book } from '@/data/travelBooks';
 import { usePageViewTracker } from '@/lib/analytics';
+
+interface Book {
+  id: number;
+  title: string;
+  author: string;
+  description: string;
+  price: number;
+  originalPrice: number | null;
+  image: string;
+  rating: number;
+  reviews: number;
+  category: string;
+  tags: string[];
+  content: string;
+}
 
 interface BookDetailClientProps {
   book: Book;
