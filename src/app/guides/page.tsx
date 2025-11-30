@@ -20,6 +20,7 @@ import {
   Moon
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import AdPlacement from '@/components/ads/AdPlacement';
 
 // Mock data for travel guides
 const travelGuides = [
@@ -147,6 +148,7 @@ const tipCategories = [
 
 export default function TravelGuidesPage() {
   usePageViewTracker();
+  const { AdPlacement: AdPlacementComponent } = useAdContext();
 
   return (
     <div className="min-h-screen bg-background">
@@ -197,6 +199,11 @@ export default function TravelGuidesPage() {
       </div>
 
       <Container className="py-12">
+        {/* Ad placement after hero section */}
+        <div className="mb-8">
+          <AdPlacementComponent position="guides-top" type="smartlink" />
+        </div>
+
         {/* Featured Guides */}
         <section className="mb-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
@@ -246,6 +253,11 @@ export default function TravelGuidesPage() {
             ))}
           </div>
         </section>
+
+        {/* Ad placement between sections */}
+        <div className="mb-8">
+          <AdPlacementComponent position="guides-middle" type="rectangle" />
+        </div>
 
         {/* Destination Guides */}
         <section className="mb-16">
@@ -393,6 +405,11 @@ export default function TravelGuidesPage() {
             </div>
           </div>
         </section>
+
+        {/* Ad placement before newsletter */}
+        <div className="mb-8">
+          <AdPlacementComponent position="guides-bottom" type="mobile" />
+        </div>
 
         {/* Newsletter CTA */}
         <section className="bg-primary/5 rounded-xl p-8 mb-16">

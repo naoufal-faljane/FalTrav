@@ -11,9 +11,11 @@ import Link from 'next/link';
 
 // Helper function to create URL-friendly slugs
 function createSlug(name: string): string {
+  // Replace commas followed by space with just hyphens, then remove other special chars
   return name
     .toLowerCase()
-    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/,\s*/g, '-') // Replace comma+space with hyphen
+    .replace(/[^\w\s-]/g, '') // Remove remaining special characters
     .replace(/\s+/g, '-'); // Replace spaces with hyphens
 }
 

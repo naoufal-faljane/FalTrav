@@ -14,19 +14,32 @@ import { useAdContext } from '@/contexts/AdContext';
 
 // Helper function to convert slug back to destination name
 function slugToName(slug: string): string {
+  // Handle known country names that originally had commas
+  const knownPatterns = [
+    { slugPattern: 'bali-indonesia', original: 'Bali, Indonesia' },
+    { slugPattern: 'santorini-greece', original: 'Santorini, Greece' },
+    { slugPattern: 'kyoto-japan', original: 'Kyoto, Japan' },
+    { slugPattern: 'marrakech-morocco', original: 'Marrakech, Morocco' },
+    { slugPattern: 'new-york-city-usa', original: 'New York City, USA' },
+    { slugPattern: 'tokyo-japan', original: 'Tokyo, Japan' },
+    { slugPattern: 'sydney-australia', original: 'Sydney, Australia' },
+    { slugPattern: 'swiss-alps-switzerland', original: 'Swiss Alps, Switzerland' },
+    { slugPattern: 'banff-national-park-canada', original: 'Banff National Park, Canada' },
+    { slugPattern: 'safari-kenya', original: 'Safari, Kenya' },
+  ];
+  
+  // Check for known patterns first
+  for (const pattern of knownPatterns) {
+    if (slug === pattern.slugPattern) {
+      return pattern.original;
+    }
+  }
+  
+  // Fallback to general conversion for unknown patterns
   return slug
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
-    .replace(', Indonesia', ', Indonesia')
-    .replace(', Greece', ', Greece')
-    .replace(', Japan', ', Japan')
-    .replace(', Switzerland', ', Switzerland')
-    .replace(', Morocco', ', Morocco')
-    .replace(', Canada', ', Canada')
-    .replace(', Kenya', ', Kenya')
-    .replace(', Usa', ', USA')
-    .replace(', Australia', ', Australia');
+    .join(' ');
 }
 
 // Mock data for destinations

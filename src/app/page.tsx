@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plane, Map, Camera, BookOpen } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // Mock data for featured destinations
 const featuredDestinations = [
@@ -99,31 +100,39 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 className="mx-auto max-w-xs"
               >
-                <Card className="overflow-hidden group cursor-pointer" onClick={() => window.location.href = `/destinations/${destination.id}`}>
-                  <div className="relative h-40 sm:h-48 overflow-hidden">
-                    <Image
-                      src={destination.image}
-                      alt={destination.name}
-                      fill
-                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                      <h3 className="text-white font-bold text-lg text-center">{destination.name}</h3>
+                <Link href={`/destinations/${encodeURIComponent(destination.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''))}`}>
+                  <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
+                    <div className="relative h-40 sm:h-48 overflow-hidden">
+                      <Image
+                        src={destination.image}
+                        alt={destination.name}
+                        fill
+                        className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                        <h3 className="text-white font-bold text-lg text-center">{destination.name}</h3>
+                      </div>
                     </div>
-                  </div>
-                  <CardContent className="p-4">
-                    <p className="text-muted-foreground text-sm mb-2 text-center">{destination.description}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xl font-bold text-primary">{destination.price}</span>
-                      <Button size="sm" onClick={(e) => {
-                        e.stopPropagation();
-                        window.location.href = `/destinations/${destination.id}`;
-                      }}>Explore</Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                    <CardContent className="p-4">
+                      <p className="text-muted-foreground text-sm mb-2 text-center">{destination.description}</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xl font-bold text-primary">{destination.price}</span>
+                        <Button size="sm">Explore</Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Ad placements for homepage */}
+      <section className="py-6">
+        <Container className="flex justify-center">
+          <div className="w-full max-w-2xl">
+            <AdPlacement position="homepage-top" type="mobile" />
           </div>
         </Container>
       </section>
@@ -133,6 +142,15 @@ export default function Home() {
         <Container className="flex justify-center">
           <div className="w-full max-w-2xl">
             <AdPlacement position="homepage-smartlink" type="smartlink" />
+          </div>
+        </Container>
+      </section>
+
+      {/* Rectangle ad after featured destinations */}
+      <section className="py-6">
+        <Container className="flex justify-center">
+          <div className="w-full max-w-4xl">
+            <AdPlacement position="homepage-middle" type="rectangle" />
           </div>
         </Container>
       </section>
@@ -166,30 +184,25 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="overflow-hidden group cursor-pointer" onClick={() => {
-                  const slug = encodeURIComponent(tip.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''));
-                  window.location.href = `/news/${slug}`;
-                }}>
-                  <div className="relative h-40 overflow-hidden">
-                    <Image
-                      src={tip.image}
-                      alt={tip.title}
-                      fill
-                      className="object-cover transition-transform group-hover:scale-105"
-                    />
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="font-bold text-base sm:text-lg mb-2">{tip.title}</h3>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      {tip.description}
-                    </p>
-                    <Button variant="outline" size="sm" onClick={(e) => {
-                      e.stopPropagation();
-                      const slug = encodeURIComponent(tip.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''));
-                      window.location.href = `/news/${slug}`;
-                    }}>Read More</Button>
-                  </CardContent>
-                </Card>
+                <Link href={`/news/${encodeURIComponent(tip.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''))}`}>
+                  <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
+                    <div className="relative h-40 overflow-hidden">
+                      <Image
+                        src={tip.image}
+                        alt={tip.title}
+                        fill
+                        className="object-cover transition-transform group-hover:scale-105"
+                      />
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="font-bold text-base sm:text-lg mb-2">{tip.title}</h3>
+                      <p className="text-muted-foreground text-sm mb-4">
+                        {tip.description}
+                      </p>
+                      <Button variant="outline" size="sm">Read More</Button>
+                    </CardContent>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </div>
