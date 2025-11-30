@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { trackViewItem, trackEvent } from '@/lib/analytics';
+import { trackEvent } from '@/lib/analytics';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Star, ShoppingCart, ChevronRight } from 'lucide-react';
@@ -38,7 +38,7 @@ export default function BooksClient({ books }: BooksClientProps) {
 
   // Track when a book is viewed
   const handleBookClick = (book: Book) => {
-    trackViewItem(book.title, book.category, book.price);
+    trackEvent('view_item', book.title);
     trackEvent('select_item', 'books', book.title, book.price);
     window.location.href = `/books/${book.id}`;
   };

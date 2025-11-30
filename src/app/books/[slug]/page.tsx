@@ -7,7 +7,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { travelBooks } from '@/data/travelBooks';
 import { notFound } from 'next/navigation';
-import BookAnalytics from '@/components/analytics/BookAnalytics';
+import { BookAnalytics } from '@/components/analytics/BookAnalytics';
+
 
 // Helper function to convert title to slug
 function createSlug(title: string): string {

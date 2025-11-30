@@ -449,8 +449,7 @@ const destinations = [
     rating: 4.9,
     reviews: 1024,
     price: 2499,
-    duration: '7 days',
-    travelers: '2-6 people',
+    duration: '7 days',    travelers: '2-6 people',
     category: 'Adventure',
     season: 'July-October',
     guide: 'Kenya Safari travel guide: Experience the Great Migration in Maasai Mara. The best time is July-October when millions of animals cross the plains. Other highlights include Amboseli National Park with views of Mount Kilimanjaro and the Big Five game viewing.',
@@ -771,7 +770,8 @@ export default function DestinationPage() {
                     {Object.entries(destination.costs).map(([item, cost], index) => (
                       <div key={index} className="flex justify-between items-center p-3 bg-muted rounded-lg">
                         <span className="text-muted-foreground">{item}</span>
-                        <span className="font-medium">{cost}</span>
+                        <span className="font-medium">{String(cost)}</span>
+
                       </div>
                     ))}
                   </div>

@@ -268,8 +268,9 @@ export default function ShopPage() {
                     <Button 
                       className="w-full text-xs sm:text-sm"
                       onClick={() => {
-                        trackAddToCart(item.name, item.category, item.price);
-                        trackEvent('click_add_to_cart', 'shop', item.name, item.price);
+                        trackEvent('add_to_cart', item.name);
+trackEvent('click_add_to_cart', item.name);
+
                         if (item.affiliateLink) window.open(item.affiliateLink, '_blank');
                       }}
                     >

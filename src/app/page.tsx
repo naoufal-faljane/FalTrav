@@ -1,5 +1,5 @@
 'use client';
-
+import AdPlacement from '@/components/ads/AdPlacement';
 import { motion } from 'framer-motion';
 import { usePageViewTracker } from '@/lib/analytics';
 import { useAdContext } from '@/contexts/AdContext';

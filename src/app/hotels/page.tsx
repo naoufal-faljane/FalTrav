@@ -102,7 +102,13 @@ export default function HotelsPage() {
     setLocation(suggestion.name);
     setSelectedLocationId(suggestion.id);
     setShowSuggestions(false);
-    trackEvent('location_selected', 'hotels', suggestion.name, 0);
+    trackEvent(
+  "hotel_location_selected",
+  "Hotelsearch",
+  suggestion.name
+);
+
+
   };
 
   const handleSearch = async () => {

@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 // Log the pageview with the gtag function
 export const pageview = (url: string) => {
   if (typeof window !== 'undefined' && window.gtag) {

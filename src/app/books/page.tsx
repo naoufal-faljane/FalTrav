@@ -1,5 +1,5 @@
 'use client';
-
+import AdPlacement from '@/components/ads/AdPlacement';
 import { useState } from 'react';
 import { useAdContext } from '@/contexts/AdContext';
 import Container from '@/components/layout/Container';

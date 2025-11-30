@@ -15,7 +15,8 @@ import {
 import { cn } from '@/lib/utils';
 import SearchComponent from '@/components/search/SearchComponent';
 import { useAdContext } from '@/contexts/AdContext';
-import { AdPlacement } from '@/components/ads/AdComponent';
+import AdPlacement from '@/components/ads/AdPlacement';
+
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

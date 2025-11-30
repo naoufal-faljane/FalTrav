@@ -1,4 +1,5 @@
 'use client';
+import { trackEvent } from '@/lib/analytics';
 
 import { useEffect, useCallback } from 'react';
 import { 
@@ -32,16 +33,19 @@ export function InteractionTracker({ children }: InteractionTrackerProps) {
     if (target.tagName === 'A' || target.closest('a')) {
       const linkElement = target.tagName === 'A' ? target : target.closest('a');
       if (linkElement) {
-        trackUserInteraction('link_click', elementName, {
-          link_url: (linkElement as HTMLAnchorElement).href,
-          link_text: (linkElement as HTMLAnchorElement).textContent?.substring(0, 50) || ''
-        });
+       trackEvent(
+  'link_click',
+  elementName,
+  `url:${(linkElement as HTMLAnchorElement).href} | text:${(linkElement as HTMLAnchorElement).textContent?.substring(0, 50) || ''}`
+);
+
       }
     } else if (target.tagName === 'BUTTON' || target.closest('button')) {
-      trackUserInteraction('button_click', elementName);
-    } else if (target.tagName === 'FORM' || target.closest('form')) {
-      trackUserInteraction('form_interaction', elementName);
-    }
+  trackEvent('button_click', elementName);
+} else if (target.tagName === 'FORM' || target.closest('form')) {
+  trackEvent('form_interaction', elementName);
+}
+
   }, []);
 
   // Track scrolls and page engagement
@@ -52,19 +56,19 @@ export function InteractionTracker({ children }: InteractionTrackerProps) {
 
     // Track when user scrolls to significant portions of the page
     if (scrollPercent >= 25 && sessionStorage.getItem('scrolled_25') !== 'true') {
-      trackEventWithLocation('scroll', 'engagement', '25_percent', { scroll_percent: 25 });
+      trackEvent('scroll_25_percent', 'engagement');
       sessionStorage.setItem('scrolled_25', 'true');
     }
     if (scrollPercent >= 50 && sessionStorage.getItem('scrolled_50') !== 'true') {
-      trackEventWithLocation('scroll', 'engagement', '50_percent', { scroll_percent: 50 });
+      trackEvent('scroll_50_percent', 'engagement');
       sessionStorage.setItem('scrolled_50', 'true');
     }
     if (scrollPercent >= 75 && sessionStorage.getItem('scrolled_75') !== 'true') {
-      trackEventWithLocation('scroll', 'engagement', '75_percent', { scroll_percent: 75 });
+      trackEvent('scroll_100_percent', 'engagement');
       sessionStorage.setItem('scrolled_75', 'true');
     }
     if (scrollPercent >= 90 && sessionStorage.getItem('scrolled_90') !== 'true') {
-      trackEventWithLocation('scroll', 'engagement', '90_percent', { scroll_percent: 90 });
+      trackEvent('scroll_90_percent', 'engagement');
       sessionStorage.setItem('scrolled_90', 'true');
     }
   }, []);

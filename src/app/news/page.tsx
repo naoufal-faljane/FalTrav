@@ -1,5 +1,5 @@
 'use client';
-
+import AdPlacement from '@/components/ads/AdPlacement';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAdContext } from '@/contexts/AdContext';

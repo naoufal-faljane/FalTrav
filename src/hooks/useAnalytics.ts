@@ -1,74 +1,38 @@
-import { useCallback } from 'react';
-import { 
-  trackEventWithLocation,
-  trackViewDestination,
+import { useEffect } from 'react';
+import {
   trackViewArticle,
   trackViewBook,
-  trackViewGuide,
   trackUserInteraction
 } from '@/lib/enhanced-analytics';
 
-// Custom hook for easy access to analytics functions
-export const useAnalytics = () => {
-  const trackDestinationView = useCallback((destinationName: string) => {
-    trackViewDestination(destinationName);
-  }, []);
+export default function useAnalytics() {
+  useEffect(() => {
+    const handleClick = (event: any) => {
+      const target = event.target as HTMLElement;
 
-  const trackArticleView = useCallback((articleTitle: string) => {
-    trackViewArticle(articleTitle);
-  }, []);
+      if (!target) return;
 
-  const trackBookView = useCallback((bookTitle: string) => {
-    trackViewBook(bookTitle);
-  }, []);
+      const elementName =
+        target.getAttribute('data-analytics-name') ||
+        target.innerText ||
+        target.tagName;
 
-  const trackGuideView = useCallback((guideTitle: string) => {
-    trackViewGuide(guideTitle);
-  }, []);
+   if (target.tagName === 'A' || target.closest('a')) {
+  trackUserInteraction();
+} else if (target.tagName === 'BUTTON' || target.closest('button')) {
+  trackUserInteraction();
+} else if (target.tagName === 'FORM' || target.closest('form')) {
+  trackUserInteraction();
+}
 
-  const trackCustomEvent = useCallback((
-    action: string, 
-    category: string, 
-    label: string, 
-    value?: number
-  ) => {
-    trackEventWithLocation(action, category, label, undefined, value);
-  }, []);
 
-  const trackClickInteraction = useCallback((
-    elementName: string,
-    extraParams?: Record<string, any>
-  ) => {
-    trackUserInteraction('click', elementName, extraParams);
-  }, []);
+    };
 
-  const trackFormSubmission = useCallback((
-    formName: string,
-    extraParams?: Record<string, any>
-  ) => {
-    trackUserInteraction('form_submission', formName, extraParams);
-  }, []);
+    document.addEventListener('click', handleClick);
 
-  const trackSearch = useCallback((
-    searchTerm: string,
-    resultCount?: number
-  ) => {
-    trackEventWithLocation(
-      'search',
-      'engagement',
-      searchTerm,
-      resultCount !== undefined ? { result_count: resultCount } : {}
-    );
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
   }, []);
+}
 
-  return {
-    trackDestinationView,
-    trackArticleView,
-    trackBookView,
-    trackGuideView,
-    trackCustomEvent,
-    trackClickInteraction,
-    trackFormSubmission,
-    trackSearch
-  };
-};

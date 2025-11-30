@@ -1,28 +1,47 @@
-          {/* Article Content */}
-          <div className="prose prose-lg max-w-none">
-            {article.content.split('\n\n').map((paragraph, index) => {
-              const isList = paragraph.startsWith('•') || paragraph.startsWith('1.') || paragraph.startsWith('2.') || paragraph.startsWith('3.') || paragraph.startsWith('4.') || paragraph.startsWith('5.') || paragraph.startsWith('6.') || paragraph.startsWith('7.') || paragraph.startsWith('8.') || paragraph.startsWith('9.');
+import React from "react";
+import { notFound } from "next/navigation";
 
-              // Insert Smartlink ad after the first paragraph
-              if (index === 1) {
-                return (
-                  <div key={`ad-${index}`} className="my-8">
-                    <div className="max-w-2xl mx-auto">
-                      <AdPlacement position={`article-${article.id}-smartlink`} type="smartlink" />
-                    </div>
-                    <p key={index} className={index === 0 ? "text-xl text-muted-foreground mb-6 leading-relaxed" : "mb-4"}>
-                      {paragraph}
-                    </p>
-                  </div>
-                );
-              }
+/** Temporary static article */
+function getArticleBySlug(slug: string) {
+  return {
+    title: "Sample Article Title",
+    content: "This is sample article content until the backend is ready.",
+    date: "2024-01-01",
+    author: "Admin",
+  };
+}
 
-              return isList ? (
-                renderList(paragraph, index)
-              ) : (
-                <p key={index} className={index === 0 ? "text-xl text-muted-foreground mb-6 leading-relaxed" : "mb-4"}>
-                  {paragraph}
-                </p>
-              );
-            })}
-          </div>
+export default function Page({ params }: { params: { slug: string } }) {
+  const article = getArticleBySlug(params.slug);
+
+  if (!article) return notFound();
+
+  return (
+    <div className="max-w-3xl mx-auto py-10 px-4">
+      <h1 className="text-4xl font-bold mb-6">{article.title}</h1>
+
+      <p className="text-muted-foreground mb-4">
+        {article.date} — {article.author}
+      </p>
+
+      <div className="my-6">
+        <script
+          async
+          src="https://www.travelpayouts.com/widgets/..."
+        ></script>
+      </div>
+
+      <div className="prose dark:prose-invert leading-relaxed">
+        {article.content}
+      </div>
+
+      <div className="my-10">
+        <script
+          async
+          src="https://www.travelpayouts.com/widgets/..."
+        ></script>
+      </div>
+    </div>
+  );
+}
+
