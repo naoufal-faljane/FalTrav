@@ -18,9 +18,9 @@ interface AdProps {
 }
 
 // Ad component that safely handles Adsterra scripts
-export const AdComponent = ({ 
-  type, 
-  adKey, 
+export const AdComponent = ({
+  type,
+  adKey,
   className,
   priority = 'medium',
   fallbackContent,
@@ -62,9 +62,9 @@ export const AdComponent = ({
       adCheck.style.visibility = 'hidden';
       adCheck.style.height = '1px';
       adCheck.style.overflow = 'hidden';
-      
+
       document.body.appendChild(adCheck);
-      
+
       setTimeout(() => {
         setIsAdBlocked(adCheck.offsetHeight === 0);
         document.body.removeChild(adCheck);
@@ -79,7 +79,7 @@ export const AdComponent = ({
         // Create the ad options script
         const adOptionsScript = document.createElement('script');
         adOptionsScript.type = 'text/javascript';
-        
+
         // Create different ad options based on type
         let adOptions = {};
         switch (type) {
@@ -137,7 +137,7 @@ export const AdComponent = ({
         const invokeScript = document.createElement('script');
         invokeScript.type = 'text/javascript';
         invokeScript.src = `//www.highperformanceformat.com/${adKey}/invoke.js`;
-        
+
         // Handle successful load
         invokeScript.onload = () => {
           setAdLoaded(true);
@@ -210,7 +210,7 @@ export const AdComponent = ({
     if (fallbackContent) {
       return fallbackContent;
     }
-    
+
     return (
       <div className="flex items-center justify-center bg-gray-100 border border-gray-200 rounded-lg h-full w-full">
         <span className="text-gray-500 text-sm">Advertisement</span>
@@ -219,14 +219,14 @@ export const AdComponent = ({
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={cn(
         "ad-container relative overflow-hidden",
         type === 'mobile' ? 'flex justify-center' : '',
         className
       )}
-      style={{ 
+      style={{
         width: typeof width === 'number' ? `${width}px` : width,
         height: typeof height === 'number' ? `${height}px` : height
       }}
@@ -236,9 +236,9 @@ export const AdComponent = ({
           <div className="text-gray-400 text-sm">Loading ad...</div>
         </div>
       )}
-      
+
       {adError && renderFallback()}
-      
+
       {/* Ad blocker notice */}
       {isAdBlocked && (
         <div className="absolute inset-0 flex items-center justify-center bg-gray-100">

@@ -1,11 +1,10 @@
 import { AdComponent } from './AdComponent';
-import { ADS_CONFIG } from '@/lib/ad-management';
 
 // Rectangle Ad Component - 300x250
-export const RectangleAd = ({ 
-  className, 
+export const RectangleAd = ({
+  className,
   priority = 'medium',
-  fallbackContent 
+  fallbackContent
 }: {
   className?: string;
   priority?: 'low' | 'medium' | 'high';
@@ -14,7 +13,7 @@ export const RectangleAd = ({
   return (
     <AdComponent
       type="rectangle"
-      adKey={ADS_CONFIG.rectangle.key}
+      adKey="a425a9ba84b0de190841de26b949448c" // Your 300x250 ad key
       className={className}
       priority={priority}
       fallbackContent={fallbackContent}
@@ -23,10 +22,10 @@ export const RectangleAd = ({
 };
 
 // Mobile Ad Component - 320x50
-export const MobileAd = ({ 
-  className, 
+export const MobileAd = ({
+  className,
   priority = 'medium',
-  fallbackContent 
+  fallbackContent
 }: {
   className?: string;
   priority?: 'low' | 'medium' | 'high';
@@ -35,7 +34,7 @@ export const MobileAd = ({
   return (
     <AdComponent
       type="mobile"
-      adKey={ADS_CONFIG.mobile.key}
+      adKey="a1593f7dbeeec27923c535ee40c45244" // Your mobile ad key
       className={className}
       priority={priority}
       fallbackContent={fallbackContent}
@@ -44,10 +43,10 @@ export const MobileAd = ({
 };
 
 // Leaderboard Ad Component - 728x90
-export const LeaderboardAd = ({ 
-  className, 
+export const LeaderboardAd = ({
+  className,
   priority = 'medium',
-  fallbackContent 
+  fallbackContent
 }: {
   className?: string;
   priority?: 'low' | 'medium' | 'high';
@@ -56,7 +55,7 @@ export const LeaderboardAd = ({
   return (
     <AdComponent
       type="leaderboard"
-      adKey={ADS_CONFIG.leaderboard.key}
+      adKey="a1593f7dbeeec27923c535ee40c45244" // Using mobile ad for leaderboard as example
       className={className}
       priority={priority}
       fallbackContent={fallbackContent}
@@ -65,11 +64,11 @@ export const LeaderboardAd = ({
 };
 
 // Native Ad Component - Responsive
-export const NativeAd = ({ 
-  className, 
+export const NativeAd = ({
+  className,
   priority = 'medium',
   slot,
-  fallbackContent 
+  fallbackContent
 }: {
   className?: string;
   priority?: 'low' | 'medium' | 'high';
@@ -79,7 +78,7 @@ export const NativeAd = ({
   return (
     <AdComponent
       type="native"
-      adKey={ADS_CONFIG.rectangle.key} // Using rectangle key as default, can be changed
+      adKey="a425a9ba84b0de190841de26b949448c" // Using rectangle key as default
       className={className}
       slot={slot}
       priority={priority}

@@ -2,13 +2,13 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAdFrequency, useAdBlockDetection, AD_CONTENT_POLICY } from '@/lib/ad-management';
-import { MobileAd, RectangleAd } from '@/components/ads/SponsoredAd';
+import { MobileAd, RectangleAd, LeaderboardAd, NativeAd } from '@/components/ads/SponsoredAd';
 import { SmartlinkAd } from '@/components/ads/SmartlinkAd';
 
 interface AdContextType {
   showAd: (position: string) => boolean;
   trackAdView: (position: string) => void;
-  AdPlacement: React.FC<{ position: string; type?: 'rectangle' | 'mobile' | 'smartlink'; className?: string }>;
+  AdPlacement: React.FC<{ position: string; type?: 'rectangle' | 'mobile' | 'smartlink' | 'leaderboard' | 'native'; className?: string }>;
 }
 
 const AdContext = createContext<AdContextType | undefined>(undefined);
@@ -22,7 +22,7 @@ export const AdProvider: React.FC<{ children: React.ReactNode }> = ({ children }
   // Check if we should show an ad at a given position
   const showAd = (position: string): boolean => {
     if (isAdBlocked) return false;
-    
+
     // Check if we've reached the maximum ads per page
     const totalAdsShown = Object.keys(adsShown).length;
     if (totalAdsShown >= AD_CONTENT_POLICY.maxAdsPerPage) {
@@ -47,9 +47,9 @@ export const AdProvider: React.FC<{ children: React.ReactNode }> = ({ children }
   };
 
   // AdPlacement component for easy ad insertion
-  const AdPlacement: React.FC<{ 
-    position: string; 
-    type?: 'rectangle' | 'mobile' | 'smartlink';
+  const AdPlacement: React.FC<{
+    position: string;
+    type?: 'rectangle' | 'mobile' | 'smartlink' | 'leaderboard' | 'native';
     className?: string;
   }> = ({ position, type = 'mobile', className }) => {
     if (!showAd(position)) {
@@ -66,6 +66,10 @@ export const AdProvider: React.FC<{ children: React.ReactNode }> = ({ children }
       return <RectangleAd className={className} priority="medium" />;
     } else if (type === 'smartlink') {
       return <SmartlinkAd className={className} placement="content" priority="medium" />;
+    } else if (type === 'leaderboard') {
+      return <LeaderboardAd className={className} priority="medium" />;
+    } else if (type === 'native') {
+      return <NativeAd className={className} priority="medium" />;
     }
 
     return <MobileAd className={className} priority="medium" />;
