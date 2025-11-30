@@ -51,6 +51,7 @@ const InPageNotification = ({ className }: InPageNotificationProps) => {
         if (container && container.parentNode) {
           while (container.firstChild) {
             container.removeChild(container.firstChild);
+          }
         }
         if (window.__adsInjected) {
           delete window.__adsInjected['INPAGE_NOTIFICATION_AD_KEY'];
