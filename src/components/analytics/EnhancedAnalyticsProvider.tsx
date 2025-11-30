@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { 
   initGtag, 
-  useEnhancedPageViewTracker, 
   getLocationFromIP 
 } from '@/lib/enhanced-analytics';
+import dynamic from 'next/dynamic';
+
+// Dynamic import for page view tracking to ensure it only runs client-side
+const PageViewTracker = dynamic(() => import('./PageViewTracker').then(mod => ({ default: mod.PageViewTracker })), { ssr: false });
 
 export function EnhancedAnalyticsProvider() {
   const [userLocation, setUserLocation] = useState<any>(null);
@@ -35,7 +38,5 @@ export function EnhancedAnalyticsProvider() {
   }, []);
 
   // Track page views with enhanced data
-  useEnhancedPageViewTracker();
-
-  return null; // This component doesn't render anything visual
+  return <PageViewTracker />; // This component doesn't render anything visual
 }

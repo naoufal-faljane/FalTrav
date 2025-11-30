@@ -29,23 +29,24 @@ export function InteractionTracker({ children }: InteractionTrackerProps) {
       elementName = target.textContent.substring(0, 20).trim(); // First 20 chars of text
     }
 
+    // Get user location data
+    const userLocation = (window as any).userLocation;
+
     // Track different types of interactions
     if (target.tagName === 'A' || target.closest('a')) {
       const linkElement = target.tagName === 'A' ? target : target.closest('a');
       if (linkElement) {
-       trackEvent(
-  'link_click',
-  elementName,
-  `url:${(linkElement as HTMLAnchorElement).href} | text:${(linkElement as HTMLAnchorElement).textContent?.substring(0, 50) || ''}`
-);
-
+        trackUserInteraction(
+          'link_click',
+          `url: ${(linkElement as HTMLAnchorElement).href} | text: ${(linkElement as HTMLAnchorElement).textContent?.substring(0, 50) || ''}`,
+          userLocation
+        );
       }
     } else if (target.tagName === 'BUTTON' || target.closest('button')) {
-  trackEvent('button_click', elementName);
-} else if (target.tagName === 'FORM' || target.closest('form')) {
-  trackEvent('form_interaction', elementName);
-}
-
+      trackUserInteraction('button_click', elementName, userLocation);
+    } else if (target.tagName === 'FORM' || target.closest('form')) {
+      trackUserInteraction('form_interaction', elementName, userLocation);
+    }
   }, []);
 
   // Track scrolls and page engagement
@@ -54,21 +55,24 @@ export function InteractionTracker({ children }: InteractionTrackerProps) {
       (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
     );
 
+    // Get user location data
+    const userLocation = (window as any).userLocation;
+
     // Track when user scrolls to significant portions of the page
     if (scrollPercent >= 25 && sessionStorage.getItem('scrolled_25') !== 'true') {
-      trackEvent('scroll_25_percent', 'engagement');
+      trackEventWithLocation('scroll_25_percent', { event_category: 'engagement' }, userLocation);
       sessionStorage.setItem('scrolled_25', 'true');
     }
     if (scrollPercent >= 50 && sessionStorage.getItem('scrolled_50') !== 'true') {
-      trackEvent('scroll_50_percent', 'engagement');
+      trackEventWithLocation('scroll_50_percent', { event_category: 'engagement' }, userLocation);
       sessionStorage.setItem('scrolled_50', 'true');
     }
     if (scrollPercent >= 75 && sessionStorage.getItem('scrolled_75') !== 'true') {
-      trackEvent('scroll_100_percent', 'engagement');
+      trackEventWithLocation('scroll_100_percent', { event_category: 'engagement' }, userLocation);
       sessionStorage.setItem('scrolled_75', 'true');
     }
     if (scrollPercent >= 90 && sessionStorage.getItem('scrolled_90') !== 'true') {
-      trackEvent('scroll_90_percent', 'engagement');
+      trackEventWithLocation('scroll_90_percent', { event_category: 'engagement' }, userLocation);
       sessionStorage.setItem('scrolled_90', 'true');
     }
   }, []);

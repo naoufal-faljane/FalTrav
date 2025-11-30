@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { pageview } from '@/lib/gtag';
 
 declare global {
@@ -31,45 +30,6 @@ export function initGtag() {
     });
   `;
   document.head.appendChild(initScript);
-}
-
-export function useEnhancedPageViewTracker() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      // Get current location if available
-      const userLocation = (window as any).userLocation;
-      
-      // Send page view event with location data
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('config', 'G-WR9K1KTMF0', {
-          page_path: url,
-          page_title: document.title,
-          ...(userLocation && {
-            custom_map: {
-              dimension1: 'user_city',
-              dimension2: 'user_region',
-              dimension3: 'user_country'
-            },
-            user_city: userLocation.city,
-            user_region: userLocation.region,
-            user_country: userLocation.country
-          })
-        });
-      }
-    };
-
-    // Track initial page load
-    handleRouteChange(window.location.pathname + window.location.search);
-
-    // Listen for route changes
-    router.events.on('routeChangeComplete', handleRouteChange);
-    
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
 }
 
 export function trackUserInteraction(interactionType: string, element: string, locationData?: any) {
@@ -160,7 +120,7 @@ export async function getLocationFromIP(): Promise<any> {
       const ipData = await response.json();
       
       // Then get location for the IP
-      const locationResponse = await fetch(\`https://ipapi.co/\${ipData.ip}/json/\`);
+      const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
       const locationData = await locationResponse.json();
       
       return {

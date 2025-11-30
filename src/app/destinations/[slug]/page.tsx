@@ -677,7 +677,6 @@ export default function DestinationPage() {
         trackViewDestination(foundDestination.name, userLocation);
       }
     }
-    }
   }, [slug]);
 
   if (!destination) {
