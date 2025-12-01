@@ -1,44 +1,50 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
-// تعريف الأنواع ديال props
 interface AdsterraAdProps {
   keyId: string;
-  width: string;
-  height: string;
+  width: string;          // desktop width
+  height: string;         // desktop height
+  mobileWidth?: string;   // optional mobile width
+  mobileHeight?: string;  // optional mobile height
 }
 
-export default function AdsterraAd({ keyId, width, height }: AdsterraAdProps) {
+export default function AdsterraAd({
+  keyId,
+  width,
+  height,
+  mobileWidth,
+  mobileHeight,
+}: AdsterraAdProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // 1. إنشاء السكريبت ديال الإعلان
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = `//www.highperformanceformat.com/${keyId}/invoke.js`;
     script.async = true;
 
-    // 2. عرض Loading Ad قبل ما يحمل الإعلان
+    // Show loading text before ad loads
     containerRef.current.innerHTML = "Loading Ad...";
     containerRef.current.appendChild(script);
 
-    // تنظيف عند unmount
     return () => {
-      if (containerRef.current) {
-        containerRef.current.innerHTML = "";
-      }
+      if (containerRef.current) containerRef.current.innerHTML = "";
     };
   }, [keyId]);
+
+  // Determine width/height based on screen size
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   return (
     <div
       ref={containerRef}
       style={{
-        width,
-        height,
+        width: isMobile && mobileWidth ? mobileWidth : width,
+        height: isMobile && mobileHeight ? mobileHeight : height,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
