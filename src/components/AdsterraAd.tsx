@@ -43,7 +43,7 @@ export default function AdsterraAd({ keyId, width = 300, height = 250 }: Adsterr
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#fff",
+  
       }}
     >
       Loading Ad...
