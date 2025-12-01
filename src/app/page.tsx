@@ -1,4 +1,7 @@
 'use client';
+import AdsterraAd from '@/components/AdsterraAd';
+
+
 import AdPlacement from '@/components/ads/AdPlacement';
 import { motion } from 'framer-motion';
 import { usePageViewTracker } from '@/lib/analytics';
@@ -154,6 +157,17 @@ export default function Home() {
           </div>
         </Container>
       </section>
+
+<section className="py-6">
+  <Container className="flex justify-center">
+    <AdsterraAd
+      keyId="a425a9ba84b0de190841de26b949448c"  // Banner 300x250
+      width="300px"
+      height="250px"
+    />
+  </Container>
+</section>
+
 
       {/* Travel Tips */}
       <section className="py-16 bg-muted/20">
