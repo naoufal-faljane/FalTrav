@@ -23,7 +23,7 @@ export default function AdsterraAd({
     const scriptKey = `${keyId}-${Date.now()}`;
     const script = document.createElement("script");
     script.async = true;
-    script.src = "//plxxx.com/xxx.js"; // ← حط هنا السكريبت الحقيقي
+    script.src = "https://www.adsterra.com/script.js"; // ← هنا حط السكريبت الحقيقي
     script.dataset.zone = zone;
     script.dataset.key = scriptKey;
 
