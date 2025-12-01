@@ -162,12 +162,12 @@ export default function Home() {
   <Container className="flex justify-center">
     
 <AdsterraAd
-  zone="123456"
-  keyId="abc123"
+  zone="center"
+  keyId="a1593f7dbeeec27923c535ee40c45244"
 />
 
 <AdsterraAd
-  zone="654321"
+  zone="center"
   keyId="a1593f7dbeeec27923c535ee40c45244"
   width={320}
   height={50}
