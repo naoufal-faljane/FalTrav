@@ -168,7 +168,7 @@ export default function Home() {
 
 <AdsterraAd
   zone="654321"
-  keyId="def456"
+  keyId="a1593f7dbeeec27923c535ee40c45244"
   width={320}
   height={50}
 />
