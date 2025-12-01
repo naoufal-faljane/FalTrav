@@ -3,33 +3,31 @@
 import React, { useEffect, useRef } from "react";
 
 interface AdsterraAdProps {
+  zone: string;
+  keyId: string;
   width?: number;
   height?: number;
-  zone: string; // Zone ID dyalek
-  keyId: string; // Key dyalek
 }
 
 export default function AdsterraAd({
-  width = 300,
-  height = 250,
   zone,
   keyId,
+  width,
+  height,
 }: AdsterraAdProps) {
   const adRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!adRef.current) return;
 
-    // Generate a random key to force Adsterra refresh
     const scriptKey = `${keyId}-${Date.now()}`;
-
     const script = document.createElement("script");
     script.async = true;
     script.src = "//plxxx.com/xxx.js"; // ← حط هنا السكريبت الحقيقي
-    script.dataset.zone = zone;        // ← zone الحقيقي
-    script.dataset.key = scriptKey;    // ← key + random
+    script.dataset.zone = zone;
+    script.dataset.key = scriptKey;
 
-    adRef.current.innerHTML = "";      // clear previous ads if any
+    adRef.current.innerHTML = ""; // clear previous ads
     adRef.current.appendChild(script);
 
     return () => {
@@ -37,22 +35,21 @@ export default function AdsterraAd({
         adRef.current.removeChild(script);
       }
     };
-  }, [zone, keyId]); // re-run if zone/key changes
+  }, [zone, keyId]);
 
   return (
     <div
       ref={adRef}
       style={{
-        width: `${width}px`,
-        height: `${height}px`,
-        background: "#fff",
+        width: width ? `${width}px` : "100%",
+        height: height ? `${height}px` : "auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
+        background: "#fff",
       }}
     >
-      {/* Placeholder */}
       Loading Ad...
     </div>
   );
