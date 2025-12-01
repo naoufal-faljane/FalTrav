@@ -57,7 +57,6 @@ export default function Home() {
       <section className="py-6">
         <Container className="flex justify-center">
           <AdsterraAd
-            zone="smartlink"
             keyId="a425a9ba84b0de190841de26b949448c"
             width={300}
             height={250}
@@ -105,7 +104,7 @@ export default function Home() {
       <section className="py-6">
         <Container className="flex justify-center">
           <AdsterraAd
-            zone="banner-300x250"
+            
             keyId="a425a9ba84b0de190841de26b949448c"
             width={300}
             height={250}
@@ -143,7 +142,7 @@ export default function Home() {
             {/* Native Banner داخل Travel Tips */}
             <motion.div className="col-span-1 md:col-span-3 mt-6">
               <AdsterraAd
-                zone="native-banner"
+                
                 keyId="a425a9ba84b0de190841de26b949448c"
                 width={300}
                 height={250}
@@ -157,7 +156,7 @@ export default function Home() {
       <section className="py-6">
         <Container className="flex justify-center">
           <AdsterraAd
-            zone="banner-320x50"
+            
             keyId="a425a9ba84b0de190841de26b949448c"
             width={320}
             height={50}
