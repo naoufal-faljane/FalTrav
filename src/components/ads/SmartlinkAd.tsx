@@ -44,7 +44,9 @@ export const SmartlinkAd = ({
       
       setTimeout(() => {
         setIsAdBlocked(adCheck.offsetHeight === 0);
-        document.body.removeChild(adCheck);
+        if (adCheck.parentNode === document.body) {
+          document.body.removeChild(adCheck);
+        }
       }, 100);
     };
 
@@ -127,7 +129,10 @@ export const SmartlinkAd = ({
       if (containerRef.current) {
         // Remove all child elements from container
         while (containerRef.current.firstChild) {
-          containerRef.current.removeChild(containerRef.current.firstChild);
+          const child = containerRef.current.firstChild;
+          if (containerRef.current.contains(child)) {
+            containerRef.current.removeChild(child);
+          }
         }
       }
     };

@@ -3,9 +3,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 interface AdsterraAdProps {
-  keyId: string;
-  width: string;          // desktop width
-  height: string;         // desktop height
+  keyId: string;          // Adsterra key
+  width: string;          // desktop width, e.g., '300px'
+  height: string;         // desktop height, e.g., '250px'
   mobileWidth?: string;   // optional mobile width
   mobileHeight?: string;  // optional mobile height
 }
@@ -23,25 +23,27 @@ export default function AdsterraAd({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Clear any previous content
-    containerRef.current.innerHTML = "";
-
+    // Create ad script
     const script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = `//www.highperformanceformat.com/${keyId}/invoke.js`;
     script.async = true;
 
-    // When script loads, remove loading
+    // Hide loading when script loads
     script.onload = () => setLoading(false);
 
+    // Append script to container
     containerRef.current.appendChild(script);
 
+    // Cleanup: remove only this script to prevent errors
     return () => {
-      if (containerRef.current) containerRef.current.innerHTML = "";
+      if (containerRef.current && script.parentNode === containerRef.current) {
+        containerRef.current.removeChild(script);
+      }
     };
   }, [keyId]);
 
-  // Determine size based on screen
+  // Determine size based on device
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const finalWidth = isMobile && mobileWidth ? mobileWidth : width;
   const finalHeight = isMobile && mobileHeight ? mobileHeight : height;
@@ -57,7 +59,7 @@ export default function AdsterraAd({
         justifyContent: 'center',
         alignItems: 'center',
         overflow: 'hidden',
-        background: 'transparent',
+        background: '#f3f3f3',
       }}
     >
       {loading && (
@@ -73,7 +75,7 @@ export default function AdsterraAd({
         </span>
       )}
 
-      {/* Ensure iframe fills container */}
+      {/* Ensure iframe fills the container */}
       <style jsx>{`
         div > iframe {
           width: 100% !important;

@@ -100,7 +100,9 @@ export const useAdBlockDetection = () => {
         const isBlocked = adTest.offsetHeight === 0;
         setIsAdBlocked(isBlocked);
         
-        document.body.removeChild(adTest);
+        if (adTest.parentNode === document.body) {
+          document.body.removeChild(adTest);
+        }
       } catch (error) {
         setIsAdBlocked(true);
       }

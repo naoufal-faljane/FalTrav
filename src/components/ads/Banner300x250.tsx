@@ -46,7 +46,10 @@ const Banner300x250 = () => {
       return () => {
         if (container && container.parentNode) {
           while (container.firstChild) {
-            container.removeChild(container.firstChild);
+            const child = container.firstChild;
+            if (container.contains(child)) {
+              container.removeChild(child);
+            }
           }
         }
         if (window.__adsInjected) {
