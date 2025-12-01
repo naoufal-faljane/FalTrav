@@ -102,6 +102,11 @@ export async function getLocationFromIP(): Promise<any> {
   try {
     // Using ipapi.co for IP geolocation
     const response = await fetch('https://ipapi.co/json/');
+    
+    if (!response.ok) {
+      throw new Error(`IP geolocation request failed with status ${response.status}`);
+    }
+    
     const data = await response.json();
     
     return {
@@ -113,14 +118,24 @@ export async function getLocationFromIP(): Promise<any> {
       longitude: data.longitude || null
     };
   } catch (error) {
-    console.warn('Error getting location from IP:', error);
-    // Fallback to a free IP geolocation service
+    console.warn('Error getting location from IP (primary):', error);
+    
+    // Fallback to a different free IP geolocation service
     try {
       const response = await fetch('https://api.ipify.org?format=json');
-      const ipData = await response.json();
+      if (!response.ok) {
+        throw new Error(`IP detection request failed with status ${response.status}`);
+      }
       
-      // Then get location for the IP
+      const ipData = await response.json();
+
+      // Then get location for the IP using a different service as fallback
       const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+      
+      if (!locationResponse.ok) {
+        throw new Error(`Secondary IP geolocation request failed with status ${locationResponse.status}`);
+      }
+      
       const locationData = await locationResponse.json();
       
       return {
@@ -132,15 +147,36 @@ export async function getLocationFromIP(): Promise<any> {
         longitude: locationData.longitude || null
       };
     } catch (error2) {
-      console.error('Failed to get location from IP:', error2);
-      return {
-        ip: '',
-        city: 'Unknown',
-        region: 'Unknown',
-        country: 'Unknown',
-        latitude: null,
-        longitude: null
-      };
+      console.error('Failed to get location from IP (both services):', error2);
+      
+      // Final fallback to a different service
+      try {
+        const response = await fetch('https://extreme-ip-lookup.com/json/');
+        if (!response.ok) {
+          throw new Error(`Fallback IP geolocation request failed with status ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        return {
+          ip: data.query || '',
+          city: data.city || 'Unknown',
+          region: data.region || 'Unknown',
+          country: data.country || 'Unknown',
+          latitude: data.lat || null,
+          longitude: data.lon || null
+        };
+      } catch (error3) {
+        console.error('All IP geolocation services failed:', error3);
+        return {
+          ip: '',
+          city: 'Unknown',
+          region: 'Unknown',
+          country: 'Unknown',
+          latitude: null,
+          longitude: null
+        };
+      }
     }
   }
 }
