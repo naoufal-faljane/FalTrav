@@ -161,13 +161,10 @@ export default function Home() {
 <section className="py-6">
   <Container className="flex justify-center">
     <AdsterraAd
-  keyId="a425a9ba84b0de190841de26b949448c"
-  width="300px"
-  height="250px"
-  mobileWidth="320px"
-  mobileHeight="50px"
-/>
-
+      keyId="a425a9ba84b0de190841de26b949448c"  // Banner 300x250
+      width="300px"
+      height="250px"
+    />
   </Container>
 </section>
 
