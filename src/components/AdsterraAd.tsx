@@ -1,88 +1,44 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef } from "react";
 
-interface AdsterraAdProps {
-  keyId: string;          // Adsterra key
-  width: string;          // desktop width, e.g., '300px'
-  height: string;         // desktop height, e.g., '250px'
-  mobileWidth?: string;   // optional mobile width
-  mobileHeight?: string;  // optional mobile height
-}
-
-export default function AdsterraAd({
-  keyId,
-  width,
-  height,
-  mobileWidth,
-  mobileHeight,
-}: AdsterraAdProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState(true);
+export default function AdsterraAd() {
+  const adRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    // Prevent double loading
+    if (!adRef.current) return;
 
-    // Create ad script
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = `//www.highperformanceformat.com/${keyId}/invoke.js`;
+    const script = document.createElement("script");
     script.async = true;
+    script.src = "//plxxx.com/xxx.js"; // ← حط هنا السكريبت الحقيقي ديالك
+    script.dataset.zone = "xxx";        // ← zone الحقيقي
+    script.dataset.key = "xxx";         // ← key الحقيقي
 
-    // Hide loading when script loads
-    script.onload = () => setLoading(false);
+    adRef.current.appendChild(script);
 
-    // Append script to container
-    containerRef.current.appendChild(script);
-
-    // Cleanup: remove only this script to prevent errors
     return () => {
-      if (containerRef.current && script.parentNode === containerRef.current) {
-        containerRef.current.removeChild(script);
+      // Cleanup safely
+      if (script && script.parentNode === adRef.current) {
+        adRef.current.removeChild(script);
       }
     };
-  }, [keyId]);
-
-  // Determine size based on device
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const finalWidth = isMobile && mobileWidth ? mobileWidth : width;
-  const finalHeight = isMobile && mobileHeight ? mobileHeight : height;
+  }, []);
 
   return (
     <div
-      ref={containerRef}
+      ref={adRef}
       style={{
-        width: finalWidth,
-        height: finalHeight,
-        position: 'relative',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        overflow: 'hidden',
-        background: '#f3f3f3',
+        width: "300px",
+        height: "250px",
+        background: "#fff", // غادي يتحيد ملي الإعلان يبان
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        overflow: "hidden",
       }}
     >
-      {loading && (
-        <span
-          style={{
-            position: 'absolute',
-            color: '#666',
-            fontSize: '14px',
-            textAlign: 'center',
-          }}
-        >
-          Loading Ad...
-        </span>
-      )}
-
-      {/* Ensure iframe fills the container */}
-      <style jsx>{`
-        div > iframe {
-          width: 100% !important;
-          height: 100% !important;
-          border: none !important;
-        }
-      `}</style>
+      {/* placeholder */}
     </div>
   );
 }

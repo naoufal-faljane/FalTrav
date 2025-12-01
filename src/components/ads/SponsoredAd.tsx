@@ -1,3 +1,6 @@
+'use client';
+
+
 import { AdComponent } from './AdComponent';
 
 // Rectangle Ad Component - 300x250
