@@ -1,5 +1,3 @@
-'use client';
-
 
 import { AdComponent } from './AdComponent';
 
