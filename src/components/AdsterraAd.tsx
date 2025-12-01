@@ -48,10 +48,10 @@ export default function AdsterraAd({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: '#f3f3f3',
+        background: 'transparent',
       }}
     >
-      Loading Ad...
+     
     </div>
   );
 }
