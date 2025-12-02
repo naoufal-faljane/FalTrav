@@ -36,7 +36,10 @@ function slugToName(slug: string): string {
     { slugPattern: 'rio-de-janeiro-brazil', original: 'Rio de Janeiro, Brazil' },
     { slugPattern: 'barcelona-spain', original: 'Barcelona, Spain' },
     { slugPattern: 'dubai-uae', original: 'Dubai, UAE' },
-    { slugPattern: 'paris-france', original: 'Paris, France' }
+    { slugPattern: 'paris-france', original: 'Paris, France' },
+    { slugPattern: 'rabat-morocco', original: 'Rabat, Morocco' },
+    { slugPattern: 'qatar', original: 'Qatar' },
+    { slugPattern: 'amsterdam-netherlands', original: 'Amsterdam, Netherlands' }
   ];
   
   // Check for known patterns first
@@ -1212,6 +1215,210 @@ const destinations = [
   },
   {
     id: 18,
+    name: 'Rabat, Morocco',
+    country: 'Morocco',
+    continent: 'Africa',
+    description: 'Elegant capital city with beautiful architecture, royal gardens, and rich history',
+    image: '/img/destinations/Rabat.png',
+    rating: 4.3,
+    reviews: 780,
+    price: 699,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'Culture',
+    season: 'Spring/Fall',
+    guide: 'Rabat, Morocco travel guide: The political capital of Morocco balances governmental functions with historical sites. The city features the Hassan Tower, Chellah Necropolis, and the Royal Palace. Enjoy the relaxed atmosphere along the Bou Regreg river and the beautiful Andalusian Gardens. Best visited in spring or fall for comfortable weather.',
+    highlights: [
+      'Hassan Tower',
+      'Chellah Necropolis',
+      'Royal Palace of Rabat',
+      'Kasbah of the Udayas',
+      'Andalusian Gardens'
+    ],
+    bestFor: ['History Lovers', 'Architecture Enthusiasts', 'Cultural Experiences'],
+    images: [
+      '/img/destinations/Rabat.png',
+      'https://images.unsplash.com/photo-1572615133724-496e739b10f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1566647862936-76a2939e3b33?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1596127279410-ef09221e52e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Moroccan ceramics and pottery',
+      'Handwoven rugs and textiles',
+      'Argan oil and beauty products',
+      'Traditional lanterns and metalwork'
+    ],
+    restaurants: [
+      'Dar Zaki - traditional Moroccan cuisine with garden setting',
+      'Le Dhow - dinner cruise on the Bou Regreg river',
+      'Restaurant Villa Blanche - fine dining with colonial atmosphere',
+      'La Shella - seafood with Atlantic views'
+    ],
+    costs: {
+      'Budget per day': '$40-70',
+      'Mid-range per day': '$70-120',
+      'Luxury per day': '$200+',
+      'Avg. meal (local)': '$8-15',
+      'Avg. meal (international)': '$15-30',
+      'Transportation': '$5-15/day'
+    },
+    mustSee: [
+      'Hassan Tower and Mausoleum of Mohammed V',
+      'Chellah Roman and Medieval ruins',
+      'Kasbah of the Udayas and Oudayas Gardens',
+      'Mohammed VI Museum of Modern and Contemporary Art'
+    ],
+    cheapestPlaces: [
+      'Medina for budget accommodations and food',
+      'Local markets like Souk el Had for shopping',
+      'Free walking tours to explore the city',
+      'Public beaches along the Atlantic coast'
+    ],
+    tips: [
+      'Dress modestly to respect local customs',
+      'Stay hydrated and protect from the sun',
+      'Bargain respectfully in markets',
+      'Plan visits to religious sites during non-prayer times'
+    ]
+  },
+  {
+    id: 19,
+    name: 'Qatar',
+    country: 'Qatar',
+    continent: 'Asia',
+    description: 'Modern Arabian peninsula nation with world-class architecture and cultural landmarks',
+    image: '/img/destinations/Qatar.png',
+    rating: 4.5,
+    reviews: 890,
+    price: 1699,
+    duration: '5 days',
+    travelers: '2-4 people',
+    category: 'Luxury',
+    season: 'Fall/Winter',
+    guide: 'Qatar travel guide: A modern gulf state that combines traditional Qatari culture with rapid modernization. Doha, the capital, features the Museum of Islamic Art, Souq Waqif, and stunning skyline. The country hosted the 2022 FIFA World Cup and offers luxury experiences with unique desert adventures. Best visited from November to March to avoid extreme summer heat.',
+    highlights: [
+      'Museum of Islamic Art',
+      'Souq Waqif',
+      'Pearl Qatar',
+      'Katara Cultural Village',
+      'Aspire Park'
+    ],
+    bestFor: ['Luxury Travelers', 'Cultural Experiences', 'Architecture Lovers'],
+    images: [
+      '/img/destinations/Qatar.png',
+      'https://images.unsplash.com/photo-1618017055598-41200fbbc1d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1618017055598-41200fbbc1d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1618017055598-41200fbbc1d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Arabian perfumes and oud',
+      'Qatari traditional dress',
+      'Islamic calligraphy and art',
+      'High-end jewelry from Souq Waqif'
+    ],
+    restaurants: [
+      'Al Mourjan - Lebanese fine dining in Souq Waqif',
+      'The Afghan - authentic Middle Eastern cuisine',
+      'Bryant & May - contemporary dining in The Pearl',
+      'ID - innovative cuisine at Marsa Malaz Kempinski'
+    ],
+    costs: {
+      'Budget per day': '$100-150',
+      'Mid-range per day': '$150-300',
+      'Luxury per day': '$600+',
+      'Avg. meal (local)': '$20-35',
+      'Avg. meal (international)': '$35-60',
+      'Transportation': '$20-50/day'
+    },
+    mustSee: [
+      'Museum of Islamic Art and its stunning architecture',
+      'Souq Waqif traditional market',
+      'Doha Corniche waterfront promenade',
+      'Katara Cultural Village with amphitheater'
+    ],
+    cheapestPlaces: [
+      'Al Khor and Al Ghuwariya for budget accommodations',
+      'Local cafés for affordable dining',
+      'Free public transportation during World Cup legacy',
+      'Public beaches for recreation'
+    ],
+    tips: [
+      'Respect local customs especially during Ramadan',
+      'Dress conservatively in public places',
+      'Summer months (June-September) are extremely hot',
+      'Try traditional Qatari dishes like machboos'
+    ]
+  },
+  {
+    id: 20,
+    name: 'Amsterdam, Netherlands',
+    country: 'Netherlands',
+    continent: 'Europe',
+    description: 'Charming canal city with rich culture, historic architecture, and vibrant atmosphere',
+    image: '/img/destinations/Amsterdam.png',
+    rating: 4.6,
+    reviews: 1450,
+    price: 1199,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'Culture',
+    season: 'Spring/Summer',
+    guide: 'Amsterdam, Netherlands travel guide: Famous for its artistic heritage, elaborate canal system, and narrow houses with gabled facades. Explore the Rijksmuseum, Van Gogh Museum, and Anne Frank House. Cycle through the city like locals do, and enjoy the vibrant café culture. Best visited in spring (for tulips) or summer for pleasant weather.',
+    highlights: [
+      'Rijksmuseum',
+      'Van Gogh Museum',
+      'Anne Frank House',
+      'Canal Ring',
+      'Vondelpark'
+    ],
+    bestFor: ['Cultural Experiences', 'Art Lovers', 'Architecture Enthusiasts', 'Cyclists'],
+    images: [
+      '/img/destinations/Amsterdam.png',
+      'https://images.unsplash.com/photo-1566738780863-f385b7f6e761?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1530521954074-e64f6810b27e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1518690614641-6643892693b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Dutch cheese',
+      'Cannabis-themed items (legal)',
+      'Delft blue pottery',
+      'Wooden clogs'
+    ],
+    restaurants: [
+      'Café de Jaren - canal-side dining with great views',
+      'Yellow - innovative French cuisine',
+      'De Kas - restaurant in a greenhouse',
+      'Winkel 43 - famous for apple pie'
+    ],
+    costs: {
+      'Budget per day': '$80-120',
+      'Mid-range per day': '$120-250',
+      'Luxury per day': '$400+',
+      'Avg. meal (local)': '$15-30',
+      'Avg. meal (international)': '$25-50',
+      'Transportation': '$5-15/day'
+    },
+    mustSee: [
+      'Rijksmuseum and Dutch art collection',
+      'Van Gogh Museum',
+      'Anne Frank House',
+      'Explore the canal ring area'
+    ],
+    cheapestPlaces: [
+      'Jordaan district for budget accommodations',
+      'Foodhallen for affordable gourmet food',
+      'Vondelpark for free activities',
+      'Local markets like Albert Cuypmarkt'
+    ],
+    tips: [
+      'Rent a bicycle to get around like locals',
+      'Be respectful of the coffee shop (cannabis) culture',
+      'Many museums offer free entrance on certain days',
+      'Be mindful of bike lanes when walking'
+    ]
+  },
+  {
+    id: 21,
     name: 'Paris, France',
     country: 'France',
     continent: 'Europe',

@@ -1,15 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Container from '@/components/layout/Container';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, MapPin, Clock, Users, Filter } from 'lucide-react';
+import { Star, MapPin, Clock, Users } from 'lucide-react';
 import Link from 'next/link';
 import AdsterraAd from '@/components/AdsterraAd';
-
 
 // Helper function to create URL-friendly slugs
 function createSlug(name: string): string {
@@ -20,13 +19,6 @@ function createSlug(name: string): string {
     .replace(/[^\w\s-]/g, '') // Remove remaining special characters
     .replace(/\s+/g, '-'); // Replace spaces with hyphens
 }
-
-
-
-{/* Banner Top */}
-        <section className="py-6 flex justify-center">
-          <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={728} height={90} />
-        </section>
 
 // Mock data for destinations
 const destinations = [
@@ -333,6 +325,214 @@ const destinations = [
     category: 'Romance',
     season: 'Spring/Fall',
     guide: 'Paris, France travel guide: The eternal city of romance, art, and cuisine. Best visited in spring or fall when the weather is pleasant and crowds are smaller. Stroll along the Seine, visit world-class museums, and enjoy café culture. The City of Light offers iconic landmarks like the Eiffel Tower and Louvre Museum.'
+  },
+  {
+    id: 20,
+    name: 'Amsterdam, Netherlands',
+    country: 'Netherlands',
+    continent: 'Europe',
+    description: 'Charming canal city with rich culture, historic architecture, and vibrant atmosphere',
+    image: '/img/destinations/Amsterdam.png',
+    rating: 4.6,
+    reviews: 1450,
+    price: 1199,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'Culture',
+    season: 'Spring/Summer',
+    guide: 'Amsterdam, Netherlands travel guide: Famous for its artistic heritage, elaborate canal system, and narrow houses with gabled facades. Explore the Rijksmuseum, Van Gogh Museum, and Anne Frank House. Cycle through the city like locals do, and enjoy the vibrant café culture. Best visited in spring (for tulips) or summer for pleasant weather.'
+  },
+  {
+    id: 21,
+    name: 'Athens, Greece',
+    country: 'Greece',
+    continent: 'Europe',
+    description: 'Ancient city with rich history, iconic landmarks like the Acropolis and Parthenon',
+    image: '/img/destinations/Athens.png',
+    rating: 4.5,
+    reviews: 1250,
+    price: 899,
+    duration: '5 days',
+    travelers: '1-4 people',
+    category: 'Culture',
+    season: 'Spring/Fall',
+    guide: 'Athens, Greece travel guide: The cradle of democracy and Western civilization. Visit the iconic Acropolis and Parthenon, explore the Ancient Agora, and discover the National Archaeological Museum. Best visited in spring or fall for pleasant weather and fewer crowds. Don\'t miss the famous sunset views from Filopappou Hill and taste traditional Greek cuisine in Plaka neighborhood.'
+  },
+  {
+    id: 22,
+    name: 'Bangkok, Thailand',
+    country: 'Thailand',
+    continent: 'Asia',
+    description: 'Vibrant Southeast Asian capital with rich culture, street food, and ornate temples',
+    image: '/img/destinations/bangkok.png',
+    rating: 4.4,
+    reviews: 1800,
+    price: 799,
+    duration: '6 days',
+    travelers: '1-4 people',
+    category: 'City',
+    season: 'November-March',
+    guide: 'Bangkok, Thailand travel guide: A city of contrasts with ornate temples, bustling markets, and world-class cuisine. Best visited from November to March for cooler weather. Don\'t miss the Grand Palace, Wat Pho temple, and floating markets. Experience the vibrant street food scene and tuk-tuk rides.'
+  },
+  {
+    id: 23,
+    name: 'Bengaluru, India',
+    country: 'India',
+    continent: 'Asia',
+    description: 'Tech hub with garden city charm, rich culture, and thriving food scene',
+    image: '/img/destinations/bengaluru.png',
+    rating: 4.2,
+    reviews: 950,
+    price: 649,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'City',
+    season: 'September-February',
+    guide: 'Bengaluru, India travel guide: Known as the Garden City with its beautiful parks and pleasant climate. Best visited between September and February. Explore Cubbon Park, Lalbagh Botanical Garden, and the nightlife scene. Experience the tech culture and diverse culinary offerings.'
+  },
+  {
+    id: 24,
+    name: 'Bratislava, Slovakia',
+    country: 'Slovakia',
+    continent: 'Europe',
+    description: 'Charming riverfront city with medieval castle and vibrant old town',
+    image: '/img/destinations/bratislava.png',
+    rating: 4.3,
+    reviews: 680,
+    price: 599,
+    duration: '3 days',
+    travelers: '1-3 people',
+    category: 'Culture',
+    season: 'Spring/Summer',
+    guide: 'Bratislava, Slovakia travel guide: A picturesque city with a dominant hilltop castle and well-preserved old town. Best visited in spring or summer for pleasant weather. Walk across the iconic UFO Bridge, explore the historic center, and enjoy the riverside promenades. Day trips to Vienna or wine regions are easily accessible.'
+  },
+  {
+    id: 25,
+    name: 'Brussels, Belgium',
+    country: 'Belgium',
+    continent: 'Europe',
+    description: 'European capital with historic architecture, chocolate, and world-famous waffles',
+    image: '/img/destinations/brussels.png',
+    rating: 4.4,
+    reviews: 890,
+    price: 799,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'City',
+    season: 'Spring/Summer',
+    guide: 'Brussels, Belgium travel guide: The heart of Europe with stunning architecture and renowned chocolates. Best visited in spring or summer. See the Grand Place, Atomium, and Manneken Pis. Don\'t miss trying authentic Belgian waffles, chocolate, and beer.'
+  },
+  {
+    id: 26,
+    name: 'Bucharest, Romania',
+    country: 'Romania',
+    continent: 'Europe',
+    description: 'Paris of the East with grand architecture and vibrant cultural scene',
+    image: '/img/destinations/bucharest.png',
+    rating: 4.3,
+    reviews: 720,
+    price: 549,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'City',
+    season: 'Spring/Summer',
+    guide: 'Bucharest, Romania travel guide: Known as the Paris of the East with elegant architecture and green spaces. Best visited in spring or summer for pleasant weather. Explore the Palace of Parliament, Herăstrău Park, and the vibrant Lipscani Street for shopping and dining.'
+  },
+  {
+    id: 27,
+    name: 'Budapest, Hungary',
+    country: 'Hungary',
+    continent: 'Europe',
+    description: 'Danube riverside beauty with thermal baths, historic architecture, and ruin bars',
+    image: '/img/destinations/budapest.png',
+    rating: 4.6,
+    reviews: 1650,
+    price: 749,
+    duration: '5 days',
+    travelers: '1-4 people',
+    category: 'City',
+    season: 'Spring/Fall',
+    guide: 'Budapest, Hungary travel guide: The Queen of the Danube with stunning architecture and thermal baths. Best visited in spring or fall for ideal weather. Don\'t miss the Parliament building, Chain Bridge, and Széchenyi Thermal Bath. Experience the unique ruin bar scene in the Jewish Quarter.'
+  },
+  {
+    id: 28,
+    name: 'Buenos Aires, Argentina',
+    country: 'Argentina',
+    continent: 'South America',
+    description: 'Passionate city of tango, European architecture, and vibrant neighborhoods',
+    image: '/img/destinations/buenos aires.png',
+    rating: 4.7,
+    reviews: 1020,
+    price: 999,
+    duration: '6 days',
+    travelers: '1-3 people',
+    category: 'City',
+    season: 'Spring/Fall',
+    guide: 'Buenos Aires, Argentina travel guide: The Paris of South America with European-style architecture and tango culture. Best visited in spring or fall. Explore San Telmo, La Boca, and Recoleta Cemetery. Experience passionate tango performances and world-class beef.'
+  },
+  {
+    id: 29,
+    name: 'Cairo, Egypt',
+    country: 'Egypt',
+    continent: 'Africa',
+    description: 'Ancient city with iconic pyramids, Sphinx, and rich historical legacy',
+    image: '/img/destinations/cairo.png',
+    rating: 4.5,
+    reviews: 1240,
+    price: 899,
+    duration: '7 days',
+    travelers: '2-4 people',
+    category: 'Culture',
+    season: 'Fall/Winter',
+    guide: 'Cairo, Egypt travel guide: Gateway to ancient wonders including the Pyramids of Giza and Sphinx. Best visited in fall or winter to avoid intense heat. Explore Khan el-Khalili bazaar and Egyptian Museum. Consider a side trip to the pyramids just outside the city.'
+  },
+  {
+    id: 30,
+    name: 'Casablanca, Morocco',
+    country: 'Morocco',
+    continent: 'Africa',
+    description: 'Cosmopolitan coastal city with Art Deco architecture and vibrant culture',
+    image: '/img/destinations/casablanca.png',
+    rating: 4.3,
+    reviews: 880,
+    price: 799,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'City',
+    season: 'Spring/Fall',
+    guide: 'Casablanca, Morocco travel guide: The country\'s economic hub with Hassan II Mosque and Atlantic coastline. Best visited in spring or fall for pleasant weather. Visit the impressive Hassan II Mosque, walk along the Corniche, and experience the city\'s cosmopolitan atmosphere.'
+  },
+  {
+    id: 31,
+    name: 'Copenhagen, Denmark',
+    country: 'Denmark',
+    continent: 'Europe',
+    description: 'Hygge capital with modern design, cycling culture, and fairy tale vibes',
+    image: '/img/destinations/copenhagen.png',
+    rating: 4.7,
+    reviews: 980,
+    price: 1199,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'City',
+    season: 'Summer',
+    guide: 'Copenhagen, Denmark travel guide: Embrace hygge lifestyle with excellent design, food, and cycling culture. Best visited in summer for optimal weather. See Tivoli Gardens, Little Mermaid statue, and the colorful Nyhavn harbor. Experience world-class restaurants and innovative Nordic cuisine.'
+  },
+  {
+    id: 32,
+    name: 'Doha, Qatar',
+    country: 'Qatar',
+    continent: 'Asia',
+    description: 'Modern desert city with futuristic architecture and rich cultural heritage',
+    image: '/img/destinations/doha.png',
+    rating: 4.5,
+    reviews: 850,
+    price: 1399,
+    duration: '5 days',
+    travelers: '2-4 people',
+    category: 'City',
+    season: 'Winter',
+    guide: 'Doha, Qatar travel guide: A rapidly developing city with striking architecture and cultural sites. Best visited in winter for comfortable weather. Explore Souq Waqif, Museum of Islamic Art, and the impressive skyline. Experience the blend of traditional Bedouin culture with ultra-modernity.'
   }
 ];
 
@@ -375,6 +575,11 @@ export default function DestinationsPage() {
 
   return (
     <div className="min-h-screen bg-background py-8 sm:py-12">
+      {/* Banner Top */}
+      <section className="py-6 flex justify-center">
+        <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={728} height={90} />
+      </section>
+
       <Container>
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4">Explore Cities & Destinations</h1>
@@ -421,10 +626,6 @@ export default function DestinationsPage() {
                   <option key={season} value={season}>{season}</option>
                 ))}
               </select>
-{/* Banner Top */}
-        <section className="py-6 flex justify-center">
-          <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={300} height={50} />
-        </section>
             </div>
             <div>
               <label className="block text-xs sm:text-sm font-medium mb-2">Search</label>
@@ -503,18 +704,19 @@ export default function DestinationsPage() {
           </div>
         )}
       </Container>
-{/* Smartlink Button */}
-<section className="py-6 flex justify-center">
-  <a
-    href="https://www.effectivegatecpm.com/c4dhpuvm?key=a8e77dedbcfc76e7bab9ed12d4091a97"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <Button size="lg" variant="outline">
-      Smartlink
-    </Button>
-  </a>
-</section>
+
+      {/* Smartlink Button */}
+      <section className="py-6 flex justify-center">
+        <a
+          href="https://www.effectivegatecpm.com/c4dhpuvm?key=a8e77dedbcfc76e7bab9ed12d4091a97"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button size="lg" variant="outline">
+            Smartlink
+          </Button>
+        </a>
+      </section>
     </div>
   );
 }
