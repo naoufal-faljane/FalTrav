@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Star, MapPin, Clock, Users, Filter } from 'lucide-react';
 import Link from 'next/link';
+import AdsterraAd from '@/components/AdsterraAd';
+
 
 // Helper function to create URL-friendly slugs
 function createSlug(name: string): string {
@@ -18,6 +20,13 @@ function createSlug(name: string): string {
     .replace(/[^\w\s-]/g, '') // Remove remaining special characters
     .replace(/\s+/g, '-'); // Replace spaces with hyphens
 }
+
+
+
+{/* Banner Top */}
+        <section className="py-6 flex justify-center">
+          <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={728} height={90} />
+        </section>
 
 // Mock data for destinations
 const destinations = [
@@ -268,6 +277,10 @@ export default function DestinationsPage() {
                   <option key={season} value={season}>{season}</option>
                 ))}
               </select>
+{/* Banner Top */}
+        <section className="py-6 flex justify-center">
+          <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={300} height={50} />
+        </section>
             </div>
             <div>
               <label className="block text-xs sm:text-sm font-medium mb-2">Search</label>
@@ -346,6 +359,18 @@ export default function DestinationsPage() {
           </div>
         )}
       </Container>
+{/* Smartlink Button */}
+<section className="py-6 flex justify-center">
+  <a
+    href="https://www.effectivegatecpm.com/c4dhpuvm?key=a8e77dedbcfc76e7bab9ed12d4091a97"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Button size="lg" variant="outline">
+      Smartlink
+    </Button>
+  </a>
+</section>
     </div>
   );
 }

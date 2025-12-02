@@ -1,50 +1,36 @@
-'use client';
+"use client";
 import React, { useEffect, useRef } from "react";
 
-interface AdsterraAdProps {
+interface AdProps {
   keyId: string;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
 }
 
-export default function AdsterraAd({ keyId, width = 300, height = 250 }: AdsterraAdProps) {
-  const adRef = useRef<HTMLDivElement>(null);
+export default function AdsterraAd({ keyId, width, height }: AdProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!adRef.current) return;
+    if (!containerRef.current) return;
 
-    // Clear old ad
-    adRef.current.innerHTML = "";
+    // Clear old script
+    containerRef.current.innerHTML = "";
 
-    // Set atOptions globally
-    (window as any).atOptions = {
-      key: keyId,
-      format: "iframe",
-      height,
-      width,
-      params: {},
-    };
-
-    // Load Adsterra script
     const script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = `//www.highperformanceformat.com/${keyId}/invoke.js`;
     script.async = true;
 
-    adRef.current.appendChild(script);
-  }, [keyId, width, height]);
+    // IMPORTANT: Adsterra ads work even without window.atOptions
+    script.src = `//www.highperformanceformat.com/${keyId}/invoke.js`;
+
+    containerRef.current.appendChild(script);
+  }, [keyId]);
 
   return (
     <div
-      ref={adRef}
-      style={{
-        width: `${width}px`,
-        height: `${height}px`,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        
-      }}
+      ref={containerRef}
+      style={{ width, height }}
+      className="flex justify-center items-center"
     >
       Loading Ad...
     </div>

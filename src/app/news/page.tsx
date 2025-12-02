@@ -9,6 +9,9 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, User, Search } from 'lucide-react';
 import Link from 'next/link';
 
+import AdsterraAd from '@/components/AdsterraAd';
+
+
 // Mock data for news articles
 const newsArticles = [
   {
@@ -143,6 +146,10 @@ export default function NewsPage() {
             Stay updated with the latest travel news, trends, and expert tips for your journeys.
           </p>
         </div>
+{/* Banner Top */}
+        <section className="py-6 flex justify-center">
+          <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={728} height={90} />
+        </section>
 
         {/* Search and Category Filters */}
         <div className="mb-8 sm:mb-10">

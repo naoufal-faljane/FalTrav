@@ -12,6 +12,7 @@ import { useParams } from 'next/navigation';
 import { usePageViewTracker } from '@/lib/analytics';
 import { trackViewDestination } from '@/lib/enhanced-analytics';
 import { useAdContext } from '@/contexts/AdContext';
+import AdsterraAd from '@/components/AdsterraAd';
 
 // Helper function to convert slug back to destination name
 function slugToName(slug: string): string {
@@ -690,6 +691,11 @@ export default function DestinationPage() {
           {/* Ad placement before content */}
           <div className="mb-6">
             <AdPlacement position="destination-top" type="mobile" />
+{/* Banner Top */}
+        <section className="py-6 flex justify-center">
+          <AdsterraAd keyId="a1593f7dbeeec27923c535ee40c45244" width={320} height={50} />
+        </section>
+
           </div>
 
           <Link href="/destinations" className="flex items-center gap-2 text-primary mb-6">

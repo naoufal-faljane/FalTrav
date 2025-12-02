@@ -1,7 +1,6 @@
 'use client';
 
 import AdsterraAd from '@/components/AdsterraAd';
-import AdPlacement from '@/components/ads/AdPlacement';
 import { motion } from 'framer-motion';
 import { usePageViewTracker } from '@/lib/analytics';
 import Hero from '@/components/hero/Hero';
@@ -53,15 +52,10 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Smartlink Ad – الأعلى */}
+      {/* Banner Top – 300x250 */}
       <section className="py-6">
         <Container className="flex justify-center">
-          <AdsterraAd
-            
-            keyId="a425a9ba84b0de190841de26b949448c"
-            width={300}
-            height={250}
-          />
+          <AdsterraAd keyId="a425a9ba84b0de190841de26b949448c" width={300} height={250} />
         </Container>
       </section>
 
@@ -101,15 +95,10 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Banner 300x250 – بعد Featured Destinations */}
+      {/* Banner Middle – 728x90 */}
       <section className="py-6">
         <Container className="flex justify-center">
-          <AdsterraAd
-            
-            keyId="a425a9ba84b0de190841de26b949448c"
-            width={300}
-            height={250}
-          />
+          <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={728} height={90} />
         </Container>
       </section>
 
@@ -140,32 +129,27 @@ export default function Home() {
               </motion.div>
             ))}
 
-            {/* Native Banner داخل Travel Tips */}
+            {/* Native Banner – 160x300 */}
             <motion.div className="col-span-1 md:col-span-3 mt-6">
-              <AdsterraAd
-                
-                keyId="bffd773e654446e24e77e661c6dce759"
-                width={160}
-                height={300}
-              />
+              <AdsterraAd keyId="bffd773e654446e24e77e661c6dce759" width={160} height={300} />
             </motion.div>
           </div>
         </Container>
       </section>
 
-      {/* Banner 320x50 – الأسفل */}
+      {/* Banner Bottom – 320x50 */}
       <section className="py-6">
         <Container className="flex justify-center">
-          <AdsterraAd
-            
-            keyId="a425a9ba84b0de190841de26b949448c"
-            width={320}
-            height={50}
-          />
+          <AdsterraAd keyId="a1593f7dbeeec27923c535ee40c45244" width={320} height={50} />
+        </Container>
+      </section>
+
+      {/* Banner Footer – 468x60 */}
+      <section className="py-6">
+        <Container className="flex justify-center">
+          <AdsterraAd keyId="59a91338e2382528879afcab4f94a32c" width={468} height={60} />
         </Container>
       </section>
     </div>
   );
-
-
 }

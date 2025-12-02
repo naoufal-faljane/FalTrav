@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock, User } from 'lucide-react';
 import Link from 'next/link';
 import { useAdContext } from '@/contexts/AdContext';
+import AdsterraAd from '@/components/AdsterraAd';
 
 interface Article {
   id: number;
@@ -206,7 +207,10 @@ export default function NewsArticleClient({ slug }: { slug: string }) {
             <div className="mb-6">
               <AdPlacement position="article-top" type="mobile" />
             </div>
-
+{/* Banner Top */}
+        <section className="py-6 flex justify-center">
+          <AdsterraAd keyId="2931ab60c5b897b964d4617253156a8b" width={728} height={90} />
+        </section>
             <div className="relative h-64 sm:h-96 rounded-xl overflow-hidden mb-8">
               <img
                 src={article.image}
