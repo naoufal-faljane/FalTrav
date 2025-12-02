@@ -28,6 +28,15 @@ function slugToName(slug: string): string {
     { slugPattern: 'swiss-alps-switzerland', original: 'Swiss Alps, Switzerland' },
     { slugPattern: 'banff-national-park-canada', original: 'Banff National Park, Canada' },
     { slugPattern: 'safari-kenya', original: 'Safari, Kenya' },
+    { slugPattern: 'warsaw-poland', original: 'Warsaw, Poland' },
+    { slugPattern: 'kuala-lumpur-malaysia', original: 'Kuala Lumpur, Malaysia' },
+    { slugPattern: 'sintra-portugal', original: 'Sintra, Portugal' },
+    { slugPattern: 'hong-kong-china', original: 'Hong Kong, China' },
+    { slugPattern: 'cape-town-south-africa', original: 'Cape Town, South Africa' },
+    { slugPattern: 'rio-de-janeiro-brazil', original: 'Rio de Janeiro, Brazil' },
+    { slugPattern: 'barcelona-spain', original: 'Barcelona, Spain' },
+    { slugPattern: 'dubai-uae', original: 'Dubai, UAE' },
+    { slugPattern: 'paris-france', original: 'Paris, France' }
   ];
   
   // Check for known patterns first
@@ -655,6 +664,618 @@ const destinations = [
       'Download translation apps as English is limited',
       'Tipping is not customary in Japan',
       'Reserve high-end restaurants in advance'
+    ]
+  },
+  {
+    id: 10,
+    name: 'Warsaw, Poland',
+    country: 'Poland',
+    continent: 'Europe',
+    description: 'Vibrant European capital rich in history, culture, and revitalized after WWII',
+    image: '/img/destinations/Warsaw.png',
+    rating: 4.4,
+    reviews: 680,
+    price: 599,
+    duration: '4 days',
+    travelers: '1-4 people',
+    category: 'City',
+    season: 'Spring/Summer',
+    guide: 'Warsaw, Poland travel guide: Experience a city that beautifully balances its tragic history with a vibrant modern culture. Explore the reconstructed Old Town, visit the moving Warsaw Uprising Museum, and enjoy the lively atmosphere of Nowy Świat. Spring through early fall offers pleasant weather for sightseeing. Don\'t miss the thriving food scene and the beautiful Łazienki Park.',
+    highlights: [
+      'Old Town Market Place',
+      'Warsaw Uprising Museum',
+      'Łazienki Park',
+      'Palace of Culture and Science',
+      'Wilanów Palace'
+    ],
+    bestFor: ['History Lovers', 'Architecture Enthusiasts', 'Foodies'],
+    images: [
+      '/img/destinations/Warsaw.png',
+      'https://images.unsplash.com/photo-1588225936315-3a87a1607b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1515822400657-9a2d6f8fcbb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1545252659-1b663a7c6a97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Amber jewelry from Baltic regions',
+      'Traditional Polish pottery (ceramika bolesławiecka)',
+      'Solidarity movement memorabilia',
+      'Vodka and traditional Polish honey'
+    ],
+    restaurants: [
+      'Atelier Amaro - innovative Polish cuisine',
+      'Polka - authentic traditional dishes',
+      'Pruszkowski - upscale Polish dining',
+      'Hala Koszyki - food market with local vendors'
+    ],
+    costs: {
+      'Budget per day': '$40-60',
+      'Mid-range per day': '$60-120',
+      'Luxury per day': '$200+',
+      'Avg. meal (local)': '$8-15',
+      'Avg. meal (international)': '$15-30',
+      'Transportation': '$5-10/day'
+    },
+    mustSee: [
+      'Warsaw Old Town and Royal Castle',
+      'Chopin\'s birthplace museum',
+      'Jewish Ghetto Memorial',
+      'Museum of Warsaw'
+    ],
+    cheapestPlaces: [
+      'Praga district (up-and-coming area with budget options)',
+      'Mokotów (residential with good value accommodations)',
+      'Wola (modern area with affordable stays)',
+      'Food courts in shopping centers'
+    ],
+    tips: [
+      'Learn a few Polish phrases as English isn\'t universally spoken',
+      'Use the efficient public transportation system',
+      'Visit museums on free admission days (usually first Tuesday of month)',
+      'Check out free walking tours for historical context'
+    ]
+  },
+  {
+    id: 11,
+    name: 'Kuala Lumpur, Malaysia',
+    country: 'Malaysia',
+    continent: 'Asia',
+    description: 'Dynamic metropolis blending modern skyscrapers with rich cultural heritage',
+    image: '/img/destinations/kuala lumpur.png',
+    rating: 4.3,
+    reviews: 940,
+    price: 699,
+    duration: '5 days',
+    travelers: '1-4 people',
+    category: 'City',
+    season: 'Year Round',
+    guide: 'Kuala Lumpur, Malaysia travel guide: A vibrant mix of cultures, cuisines, and towering architecture. Visit the iconic Petronas Twin Towers, explore the colorful Batu Caves, and sample diverse street food. The city is best visited outside of the monsoon season (October to March) for optimal weather. The KLCC district is the heart of the city with shopping and dining options.',
+    highlights: [
+      'Petronas Twin Towers',
+      'Batu Caves',
+      'KLCC Park',
+      'Central Market',
+      'Chinatown'
+    ],
+    bestFor: ['Urban Adventures', 'Cultural Experiences', 'Food Lovers'],
+    images: [
+      '/img/destinations/kuala lumpur.png',
+      'https://images.unsplash.com/photo-1582546455182-a1ef4bf645ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1554189343-9b43194c7c1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1570736848186-d3e99401b23e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Malaysian batik fabric',
+      'Pandan leaf products and spices',
+      'Traditional silver crafts from Kuala Lumpur',
+      'White board game (local specialty)'
+    ],
+    restaurants: [
+      'Dewakan - 2 Michelin stars, modern Malaysian cuisine',
+      'Madam Kwan\'s - famous for local Malaysian dishes',
+      'The Steak House Wine Bar - great for Western palates',
+      'Jalan Alor - street food avenue with multiple options'
+    ],
+    costs: {
+      'Budget per day': '$30-50',
+      'Mid-range per day': '$50-100',
+      'Luxury per day': '$180+',
+      'Avg. meal (local)': '$3-8',
+      'Avg. meal (international)': '$10-25',
+      'Transportation': '$3-8/day'
+    },
+    mustSee: [
+      'KL Tower and Sky Deck',
+      'Aquaria KLCC underwater zoo',
+      'Islamic Arts Museum Malaysia',
+      'National Mosque of Malaysia'
+    ],
+    cheapestPlaces: [
+      'Chinatown (Petaling Street area with affordable stays)',
+      'Brickfields (Indian quarter with budget options)',
+      'Bangsar (hip area with good value accommodations)',
+      'Street food for budget dining throughout the city'
+    ],
+    tips: [
+      'Dress modestly when visiting religious sites',
+      'Drink bottled water, especially during hot weather',
+      'Use ride-hailing apps like Grab instead of taxis',
+      'Visit Petronas Towers early morning to avoid queues'
+    ]
+  },
+  {
+    id: 12,
+    name: 'Sintra, Portugal',
+    country: 'Portugal',
+    continent: 'Europe',
+    description: 'Romantic town with fairytale palaces nestled in the Portuguese hills',
+    image: '/img/destinations/sintra.png',
+    rating: 4.6,
+    reviews: 720,
+    price: 499,
+    duration: '3 days',
+    travelers: '1-3 people',
+    category: 'Culture',
+    season: 'Spring/Fall',
+    guide: 'Sintra, Portugal travel guide: A UNESCO World Heritage site filled with colorful palaces and romantic architecture. Best visited during spring or fall for pleasant weather and fewer crowds. The town is only 30 minutes from Lisbon, making it a perfect day trip or short stay. Pena Palace is the crown jewel with its vibrant colors and panoramic views.',
+    highlights: [
+      'Pena Palace',
+      'Moorish Castle',
+      'Quinta da Regaleira',
+      'Seteais Palace',
+      'Sintra National Palace'
+    ],
+    bestFor: ['Romantic Getaways', 'Architecture Lovers', 'Historical Sites'],
+    images: [
+      '/img/destinations/sintra.png',
+      'https://images.unsplash.com/photo-1599621605511-9089431647a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1599621605511-9089431647a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1599621605511-9089431647a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Traditional Sintra travesseiros (almond puff pastries)',
+      'Portuguese ceramics and azulejos',
+      'Hand-painted tiles and pottery',
+      'Portuguese cork products'
+    ],
+    restaurants: [
+      'Tascantiga - traditional Portuguese near train station',
+      'Casa Piriquita - famous for pastries and local dishes',
+      'Anjos do Cardeal - fine dining with palace views',
+      'Malibu - casual dining with great atmosphere'
+    ],
+    costs: {
+      'Budget per day': '$45-70',
+      'Mid-range per day': '$70-130',
+      'Luxury per day': '$250+',
+      'Avg. meal (local)': '$12-20',
+      'Avg. meal (international)': '$20-35',
+      'Transportation': '$10-25/day'
+    },
+    mustSee: [
+      'Pena Palace (iconic colorful palace)',
+      'Quinta da Regaleira (mystical underground tunnels)',
+      'Moorish Castle ruins',
+      'Sintra National Palace'
+    ],
+    cheapestPlaces: [
+      'Queluz (slightly cheaper than main Sintra area)',
+      'Lisbon (easily accessible for day trips)',
+      'Local cafés and bakeries for budget dining',
+      'Free walking routes outside main palaces'
+    ],
+    tips: [
+      'Buy tickets online in advance to avoid long queues',
+      'Wear comfortable shoes for climbing hills and stairs',
+      'Start early to beat crowds at Pena Palace',
+      'Combine visit with day trip to Cascais or Cabo da Roca'
+    ]
+  },
+  {
+    id: 13,
+    name: 'Hong Kong, China',
+    country: 'China',
+    continent: 'Asia',
+    description: 'Bustling metropolis where East meets West with stunning skyline and vibrant culture',
+    image: '/img/destinations/honkong.png',
+    rating: 4.7,
+    reviews: 1580,
+    price: 1199,
+    duration: '6 days',
+    travelers: '1-4 people',
+    category: 'City',
+    season: 'Fall/Winter',
+    guide: 'Hong Kong, China travel guide: A dynamic city of contrasts with towering skyscrapers, traditional temples, and bustling markets. Best visited in fall or winter for comfortable temperatures. Experience the famous skyline from Victoria Peak, explore the vibrant neighborhoods, and enjoy world-class dining. The MTR system makes getting around efficient and easy.',
+    highlights: [
+      'Victoria Peak',
+      'Symphony of Lights',
+      'Temple Street Night Market',
+      'Lantau Island and Big Buddha',
+      'Hong Kong Disneyland'
+    ],
+    bestFor: ['Urban Adventures', 'Nightlife', 'Shopping', 'Food Lovers'],
+    images: [
+      '/img/destinations/honkong.png',
+      'https://images.unsplash.com/photo-1519396317879-833e181b9e87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1519396317879-833e181b9e87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1519396317879-833e181b9e87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Traditional Chinese herbs and teas',
+      'Custom tailoring (famous for quality suits)',
+      'Jade jewelry and ornaments',
+      'Hong Kong specialty items like pineapple buns'
+    ],
+    restaurants: [
+      'Lung King Heen - 3 Michelin stars, dim sum',
+      'Tim Ho Wan - Michelin-starred dim sum at affordable prices',
+      'Dai Lai Dessert - famous mango pomelo sago',
+      'Australia Dairy Company - local Hong Kong café experience'
+    ],
+    costs: {
+      'Budget per day': '$60-90',
+      'Mid-range per day': '$90-180',
+      'Luxury per day': '$300+',
+      'Avg. meal (local)': '$8-15',
+      'Avg. meal (international)': '$20-40',
+      'Transportation': '$8-15/day'
+    },
+    mustSee: [
+      'Victoria Harbour and skyline views',
+      'Monk\'s Café for local experience',
+      'Ngong Ping 360 cable car and Big Buddha',
+      'Tai O fishing village'
+    ],
+    cheapestPlaces: [
+      'Causeway Bay for budget shopping',
+      'Local cha chaan teng (Hong Kong-style cafes)',
+      'MTR for efficient transportation',
+      'Free views from various vantage points'
+    ],
+    tips: [
+      'Get an Octopus card for seamless public transportation',
+      'Carry cash as some local vendors don\'t accept cards',
+      'Avoid public transportation during rush hours',
+      'Book Peak Tram in advance for better rates'
+    ]
+  },
+  {
+    id: 14,
+    name: 'Cape Town, South Africa',
+    country: 'South Africa',
+    continent: 'Africa',
+    description: 'Stunning coastal city with dramatic landscapes and rich cultural heritage',
+    image: '/img/destinations/Cape Town.png',
+    rating: 4.8,
+    reviews: 1320,
+    price: 899,
+    duration: '7 days',
+    travelers: '2-6 people',
+    category: 'Adventure',
+    season: 'Spring/Summer',
+    guide: 'Cape Town, South Africa travel guide: One of the world\'s most beautiful cities with Table Mountain as its backdrop. Visit during southern hemisphere spring or summer (October to March) for warm weather. Explore Table Mountain, the Cape Peninsula, and world-class wine regions. The V&A Waterfront is a hub for shopping, dining, and entertainment.',
+    highlights: [
+      'Table Mountain',
+      'Cape of Good Hope',
+      'Robben Island',
+      'V&A Waterfront',
+      'Wine tours in Stellenbosch'
+    ],
+    bestFor: ['Adventure Seekers', 'Nature Lovers', 'Wine Tasting', 'Photography'],
+    images: [
+      '/img/destinations/Cape Town.png',
+      'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'African crafts and woodcarvings',
+      'Rooibos tea and honey',
+      'Biltong (dried meat) and local wines',
+      'Shweshwe fabric and traditional crafts'
+    ],
+    restaurants: [
+      'The Test Kitchen - innovative cuisine with multiple awards',
+      'Gold Restaurant - African-themed dining experience',
+      'Harold\'s Place - famous for their famous burger',
+      'Mielie Boord - traditional South African cuisine'
+    ],
+    costs: {
+      'Budget per day': '$50-80',
+      'Mid-range per day': '$80-150',
+      'Luxury per day': '$250+',
+      'Avg. meal (local)': '$10-20',
+      'Avg. meal (international)': '$25-50',
+      'Transportation': '$10-30/day'
+    },
+    mustSee: [
+      'Table Mountain and cable car',
+      'Robben Island tour where Mandela was imprisoned',
+      'Cape Winelands (Stellenbosch and Franschhoek)',
+      'Cape of Good Hope and penguins at Boulders Beach'
+    ],
+    cheapestPlaces: [
+      'Long Street for budget dining and entertainment',
+      'Bo-Kaap for colorful houses and affordable eats',
+      'Local markets like Greenmarket Square',
+      'Hiking trails instead of paid attractions'
+    ],
+    tips: [
+      'Take safety precautions in tourist areas as advised',
+      'Book wine tours in advance during peak season',
+      'Check weather before hiking Table Mountain',
+      'Carry minimal cash and keep valuables secure'
+    ]
+  },
+  {
+    id: 15,
+    name: 'Rio de Janeiro, Brazil',
+    country: 'Brazil',
+    continent: 'South America',
+    description: 'Carnival city with iconic beaches, mountains, and vibrant culture',
+    image: '/img/destinations/rio de janeiro.png',
+    rating: 4.5,
+    reviews: 1450,
+    price: 799,
+    duration: '6 days',
+    travelers: '2-4 people',
+    category: 'Beach',
+    season: 'Carnival Season',
+    guide: 'Rio de Janeiro, Brazil travel guide: The city of endless summer with world-famous beaches, iconic landmarks, and samba rhythms. Best visited during Carnival season or outside of heavy rain season (December to March). Don\'t miss Copacabana and Ipanema beaches, Christ the Redeemer, and Sugar Loaf. The city pulses with music, dance, and outdoor lifestyle.',
+    highlights: [
+      'Christ the Redeemer',
+      'Sugar Loaf Mountain',
+      'Copacabana Beach',
+      'Ipanema Beach',
+      'Carnival celebrations'
+    ],
+    bestFor: ['Beach Lovers', 'Adventure Seekers', 'Cultural Experiences', 'Nightlife'],
+    images: [
+      '/img/destinations/rio de janeiro.png',
+      'https://images.unsplash.com/photo-1520335280553-035a46e32d64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1520335280553-035a46e32d64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1520335280553-035a46e32d64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Havaianas flip-flops (Brazilian brand)',
+      'Brazilian coffee and acai products',
+      'Carnival masks and costumes',
+      'Samba music and Brazilian crafts'
+    ],
+    restaurants: [
+      'Aprazível - traditional Brazilian with city views',
+      'Confeitaria Colombo - historic café and pastry shop',
+      'Porcão Rio Music Bar - live music and great food',
+      'Zuka - upscale Brazilian cuisine'
+    ],
+    costs: {
+      'Budget per day': '$40-70',
+      'Mid-range per day': '$70-140',
+      'Luxury per day': '$220+',
+      'Avg. meal (local)': '$8-15',
+      'Avg. meal (international)': '$20-40',
+      'Transportation': '$8-20/day'
+    },
+    mustSee: [
+      'Christ the Redeemer statue (UNESCO site)',
+      'Sugar Loaf Mountain cable car',
+      'Samba show during Carnival season',
+      'Tijuca National Park (world\'s largest urban forest)'
+    ],
+    cheapestPlaces: [
+      'Lapa for nightlife and budget options',
+      'Local feiras (street markets) for food and shopping',
+      'Free beaches with amazing views',
+      'Botafogo area for affordable accommodations'
+    ],
+    tips: [
+      'Learn basic Portuguese phrases for better experiences',
+      'Carry only small amounts of cash for safety',
+      'Visit beaches safely during daylight hours',
+      'Book Carnival tickets and accommodations months in advance'
+    ]
+  },
+  {
+    id: 16,
+    name: 'Barcelona, Spain',
+    country: 'Spain',
+    continent: 'Europe',
+    description: 'Architectural marvels, vibrant neighborhoods, and exceptional cuisine',
+    image: '/img/destinations/barcelona.png',
+    rating: 4.7,
+    reviews: 1650,
+    price: 1099,
+    duration: '5 days',
+    travelers: '1-4 people',
+    category: 'Culture',
+    season: 'Spring/Fall',
+    guide: 'Barcelona, Spain travel guide: Gaudí\'s architectural masterpieces, delicious tapas, and vibrant beach life. Best visited in spring or fall for pleasant weather and fewer crowds. Explore Sagrada Família, Park Güell, and the Gothic Quarter. The city offers a perfect blend of history, art, and Mediterranean lifestyle.',
+    highlights: [
+      'Sagrada Família',
+      'Park Güell',
+      'Gothic Quarter',
+      'La Rambla',
+      'Casa Batlló'
+    ],
+    bestFor: ['Architecture Lovers', 'Art Enthusiasts', 'Food Lovers', 'Beach Lovers'],
+    images: [
+      '/img/destinations/barcelona.png',
+      'https://images.unsplash.com/photo-1556814350-7ec418f7f007?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556814350-7ec418f7f007?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556814350-7ec418f7f007?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Ceramics from La Bisbal d\'Empordà',
+      'Spanish wines and jamón ibérico',
+      'Gaudí-inspired decorative items',
+      'Sangria sets and Spanish kitchenware'
+    ],
+    restaurants: [
+      'Tickets - molecular tapas by the Adrià brothers',
+      'Can Culleretes - traditional Catalan cuisine since 1786',
+      'Quimet & Quimet - famous montaditos',
+      'Boquería Market stalls - fresh local ingredients'
+    ],
+    costs: {
+      'Budget per day': '$60-90',
+      'Mid-range per day': '$90-180',
+      'Luxury per day': '$300+',
+      'Avg. meal (local)': '$15-25',
+      'Avg. meal (international)': '$25-50',
+      'Transportation': '$5-15/day'
+    },
+    mustSee: [
+      'Sagrada Família (Gaudí\'s masterpiece)',
+      'Park Güell and its colorful mosaics',
+      'Gothic Quarter ancient streets',
+      'Magic Fountain of Montjuïc'
+    ],
+    cheapestPlaces: [
+      'El Born for affordable tapas and shops',
+      'Gràcia for local vibe and prices',
+      'Free walking tours for budget sightseeing',
+      'Local markets for food and provisions'
+    ],
+    tips: [
+      'Book Sagrada Família tickets in advance online',
+      'Try to avoid touristy restaurants on La Rambla',
+      'Use the T10 transport card for public transportation',
+      'Enjoy the local siesta schedule and late dining times'
+    ]
+  },
+  {
+    id: 17,
+    name: 'Dubai, UAE',
+    country: 'UAE',
+    continent: 'Asia',
+    description: 'Ultra-modern cityscape with luxury shopping and desert adventures',
+    image: '/img/destinations/Dubai.png',
+    rating: 4.6,
+    reviews: 1280,
+    price: 1399,
+    duration: '4 days',
+    travelers: '2-6 people',
+    category: 'Luxury',
+    season: 'Fall/Winter',
+    guide: 'Dubai, UAE travel guide: A gleaming metropolis offering luxury experiences, modern architecture, and desert adventures. Best visited during fall or winter for cooler weather. Marvel at the Burj Khalifa, shop in massive malls, and experience the desert. The city seamlessly blends Middle Eastern heritage with cutting-edge innovation.',
+    highlights: [
+      'Burj Khalifa',
+      'Palm Jumeirah',
+      'Dubai Mall',
+      'Desert Safari',
+      'Dubai Fountain'
+    ],
+    bestFor: ['Luxury Travelers', 'Shopping Enthusiasts', 'Adventure Seekers', 'Architecture Lovers'],
+    images: [
+      '/img/destinations/Dubai.png',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Arabian oud and incense',
+      'Gold from Gold Souk',
+      'Traditional Arabic coffee pots',
+      'Pashmina shawls and Middle Eastern textiles'
+    ],
+    restaurants: [
+      'At.mosphere - fine dining in Burj Khalifa',
+      'Pierchic - seafood restaurant on a pier',
+      'Al Mahara - undersea-themed restaurant',
+      'Bu Qtair - authentic local seafood'
+    ],
+    costs: {
+      'Budget per day': '$80-120',
+      'Mid-range per day': '$120-250',
+      'Luxury per day': '$500+',
+      'Avg. meal (local)': '$15-25',
+      'Avg. meal (international)': '$30-60',
+      'Transportation': '$10-30/day'
+    },
+    mustSee: [
+      'Burj Khalifa observation deck',
+      'Fountain show at Dubai Mall',
+      'Desert safari with dune bashing',
+      'Dubai Museum and Al Fahidi Historical District'
+    ],
+    cheapestPlaces: [
+      'Deira for budget accommodations and shopping',
+      'Local cafés and Arabian restaurants',
+      'Free public beaches instead of hotel beaches',
+      'Mall walking areas with free attractions'
+    ],
+    tips: [
+      'Dress modestly in public areas respecting local customs',
+      'Stay hydrated and protect from sun during outdoor activities',
+      'Avoid traveling during Ramadan if non-Muslim',
+      'Book Burj Khalifa tickets early in the morning'
+    ]
+  },
+  {
+    id: 18,
+    name: 'Paris, France',
+    country: 'France',
+    continent: 'Europe',
+    description: 'City of lights, romance, and unparalleled art and culture',
+    image: '/img/destinations/paris.png',
+    rating: 4.8,
+    reviews: 2100,
+    price: 1299,
+    duration: '5 days',
+    travelers: '1-4 people',
+    category: 'Romance',
+    season: 'Spring/Fall',
+    guide: 'Paris, France travel guide: The eternal city of romance, art, and cuisine. Best visited in spring or fall when the weather is pleasant and crowds are smaller. Stroll along the Seine, visit world-class museums, and enjoy café culture. The City of Light offers iconic landmarks like the Eiffel Tower and Louvre Museum.',
+    highlights: [
+      'Eiffel Tower',
+      'Louvre Museum',
+      'Notre-Dame Cathedral',
+      'Montmartre and Sacré-Cœur',
+      'Seine River Cruise'
+    ],
+    bestFor: ['Romantic Getaways', 'Art Lovers', 'Food Lovers', 'Cultural Experiences'],
+    images: [
+      '/img/destinations/paris.png',
+      'https://images.unsplash.com/photo-1506357042194-4e7d8d381601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1506357042194-4e7d8d381601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1506357042194-4e7d8d381601?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'French perfumes from Grasse',
+      'Macarons from Ladurée',
+      'Art prints from Montmartre',
+      'Wine and cheese from local markets'
+    ],
+    restaurants: [
+      'Le Jules Verne - fine dining in Eiffel Tower',
+      'L\'As du Fallafel - famous falafel in Marais',
+      'Le Comptoir du Relais - authentic bistro experience',
+      'Angelina - famous for hot chocolate and pastries'
+    ],
+    costs: {
+      'Budget per day': '$70-100',
+      'Mid-range per day': '$100-200',
+      'Luxury per day': '$400+',
+      'Avg. meal (local)': '$20-35',
+      'Avg. meal (international)': '$35-70',
+      'Transportation': '$5-15/day'
+    },
+    mustSee: [
+      'Louvre Museum and Mona Lisa',
+      'Eiffel Tower at sunset',
+      'Notre-Dame and Île de la Cité',
+      'Musée d\'Orsay and Montmartre'
+    ],
+    cheapestPlaces: [
+      'Le Marais for budget dining and vintage shopping',
+      'Local food markets for provisions',
+      'Free walking tours for sightseeing',
+      'Parks and gardens for free relaxation'
+    ],
+    tips: [
+      'Learn a few French phrases to enhance your experience',
+      'Book museum tickets in advance to avoid lines',
+      'Be cautious of pickpockets in touristy areas',
+      'Use metro for efficient city transportation'
     ]
   }
 ];
