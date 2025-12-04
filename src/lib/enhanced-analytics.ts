@@ -99,84 +99,175 @@ export function trackViewBook(bookTitle: string, bookId?: string, locationData?:
 }
 
 export async function getLocationFromIP(): Promise<any> {
-  try {
-    // Using ipapi.co for IP geolocation
-    const response = await fetch('https://ipapi.co/json/');
-    
-    if (!response.ok) {
-      throw new Error(`IP geolocation request failed with status ${response.status}`);
-    }
-    
-    const data = await response.json();
-    
-    return {
-      ip: data.ip || '',
-      city: data.city || 'Unknown',
-      region: data.region || data.region_name || 'Unknown',
-      country: data.country_name || data.country || 'Unknown',
-      latitude: data.latitude || null,
-      longitude: data.longitude || null
-    };
-  } catch (error) {
-    console.warn('Error getting location from IP (primary):', error);
-    
-    // Fallback to a different free IP geolocation service
+  // Helper function to fetch IP address
+  const fetchIPAddress = async (): Promise<string> => {
+    // First try ipify
     try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      if (!response.ok) {
-        throw new Error(`IP detection request failed with status ${response.status}`);
+      const response = await fetch('https://api.ipify.org?format=json', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        signal: AbortSignal.timeout(5000) // 5 second timeout
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.ip || '';
       }
-      
-      const ipData = await response.json();
+    } catch (error) {
+      console.warn('IPify service failed:', error);
+    }
 
-      // Then get location for the IP using a different service as fallback
-      const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
-      
-      if (!locationResponse.ok) {
-        throw new Error(`Secondary IP geolocation request failed with status ${locationResponse.status}`);
+    // Fallback to jsonip
+    try {
+      const response = await fetch('https://jsonip.com', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        signal: AbortSignal.timeout(5000) // 5 second timeout
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data.ip || data.origin || '';
       }
-      
-      const locationData = await locationResponse.json();
-      
-      return {
-        ip: locationData.ip || '',
-        city: locationData.city || 'Unknown',
-        region: locationData.region || locationData.region_name || 'Unknown',
-        country: locationData.country_name || locationData.country || 'Unknown',
-        latitude: locationData.latitude || null,
-        longitude: locationData.longitude || null
-      };
-    } catch (error2) {
-      console.error('Failed to get location from IP (both services):', error2);
-      
-      // Final fallback to a different service
+    } catch (error) {
+      console.warn('JsonIP service failed:', error);
+    }
+
+    // If all IP fetching services fail, return empty string
+    return '';
+  };
+
+  // Helper function to fetch location data for an IP
+  const fetchLocationData = async (ip: string): Promise<any> => {
+    // First try ipapi.co (with IP if available)
+    let url = 'https://ipapi.co/json/';
+    if (ip) {
+      url = `https://ipapi.co/${ip}/json/`;
+    }
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+        },
+        signal: AbortSignal.timeout(5000) // 5 second timeout
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return {
+          ip: data.ip || ip || '',
+          city: data.city || 'Unknown',
+          region: data.region || data.region_name || 'Unknown',
+          country: data.country_name || data.country || 'Unknown',
+          latitude: data.latitude || null,
+          longitude: data.longitude || null
+        };
+      }
+    } catch (error) {
+      console.warn('IPAPI.co service failed:', error);
+    }
+
+    // Fallback to another service if IP is available
+    if (ip) {
       try {
-        const response = await fetch('https://extreme-ip-lookup.com/json/');
-        if (!response.ok) {
-          throw new Error(`Fallback IP geolocation request failed with status ${response.status}`);
+        const response = await fetch(`https://ipinfo.io/${ip}/json`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+          signal: AbortSignal.timeout(5000) // 5 second timeout
+        });
+        if (response.ok) {
+          const data = await response.json();
+          const [lat, lon] = data.loc ? data.loc.split(',') : [null, null];
+          
+          return {
+            ip: data.ip || ip || '',
+            city: data.city || 'Unknown',
+            region: data.region || data.region_name || 'Unknown',
+            country: data.country || data.country_name || 'Unknown',
+            latitude: lat || null,
+            longitude: lon || null
+          };
         }
-        
+      } catch (error) {
+        console.warn('IPInfo service failed:', error);
+      }
+    }
+
+    // Final fallback to a service that works without IP if possible
+    try {
+      const response = await fetch('https://extreme-ip-lookup.com/json/', {
+        signal: AbortSignal.timeout(5000) // 5 second timeout
+      });
+      if (response.ok) {
         const data = await response.json();
         
         return {
-          ip: data.query || '',
+          ip: data.query || data.ip || '',
           city: data.city || 'Unknown',
           region: data.region || 'Unknown',
           country: data.country || 'Unknown',
           latitude: data.lat || null,
           longitude: data.lon || null
         };
-      } catch (error3) {
-        console.error('All IP geolocation services failed:', error3);
-        return {
-          ip: '',
-          city: 'Unknown',
-          region: 'Unknown',
-          country: 'Unknown',
-          latitude: null,
-          longitude: null
-        };
       }
+    } catch (error) {
+      console.warn('Extreme IP lookup service failed:', error);
+    }
+
+    // If all services fail, return default location data
+    return {
+      ip: ip || '',
+      city: 'Unknown',
+      region: 'Unknown',
+      country: 'Unknown',
+      latitude: null,
+      longitude: null
+    };
+  };
+
+  try {
+    // First try the primary IP geolocation service
+    const response = await fetch('https://ipapi.co/json/', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+      },
+      signal: AbortSignal.timeout(5000) // 5 second timeout
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      return {
+        ip: data.ip || '',
+        city: data.city || 'Unknown',
+        region: data.region || data.region_name || 'Unknown',
+        country: data.country_name || data.country || 'Unknown',
+        latitude: data.latitude || null,
+        longitude: data.longitude || null
+      };
+    } else {
+      throw new Error(`IP geolocation request failed with status ${response.status}`);
+    }
+  } catch (error) {
+    console.warn('Error getting location from IP (primary):', error);
+    
+    // Alternative implementation with better error handling and multiple fallbacks
+    // Try to get location with IP
+    const ipAddress = await fetchIPAddress();
+    
+    if (ipAddress) {
+      // If we have an IP, get location data for it
+      return await fetchLocationData(ipAddress);
+    } else {
+      // If we couldn't get IP, try location lookup without IP
+      return await fetchLocationData('');
     }
   }
 }

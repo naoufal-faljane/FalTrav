@@ -39,7 +39,10 @@ function slugToName(slug: string): string {
     { slugPattern: 'paris-france', original: 'Paris, France' },
     { slugPattern: 'rabat-morocco', original: 'Rabat, Morocco' },
     { slugPattern: 'qatar', original: 'Qatar' },
-    { slugPattern: 'amsterdam-netherlands', original: 'Amsterdam, Netherlands' }
+    { slugPattern: 'doha-qatar', original: 'Doha, Qatar' },
+    { slugPattern: 'amsterdam-netherlands', original: 'Amsterdam, Netherlands' },
+    { slugPattern: 'copenhagen-denmark', original: 'Copenhagen, Denmark' },
+    { slugPattern: 'bangkok-thailand', original: 'Bangkok, Thailand' }
   ];
   
   // Check for known patterns first
@@ -1483,6 +1486,210 @@ const destinations = [
       'Book museum tickets in advance to avoid lines',
       'Be cautious of pickpockets in touristy areas',
       'Use metro for efficient city transportation'
+    ]
+  },
+  {
+    id: 22,
+    name: 'Bangkok, Thailand',
+    country: 'Thailand',
+    continent: 'Asia',
+    description: 'Vibrant Southeast Asian capital with rich culture, street food, and ornate temples',
+    image: '/img/destinations/bangkok.png',
+    rating: 4.4,
+    reviews: 1800,
+    price: 799,
+    duration: '6 days',
+    travelers: '1-4 people',
+    category: 'City',
+    season: 'November-March',
+    guide: 'Bangkok, Thailand travel guide: A city of contrasts with ornate temples, bustling markets, and world-class cuisine. Best visited from November to March for cooler weather. Don\'t miss the Grand Palace, Wat Pho temple, and floating markets. Experience the vibrant street food scene and tuk-tuk rides. Must-visit places include Grand Palace complex, Wat Pho Temple with the massive reclining Buddha, and floating markets like Damnoen Saduak. Take a boat trip along the Chao Phraya River to see the city from a different perspective.',
+    highlights: [
+      'Grand Palace and Wat Phra Kaew',
+      'Wat Pho Temple',
+      'Chatuchak Weekend Market',
+      'Floating Markets',
+      'Chao Phraya River Cruise'
+    ],
+    bestFor: ['Cultural Experiences', 'Food Lovers', 'Shopping', 'Adventure Seekers'],
+    images: [
+      '/img/destinations/bangkok.png',
+      'https://images.unsplash.com/photo-1563464669374-8e0d7a6bbcbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1544197814-3be3a5b85eea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-15346874cdb3675b1e7f2a52f6c77f0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    ],
+    souvenirs: [
+      'Thai silk and clothing',
+      'Handmade crafts and wood carvings',
+      'Thai spices and herbs',
+      'Floating market snacks and preserves'
+    ],
+    restaurants: [
+      'Nahm - authentic Thai fine dining',
+      'Baan Khanitha - elegant traditional Thai cuisine',
+      'Thipsamai - famous pad thai restaurant',
+      'Street food at Chatuchak Market'
+    ],
+    costs: {
+      'Budget per day': '$25-40',
+      'Mid-range per day': '$40-80',
+      'Luxury per day': '$150+',
+      'Avg. meal (local)': '$2-8',
+      'Avg. meal (international)': '$10-25',
+      'Transportation': '$3-10/day'
+    },
+    mustSee: [
+      'Grand Palace and Temple of the Emerald Buddha',
+      'Wat Pho and the Reclining Buddha',
+      'Floating markets experience',
+      'Chatuchak Weekend Market'
+    ],
+    cheapestPlaces: [
+      'Khao San Road (budget traveler hub)',
+      'Silom area for good value options',
+      'Local markets and street food',
+      'BTS/MRT for affordable transport'
+    ],
+    tips: [
+      'Dress modestly when visiting temples',
+      'Carry small bills for street food and tuk-tuks',
+      'Beware of tourist scams in busy areas',
+      'Use metered taxis or ride-hailing apps'
+    ]
+  },
+  {
+    id: 23,
+    name: 'Doha, Qatar',
+    country: 'Qatar',
+    continent: 'Asia',
+    description: 'Modern desert city with futuristic architecture and rich cultural heritage',
+    image: '/img/destinations/Doha.png',
+    rating: 4.5,
+    reviews: 850,
+    price: 1399,
+    duration: '5 days',
+    travelers: '2-4 people',
+    category: 'City',
+    season: 'Winter',
+    guide: 'Doha, Qatar travel guide: The capital city of Qatar offers a unique blend of traditional Bedouin culture and ultra-modern architecture. Explore the Museum of Islamic Art, Souq Waqif, and the stunning Doha Corniche. Visit during winter months (November to March) for comfortable weather. Don\'t miss the impressive skyline, world-class museums, and vibrant cultural scene.',
+    highlights: [
+      'Museum of Islamic Art',
+      'Souq Waqif',
+      'Doha Corniche',
+      'Katara Cultural Village',
+      'Pearl Qatar'
+    ],
+    bestFor: ['Architecture Lovers', 'Cultural Experiences', 'Luxury Travelers', 'Beach Lovers'],
+    images: [
+      '/img/destinations/Doha.png',
+      '/img/destinations/Doha.png',
+      '/img/destinations/Doha.png',
+      '/img/destinations/Doha.png'
+    ],
+    souvenirs: [
+      'Arabian perfumes and oud',
+      'Qatari traditional dress',
+      'Islamic calligraphy and art',
+      'High-end jewelry from Souq Waqif'
+    ],
+    restaurants: [
+      'Al Mourjan - Lebanese fine dining in Souq Waqif',
+      'The Afghan - authentic Middle Eastern cuisine',
+      'Bryant & May - contemporary dining in The Pearl',
+      'ID - innovative cuisine at Marsa Malaz Kempinski'
+    ],
+    costs: {
+      'Budget per day': '$100-150',
+      'Mid-range per day': '$150-300',
+      'Luxury per day': '$500+',
+      'Avg. meal (local)': '$20-35',
+      'Avg. meal (international)': '$35-60',
+      'Transportation': '$20-50/day'
+    },
+    mustSee: [
+      'Museum of Islamic Art and its stunning architecture',
+      'Souq Waqif traditional market experience',
+      'Doha Corniche waterfront promenade',
+      'Katara Cultural Village amphitheater'
+    ],
+    cheapestPlaces: [
+      'Al Khor and Al Ghuwariya for budget accommodations',
+      'Local cafés for affordable dining',
+      'Free public transportation during World Cup legacy',
+      'Public beaches along the Arabian Gulf'
+    ],
+    tips: [
+      'Respect local customs especially during Ramadan',
+      'Dress conservatively in public places',
+      'Summer months (June-September) are extremely hot',
+      'Try traditional Qatari dishes like machboos'
+    ]
+  },
+  {
+    id: 31,  // Using the same ID as in the destinations overview page
+    name: 'Copenhagen, Denmark',
+    country: 'Denmark',
+    continent: 'Europe',
+    description: 'Hygge capital with modern design, cycling culture, and fairy tale vibes',
+    image: '/img/destinations/Copenhagen.png',
+    rating: 4.7,
+    reviews: 980,
+    price: 1199,
+    duration: '4 days',
+    travelers: '1-3 people',
+    category: 'City',
+    season: 'Summer',
+    guide: 'Copenhagen, Denmark travel guide: Embrace the hygge lifestyle with excellent design, food, and cycling culture. Best visited in summer for optimal weather. See Tivoli Gardens, Little Mermaid statue, and the colorful Nyhavn harbor. Experience world-class restaurants and innovative Nordic cuisine. Don\'t miss the vibrant neighborhoods, royal palaces, and the thriving cultural scene.',
+    highlights: [
+      'Tivoli Gardens',
+      'Little Mermaid statue',
+      'Nyhavn Harbor',
+      'Amalienborg Palace',
+      'Strøget shopping street'
+    ],
+    bestFor: ['Design Lovers', 'Food Enthusiasts', 'Cycling Enthusiasts', 'Cultural Experiences'],
+    images: [
+      '/img/destinations/Copenhagen.png',
+      '/img/destinations/Copenhagen.png',
+      '/img/destinations/Copenhagen.png',
+      '/img/destinations/Copenhagen.png'
+    ],
+    souvenirs: [
+      'Danish porcelain and ceramics',
+      'Design items and home goods',
+      'Danish pastries and cookies',
+      'Hygge lifestyle products'
+    ],
+    restaurants: [
+      'Noma - world-renowned Nordic cuisine',
+      'Geranium - Michelin-starred dining experience',
+      'Schønnemann - traditional Danish smørrebrød',
+      'Torvehallerne - food market with local specialties'
+    ],
+    costs: {
+      'Budget per day': '$120-180',
+      'Mid-range per day': '$180-350',
+      'Luxury per day': '$500+',
+      'Avg. meal (local)': '$25-40',
+      'Avg. meal (international)': '$40-70',
+      'Transportation': '$15-30/day'
+    },
+    mustSee: [
+      'Tivoli Gardens magical amusement park',
+      'Little Mermaid statue icon',
+      'Nyhavn colorful canal district',
+      'Amalienborg Palace royal residence'
+    ],
+    cheapestPlaces: [
+      'Vesterbro and Nørrebro for budget accommodations',
+      'Supermarket meals for affordable dining',
+      'Cycling instead of public transport',
+      'Free walking tours and public parks'
+    ],
+    tips: [
+      'Embrace the hygge lifestyle and Danish design',
+      'Rent a bike to experience local culture',
+      'Try the local pastries and New Nordic cuisine',
+      'Summer months offer the best weather and festivals'
     ]
   }
 ];

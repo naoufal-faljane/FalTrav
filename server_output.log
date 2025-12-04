@@ -1,0 +1,58 @@
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://172.29.166.39:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 6.5s
+ ○ Compiling / ...
+ GET / 200 in 6.8s (compile: 2.2s, render: 4.6s)
+ GET / 200 in 107s (compile: 101s, render: 5.8s)
+TypeError: fetch failed
+    at ignore-listed frames {
+  [cause]: AggregateError: 
+      at ignore-listed frames {
+    code: 'ETIMEDOUT'
+  }
+}
+ ○ Compiling /_error ...
+ GET /_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1508050919630-b135583b29ab%3Fixlib%3Drb-4.0.3%26auto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80&w=1920&q=75 500 in 34.4s (compile: 33.0s, render: 1387ms)
+ GET /_next/image?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1508050919630-b135583b29ab%3Fixlib%3Drb-4.0.3%26auto%3Dformat%26fit%3Dcrop%26w%3D800%26q%3D80&w=1920&q=75 500 in 34.4s (compile: 33.0s, render: 1387ms)
+ ○ Compiling /destinations ...
+ GET /destinations 200 in 7.4s (compile: 7.2s, render: 275ms)
+ GET /img/destinations/bucharest.png 404 in 4.5s (compile: 3.2s, render: 1282ms)
+ GET /img/destinations/budapest.png 404 in 4.5s (compile: 3.2s, render: 1370ms)
+ GET /img/destinations/bengaluru.png 404 in 4.6s (compile: 3.6s, render: 1010ms)
+ GET /img/destinations/bratislava.png 404 in 4.6s (compile: 3.4s, render: 1169ms)
+ GET /img/destinations/brussels.png 404 in 4.6s (compile: 3.3s, render: 1253ms)
+ GET /img/destinations/bangkok.png 404 in 5.1s (compile: 4.2s, render: 864ms)
+ GET /img/destinations/buenos%20aires.png 404 in 292ms (compile: 15ms, render: 277ms)
+ GET /img/destinations/cairo.png 404 in 295ms (compile: 95ms, render: 200ms)
+ GET /img/destinations/casablanca.png 404 in 384ms (compile: 174ms, render: 210ms)
+ GET /img/destinations/Copenhagen.png 404 in 150ms (compile: 17ms, render: 132ms)
+ GET /destinations/bangkok-thailand 200 in 14.9s (compile: 14.9s, render: 85ms)
+ GET /img/destinations/bangkok.png 404 in 340ms (compile: 156ms, render: 184ms)
+ GET /img/destinations/bratislava.png 404 in 350ms (compile: 32ms, render: 319ms)
+ GET /img/destinations/bengaluru.png 404 in 558ms (compile: 55ms, render: 503ms)
+ GET /img/destinations/brussels.png 404 in 567ms (compile: 183ms, render: 385ms)
+ GET /img/destinations/budapest.png 404 in 626ms (compile: 240ms, render: 386ms)
+ GET /img/destinations/bucharest.png 404 in 491ms (compile: 192ms, render: 299ms)
+ GET /img/destinations/buenos%20aires.png 404 in 421ms (compile: 202ms, render: 219ms)
+ GET /img/destinations/cairo.png 404 in 309ms (compile: 125ms, render: 185ms)
+ GET /img/destinations/casablanca.png 404 in 178ms (compile: 20ms, render: 159ms)
+ GET /img/destinations/Copenhagen.png 404 in 176ms (compile: 76ms, render: 100ms)
+ GET /destinations/amsterdam-netherlands 200 in 81ms (compile: 43ms, render: 38ms)
+ GET /img/destinations/bangkok.png 404 in 3.5s (compile: 27ms, render: 3.5s)
+ GET /img/destinations/bengaluru.png 404 in 9.7s (compile: 505ms, render: 9.2s)
+ ✓ Compiled in 0ms
+ GET /img/destinations/bucharest.png 404 in 5.4s (compile: 3.8s, render: 1663ms)
+ GET /img/destinations/bratislava.png 404 in 5.4s (compile: 3.7s, render: 1697ms)
+ GET /img/destinations/brussels.png 404 in 1774ms (compile: 1181ms, render: 593ms)
+ GET /img/destinations/budapest.png 404 in 1878ms (compile: 1399ms, render: 480ms)
+ GET /img/destinations/buenos%20aires.png 404 in 754ms (compile: 402ms, render: 351ms)
+ GET /img/destinations/cairo.png 404 in 326ms (compile: 90ms, render: 236ms)
+ GET /img/destinations/casablanca.png 404 in 251ms (compile: 22ms, render: 228ms)
+ GET /img/destinations/Copenhagen.png 404 in 250ms (compile: 99ms, render: 151ms)
+ ✓ Compiled in 0ms
+ GET /destinations/bangkok-thailand 200 in 2.4s (compile: 181ms, render: 2.2s)

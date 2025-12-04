@@ -23,8 +23,10 @@ export function InteractionTracker({ children }: InteractionTrackerProps) {
     // Get more descriptive name if available
     if (target.id) {
       elementName = target.id;
-    } else if (target.className) {
+    } else if (target.className && typeof target.className === 'string') {
       elementName = target.className.split(' ')[0]; // Use first class name
+    } else if (target.className && typeof target.className !== 'string' && target.classList && target.classList.length > 0) {
+      elementName = target.classList[0]; // Use first class from classList
     } else if (target.textContent && target.textContent.trim().length > 0) {
       elementName = target.textContent.substring(0, 20).trim(); // First 20 chars of text
     }

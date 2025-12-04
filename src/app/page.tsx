@@ -16,7 +16,7 @@ const featuredDestinations = [
   { id: 1, name: 'Bali, Indonesia', description: 'Tropical paradise with stunning beaches and rich culture', image: '/img/destinations/Bali, Indonesia.png', price: '$599' },
   { id: 2, name: 'Santorini, Greece', description: 'Iconic white buildings and breathtaking sunsets', image: '/img/destinations/Santorini, Greece.png', price: '$899' },
   { id: 3, name: 'Kyoto, Japan', description: 'Ancient temples and beautiful cherry blossoms', image: '/img/destinations/Kyoto, Japan.png', price: '$1299' },
-  { id: 4, name: 'Paris, France', description: 'City of lights with iconic landmarks and cuisine', image: 'https://images.unsplash.com/photo-1508050919630-b135583b29ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', price: '$799' },
+  { id: 4, name: 'Bangkok, Thailand', description: 'Vibrant Southeast Asian capital with rich culture and street food', image: '/img/destinations/bangkok.png', price: '$799' },
 ];
 
 // Quick links
@@ -72,7 +72,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {featuredDestinations.map((destination, index) => (
               <motion.div key={destination.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} className="mx-auto max-w-xs">
-                <Link href={`/destinations/${encodeURIComponent(destination.name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''))}`}>
+                <Link href={`/destinations/${destination.name.toLowerCase().replace(/,\s*/g, '-').replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}`}>
                   <Card className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
                     <div className="relative h-40 sm:h-48 overflow-hidden">
                       <Image src={destination.image} alt={destination.name} fill className="w-full h-full object-cover transition-transform group-hover:scale-105" />
